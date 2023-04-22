@@ -1,0 +1,25 @@
+@import "utils/variables";
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+body {
+  background-color: $background-colour;
+  margin: 0;
+}
+
+p {
+  color: $text-colour;
+}
+
+a {
+  @extend p;
+  padding: 5px;
+}
