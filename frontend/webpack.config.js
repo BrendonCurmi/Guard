@@ -25,5 +25,9 @@ module.exports = {
             }
         ]
     },
+    devServer: {
+        // Enabled to allow router to route urls
+        historyApiFallback: true
+    },
     plugins: [htmlPlugin]
 };
