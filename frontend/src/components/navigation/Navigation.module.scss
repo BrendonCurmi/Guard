@@ -1,0 +1,30 @@
+@import "../../utils/colours";
+@import "../../utils/variables";
+
+header.wrapper {
+  border-right: 1px solid $grey;
+
+  .sidebar {
+    grid-area: sidebar;
+
+    li {
+      list-style-type: none;
+      margin: 10px 0;
+
+      a {
+        &, &:hover, &:focus, &:visited {
+          text-decoration: none;
+        }
+
+        &:hover {
+          background-color: rgba(217, 217, 217, 0.1);
+          border-radius: 10px;
+        }
+
+        &.default {
+          cursor: default;
+        }
+      }
+    }
+  }
+}
