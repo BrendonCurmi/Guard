@@ -9,12 +9,14 @@ import Login from "./pages/Login";
 
 import { useAuth } from "./context/AuthProvider";
 
+import classes from "./App.module.scss";
+
 const App = () => {
     const { auth } = useAuth();
     return (
-        <div>
+        <div className={classes.wrapper}>
             <Navigation auth={auth} email/>
-            <main>
+            <main className={classes.content}>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
