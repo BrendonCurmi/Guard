@@ -3,7 +3,7 @@ import React from "react";
 const AuthForm = () => {
     return (
         <div>
-            <form onSubmit={/*todo*/}>
+            <form>
                 <div>
                     <label htmlFor="email">Email</label>
                     <input
