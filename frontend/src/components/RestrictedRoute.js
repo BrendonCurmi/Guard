@@ -8,7 +8,7 @@ import { Navigate, Outlet } from "react-router-dom";
  * @constructor
  */
 const RestrictedRoute = (props) => {
-    return props.auth ? <Outlet/> : <Navigate to="/login"/>;
+    return props.auth ? <Outlet/> : <Navigate to={props.navigate}/>;
 }
 
 export default RestrictedRoute;
