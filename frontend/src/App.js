@@ -16,7 +16,7 @@ const App = () => {
     return (
         <div className={classes.wrapper}>
             <Navigation auth={auth} email/>
-            <main className={classes.content}>
+            <main>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
