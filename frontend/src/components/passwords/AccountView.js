@@ -119,7 +119,7 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
                 />
 
                 {isEditing ?
-                    <NiceButton type="button"
+                    <NiceButton type="submit"
                                 color="primary"
                                 onClick={() => setIsEditing(false)}>Save</NiceButton> :
                     <NiceButton type="button"
