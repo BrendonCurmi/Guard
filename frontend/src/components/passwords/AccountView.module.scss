@@ -1,0 +1,39 @@
+$input-border: 10px;
+$input-colour: white;
+$input-label-colour: grey;
+$input-background-colour: #2a2a2a;
+
+.accountViewWrapper {
+  margin: 20px;
+
+  .icon {
+    margin: 10px;
+    text-align: center;
+  }
+
+  .inputForm {
+    display: grid;
+
+    .pwTextField input {
+      border-radius: $input-border 0 0 $input-border !important;
+    }
+
+    .textField {
+      margin-bottom: 10px;
+
+      > div {
+        border-radius: $input-border;
+      }
+
+      input {
+        color: $input-colour;
+        background-color: $input-background-colour;
+        border-radius: $input-border;
+      }
+
+      label {
+        color: $input-label-colour
+      }
+    }
+  }
+}
