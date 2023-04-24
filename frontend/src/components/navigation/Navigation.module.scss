@@ -1,19 +1,32 @@
 @import "../../utils/colours";
 @import "../../utils/variables";
 
+@import "tooltips";
+
+@use "sass:color";
+
 header.wrapper {
   border-right: 1px solid $grey;
 
   .sidebar {
     grid-area: sidebar;
 
+    ul {
+      padding: 0 40px;
+
+      @media screen and (max-width: $medium_screen_size) {
+        text-align: center;
+        padding: 5px 20px;
+      }
+    }
+
     li {
       list-style-type: none;
       margin: 10px 0;
 
-      a {
-        &, &:hover, &:focus, &:visited {
-          text-decoration: none;
+      &:not(:first-child) {
+        @media screen and (min-width: $medium_screen_size) {
+          padding: 7px;
         }
 
         &:hover {
@@ -21,8 +34,33 @@ header.wrapper {
           border-radius: 10px;
         }
 
-        &.default {
-          cursor: default;
+        a {
+          text-decoration: none;
+          display: block;
+          width: 100%;
+          height: 100%;
+
+          &, &:hover, &:focus, &:visited {
+            text-decoration: none;
+          }
+
+          &.default {
+            cursor: default;
+          }
+
+          > svg {
+            @media screen and (min-width: $medium_screen_size) {
+              margin-right: 5px;
+            }
+          }
+
+          > span {
+            overflow-wrap: break-word;
+
+            @media screen and (max-width: $medium_screen_size) {
+              display: none;
+            }
+          }
         }
       }
     }
