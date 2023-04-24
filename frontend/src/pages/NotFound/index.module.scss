@@ -1,0 +1,17 @@
+@import "../../utils/variables";
+
+.notFound {
+  h1 {
+    color: $highlight-blue;
+    font-size: 25px;
+  }
+
+  h2 {
+    color: $text-colour;
+    font-size: 20px;
+  }
+
+  p a {
+    padding: 0;
+  }
+}
