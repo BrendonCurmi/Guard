@@ -19,7 +19,7 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
         pw: getOr("pw")
     });
     const [showPw, setShowPw] = useState(false);
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(focus === null);
 
     const onChangeHandler = (event) => {
         const property = event.target.id.split("-")[1];
