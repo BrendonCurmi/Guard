@@ -138,9 +138,9 @@ const Passwords = () => {
                         <SiteIcon domain={account.site} size="32"/>
                     </td>
                     <td onClick={() => onEditClickHandler(key)}>
-                        <p>{account.title}</p>
+                        <p className={classes.accountTitle}>{account.title}</p>
                         {/*<p>{product.email || product.username}</p>*/}
-                        <p>obama</p>
+                        <p className={classes.accountSubtitle}>Test</p>
                     </td>
                     <td onClick={() => onEditClickHandler(key)}>{describeDate(account.lastUsed)}</td>
                     <td>
