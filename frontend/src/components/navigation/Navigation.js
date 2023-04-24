@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faRightToBracket, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faRightToBracket, faRightFromBracket, faGamepad, faUser } from "@fortawesome/free-solid-svg-icons";
+
+import NavigationItem from "./NavigationItem";
+import NavigationItemLink from "./NavigationItemLink";
 
 import classes from "./Navigation.module.scss";
 
@@ -13,25 +15,27 @@ import classes from "./Navigation.module.scss";
  */
 const Navigation = (props) => {
     const auth = props.auth;
-    const loginStatus = auth ? <Link to="/logout">Logout</Link> : <Link to="/login">Login</Link>;
-    const loginIcon = auth ? faRightFromBracket: faRightToBracket;
+    const loginData = {
+        link: auth ? "/logout" : "/login",
+        text: auth ? "Logout" : "Login",
+        icon: auth ? faRightFromBracket : faRightToBracket
+    };
     return (
         <header className={classes.wrapper}>
             <div className={classes.sidebar}>
                 <ul>
-                    <li>
-                        <FontAwesomeIcon icon={faHouse}/>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <FontAwesomeIcon icon={loginIcon}/>
-                        {loginStatus}
-                    </li>
+                    <NavigationItemLink to="/" name="Home" icon={faHouse}/>
+                    <NavigationItemLink to={loginData.link} name={loginData.text} icon={loginData.icon}/>
                     {auth && (
-                        <li>
-                            <FontAwesomeIcon icon={faUser}/>
-                            <a>Logged in</a>
-                        </li>
+                        <NavigationItem name={props.email}>
+                            <a className={classes.default}>
+                                <FontAwesomeIcon icon={faUser}/>
+                                <span>{props.email}</span>
+                            </a>
+                        </NavigationItem>
+                    )}
+                    {auth && (
+                        <NavigationItemLink to="/test" name="Test" icon={faGamepad}/>
                     )}
                 </ul>
             </div>
