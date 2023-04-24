@@ -19,6 +19,7 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
         pw: getOr("pw")
     });
     const [showPw, setShowPw] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
     const onChangeHandler = (event) => {
         const property = event.target.id.split("-")[1];
@@ -58,13 +59,14 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
             <div className={classes.icon}>
                 <SiteIcon domain={userInput.site} size="32"/>
             </div>
-            <form className={classes.inputForm} onSubmit={onSubmitHandler}>
+            <form className={`${classes.inputForm} ${!isEditing ? classes.readOnly : ""}`} onSubmit={onSubmitHandler}>
                 <TextField
                     className={classes.textField}
                     required
                     id="input-title"
                     label="Title"
                     variant="outlined"
+                    InputProps={{ readOnly: !isEditing }}
                     onChange={onChangeHandler}
                     value={userInput.title}
                 />
@@ -75,6 +77,7 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
                     id="input-site"
                     label="Website Address"
                     variant="outlined"
+                    InputProps={{ readOnly: !isEditing }}
                     onChange={onChangeHandler}
                     value={userInput.site}
                 />
@@ -85,6 +88,8 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
                     id="input-email"
                     label="Email or username"
                     variant="outlined"
+                    InputProps={{ readOnly: !isEditing }}
+                    InputLabelProps={!isEditing && { shrink: false }}
                     onChange={onChangeHandler}
                     value={userInput.email}
                 />
@@ -99,6 +104,7 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
                     onChange={onChangeHandler}
                     value={inputPwValue}
                     InputProps={{
+                        readOnly: !isEditing,
                         endAdornment: (
                             <InputAdornment position="end">
                                 <IconButton
@@ -112,8 +118,13 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
                     }}
                 />
 
-                <NiceButton type="submit"
-                            color="primary">Save</NiceButton>
+                {isEditing ?
+                    <NiceButton type="button"
+                                color="primary"
+                                onClick={() => setIsEditing(false)}>Save</NiceButton> :
+                    <NiceButton type="button"
+                                color="primary"
+                                onClick={() => setIsEditing(true)}>Edit</NiceButton>}
                 <NiceButton type="button"
                             onClick={onClick}
                             color="secondary"
