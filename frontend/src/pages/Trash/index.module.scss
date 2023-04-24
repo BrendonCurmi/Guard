@@ -1,0 +1,18 @@
+.viewWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #484545;
+  //background: white;
+  z-index: 2;
+  width: 90%;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+//todo tmp
+h2, h4 {
+  color: white;
+  margin: 10px;
+}
