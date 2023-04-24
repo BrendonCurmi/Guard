@@ -1,0 +1,58 @@
+@import "../../utils/variables";
+
+.generatorPage {
+  .generator {
+    @include padding();
+    background-color: $black-accent-colour;
+  }
+
+  .text {
+    grid-area: text;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    overflow-wrap: break-word;
+  }
+
+  .actions {
+    grid-area: actions;
+    text-align: right;
+
+    button {
+      padding: 7px;
+      margin: 3px;
+      border: 0;
+      height: auto;
+      font-size: 18px;
+      color: white;
+      background-color: $background-colour;
+
+      &:hover {
+        background-color: lighten($background-colour, 20%);
+      }
+    }
+  }
+
+  table {
+    background-color: $background-colour;
+
+    thead {
+      display: none;
+    }
+
+    .length {
+      grid-template-columns: 1fr 30px;
+      grid-template-areas:"slider value";
+      display: grid;
+
+      & > span {
+        grid-area: slider;
+      }
+
+      & > p {
+        grid-area: value;
+      }
+    }
+  }
+}
