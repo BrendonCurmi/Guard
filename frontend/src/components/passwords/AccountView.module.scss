@@ -14,6 +14,22 @@ $input-background-colour: #2a2a2a;
   .inputForm {
     display: grid;
 
+    &.readOnly {
+      input {
+        background-color: transparent;
+      }
+      fieldset {
+        border-width: 0;
+      }
+    }
+    &:not(.readOnly) {
+      input {
+        color: $input-colour;
+        background-color: $input-background-colour;
+        border-radius: $input-border;
+      }
+    }
+
     .pwTextField input {
       border-radius: $input-border 0 0 $input-border !important;
     }
@@ -22,12 +38,6 @@ $input-background-colour: #2a2a2a;
       margin-bottom: 10px;
 
       > div {
-        border-radius: $input-border;
-      }
-
-      input {
-        color: $input-colour;
-        background-color: $input-background-colour;
         border-radius: $input-border;
       }
 
