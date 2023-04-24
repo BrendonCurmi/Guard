@@ -17,3 +17,12 @@ $medium_screen_size: 707px;
 $background-colour-tmp: wheat;
 
 $black-accent-colour: #363333;
+
+@mixin padding($padding-top: 10px, $padding: 10px) {
+  padding: $padding-top $padding $padding $padding;
+}
+
+@mixin center() {
+  margin-left: auto;
+  margin-right: auto;
+}
