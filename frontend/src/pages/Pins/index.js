@@ -22,20 +22,14 @@ const Pins = () => {
 
     return <FullView
         loadApi={API}
-        createApi={"http://localhost:4000/api/pin"}
-        // updateApi={val => `http://localhost:4000/api/pin/${val}`}
-        // credentialsApi={val => `http://localhost:4000/api/pin/${val}/credentials`}
+        createApi="http://localhost:4000/api/pin"
         copy={creds => creds.pin}
-
-        confirmTitle="Are you sure?"
-        confirmMsg="Do you really want to delete this account? It can't be recovered once it's deleted"
-
-
-        pageTitle="Pins"
-        pageAction="Add Pin"
-        timeName=""
-        fields={fields}
-    />;
+        page={{ title: "Pins", action: "Add Pin", timeName: "Last Seen" }}
+        confirm={{
+            title: "Are you sure?",
+            msg: "Do you really want to delete this pin? It can't be recovered once it's deleted"
+        }}
+        fields={fields}/>;
 };
 
 export default Pins;
