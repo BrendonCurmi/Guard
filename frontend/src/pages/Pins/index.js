@@ -1,4 +1,5 @@
 import React from "react";
+import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import FullView from "../../components/views/FullView";
 
 const API = "http://localhost:4000/api/pins";
@@ -29,7 +30,8 @@ const Pins = () => {
             title: "Are you sure?",
             msg: "Do you really want to delete this pin? It can't be recovered once it's deleted"
         }}
-        fields={fields}/>;
+        fields={fields}
+        icon={faFolder}/>;
 };
 
 export default Pins;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SiteIcon from "../SiteIcon";
 import NiceButton from "../buttons/NiceButton";
@@ -19,7 +20,7 @@ import classes from "./FocusedView.module.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields }) => {
+const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon }) => {
 
     /**
      * Get the specified value from the focus item. If it doesn't exist,
@@ -177,10 +178,12 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields }) =>
         return <TextField {...fieldProps}/>;
     });
 
+    const focusedIcon = icon ? <FontAwesomeIcon icon={icon}/> : <SiteIcon domain={userInput.site} size="32"/>;
+
     return (
         <div className={classes.focusedViewWrapper}>
             <div className={classes.icon}>
-                <SiteIcon domain={userInput.site} size="32"/>
+                {focusedIcon}
             </div>
             <form className={`${classes.inputForm} ${!isEditing ? classes.readOnly : ""}`} onSubmit={onSubmitHandler}>
                 {formFields}

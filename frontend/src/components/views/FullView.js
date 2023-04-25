@@ -28,7 +28,8 @@ const fullView = ({
                       copy,
                       fields,
                       page = { title: "", action: "", timeName: "" },
-                      confirm = { title: "", msg: "" }
+                      confirm = { title: "", msg: "" },
+                      icon
                   }) => {
     const [items, setItems] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
@@ -134,6 +135,7 @@ const fullView = ({
                                      submitItemRequest={submitItemRequest}
                                      getCreds={getCreds}
                                      fields={fields}
+                                     icon={icon}
                         />
                     </div>}
                 {confirming !== null &&
