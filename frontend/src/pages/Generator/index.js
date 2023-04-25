@@ -108,7 +108,7 @@ const Generator = () => {
                 <tr>
                     <td>Length</td>
                     <td className={classes.length}>
-                        <Slider defaultValue={values.length}
+                        <Slider value={values.length}
                                 aria-label="custom label"
                             // aria-label="Default"
                                 marks={marks}
