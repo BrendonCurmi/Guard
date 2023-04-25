@@ -50,13 +50,23 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
         createAccountRequest(data);
     };
 
-    const showPwHandler = async () => {
-        let pw = userInput.pw === "" && focus ? (await getCreds(focus._id)).pw : userInput.pw;
+    const inputPwValue = focus && userInput.pw === "" && !isEditing ? "............." : userInput.pw;
+
+    const initPw = async () => {
+        let pw = focus && userInput.pw === "" ? (await getCreds(focus._id)).pw : userInput.pw;
         setUserInput({ ...userInput, pw });
+    };
+
+    const showPwHandler = () => {
+        // await initPw();// <- would cause issues because of inputPwValue defaulting when fields is empty
         setShowPw(!showPw);
     };
 
-    const inputPwValue = focus && userInput.pw === "" ? "............." : userInput.pw;
+    const onEditBtnClick = async (event) => {
+        event.preventDefault();
+        await initPw();// <- loading pw on edit instead fixes it
+        setIsEditing(true);
+    };
 
     return (
         <div className={classes.accountViewWrapper}>
@@ -124,11 +134,10 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
 
                 {isEditing ?
                     <NiceButton type="submit"
-                                color="primary"
-                                onClick={() => setIsEditing(false)}>Save</NiceButton> :
+                                color="primary">Save</NiceButton> :
                     <NiceButton type="button"
                                 color="primary"
-                                onClick={() => setIsEditing(true)}>Edit</NiceButton>}
+                                onClick={onEditBtnClick}>Edit</NiceButton>}
                 <NiceButton type="button"
                             onClick={onClick}
                             color="secondary"
