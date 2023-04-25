@@ -12,9 +12,9 @@ import classes from "./AccountView.module.scss";
 
 const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
     const getOr = (property, defaultVal = "", fix = false) => {
-        let val = focus[property];
-        if (fix) val = fix(val);
-        return focus && focus[property] ? val : defaultVal;
+        return focus && focus[property] ?
+            fix ? fix(focus[property]) : focus[property]
+            : defaultVal;
     };
 
     const allFolders = useFolder();
