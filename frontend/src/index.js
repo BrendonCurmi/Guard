@@ -5,13 +5,16 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
 import { AuthProvider } from "./context/AuthProvider";
+import FolderProvider from "./store/FolderProvider";
 
 import "./index.module.scss";
 
 ReactDOM.render(
     <AuthProvider>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
+        <FolderProvider>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </FolderProvider>
     </AuthProvider>,
     document.getElementById("app"));
