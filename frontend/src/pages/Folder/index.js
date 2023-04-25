@@ -21,7 +21,7 @@ const Folder = () => {
         }
     };
 
-    useAsync(getItems(), data => setItems(data), [name]);
+    useAsync(getItems, data => setItems(data), [name]);
 
     return (
         <ListedView
