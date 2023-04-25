@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy, faEye, faEyeSlash, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import SiteIcon from "../../components/SiteIcon";
 import AccountView from "../../components/passwords/AccountView";
 import Confirm from "../../components/confirm/Confirm";
 import ListedView from "../../components/views/ListedView";
+import ListedViewItem from "../../components/views/ListedViewItem";
 
 import { copyToClipboard } from "../../utils/CopyUtils";
-import { describeDate } from "../../utils/DateUtils";
 
 import classes from "./index.module.scss";
 
@@ -144,31 +141,15 @@ const Passwords = () => {
             popups={<Popups/>}>
 
             {accounts && accounts.map((account, key) => (
-                <tr key={key}>
-                    <td onClick={() => onEditClickHandler(key)}>
-                        <SiteIcon domain={account.site} size="32"/>
-                    </td>
-                    <td onClick={() => onEditClickHandler(key)}>
-                        <p className={classes.accountTitle}>{account.title}</p>
-                        {/*<p>{product.email || product.username}</p>*/}
-                        <p className={classes.accountSubtitle}>Test</p>
-                    </td>
-                    <td onClick={() => onEditClickHandler(key)}>{describeDate(account.lastUsed)}</td>
-                    <td>
-                        <button onClick={() => onCopyClick(key)}>
-                            <FontAwesomeIcon icon={faCopy}/>
-                        </button>
-                        <button onClick={() => onShowClick(key)}>
-                            <FontAwesomeIcon icon={account.editing ? faEyeSlash : faEye}/>
-                        </button>
-                        <button onClick={() => onEditClickHandler(key)}>
-                            <FontAwesomeIcon icon={faPencil}/>
-                        </button>
-                        <button onClick={() => setConfirming(key)}>
-                            <FontAwesomeIcon icon={faTrash}/>
-                        </button>
-                    </td>
-                </tr>
+                <ListedViewItem
+                    key={key} dkey={key}
+                    account={account}
+                    dKey={key}
+                    onEditClickHandler={onEditClickHandler}
+                    onCopyClick={onCopyClick}
+                    onShowClick={onShowClick}
+                    setConfirming={setConfirming}
+                />
             ))}
         </ListedView>
     );
