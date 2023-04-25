@@ -10,6 +10,16 @@ const MenuProps = {
             width: 250,
         },
     },
+    // Position popup
+    anchorOrigin: {
+        vertical: "bottom",
+        horizontal: "left"
+    },
+    transformOrigin: {
+        vertical: "top",
+        horizontal: "left"
+    },
+    getContentAnchorEl: null
 };
 
 // Adapted from and examples from: https://mui.com/material-ui/react-select/
