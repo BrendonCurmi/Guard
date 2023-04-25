@@ -12,14 +12,14 @@ import classes from "./FocusedView.module.scss";
 
 /**
  * @param focus the item to focus the view on.
- * @param submitAccountRequest the function to execute when submitting (creating & updating).
- * @param onClick the function to execute when clicking Cancel button to close the Account View.
+ * @param submitItemRequest the function to execute when submitting (creating & updating).
+ * @param onClick the function to execute when clicking Cancel button to close the view.
  * @param getCreds the function to execute when retrieving credentials.
  * @param fields the array of form fields.
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedView = ({ focus, submitAccountRequest, onClick, getCreds, fields }) => {
+const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields }) => {
 
     /**
      * Get the specified value from the focus item. If it doesn't exist,
@@ -105,7 +105,7 @@ const FocusedView = ({ focus, submitAccountRequest, onClick, getCreds, fields })
             );
         }
 
-        submitAccountRequest(data);
+        submitItemRequest(data);
     };
 
     const secureUserInputValue = focus && userInput[secureField] === "" && !isEditing ? "............." : userInput[secureField];

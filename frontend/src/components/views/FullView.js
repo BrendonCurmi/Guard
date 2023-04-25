@@ -139,7 +139,7 @@ const fullView = ({
                     <div>
                         <FocusedView onClick={switchFocusedViewHandler}
                                      focus={focused}
-                                     submitAccountRequest={submitItemRequest}
+                                     submitItemRequest={submitItemRequest}
                                      getCreds={getCreds}
                                      fields={fields}
                         />
