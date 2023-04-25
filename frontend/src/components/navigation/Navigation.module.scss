@@ -61,6 +61,17 @@ header.wrapper {
           }
         }
       }
+
+      .folders {
+        margin-top: 10px;
+
+        button {
+          float: right;
+          @media screen and (max-width: $medium_screen_size) {
+            display: none;
+          }
+        }
+      }
     }
   }
 }
