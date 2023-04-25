@@ -39,16 +39,12 @@ const Passwords = () => {
         updateApi={val => `http://localhost:4000/api/account/${val}`}
         credentialsApi={val => `http://localhost:4000/api/account/${val}/credentials`}
         copy={creds => creds.pw}
-
-        confirmTitle="Are you sure?"
-        confirmMsg="Do you really want to delete this account? It can't be recovered once it's deleted"
-
-
-        pageTitle="Passwords"
-        pageAction="Add Item"
-        timeName="Last Used"
-        fields={fields}
-    />;
+        page={{ title: "Passwords", action: "Add Item", timeNow: "Last Used" }}
+        confirm={{
+            title: "Are you sure?",
+            msg: "Do you really want to delete this account? It can't be recovered once it's deleted"
+        }}
+        fields={fields}/>;
 };
 
 export default Passwords;
