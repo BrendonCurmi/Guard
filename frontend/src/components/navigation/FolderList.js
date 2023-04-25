@@ -1,10 +1,8 @@
 import React from "react";
-import { useFolder } from "../../store/FolderProvider";
 
 import classes from "./FolderList.module.scss";
 
-const FolderList = ({ folderListItems }) => {
-    const allFolders = useFolder();
+const FolderList = ({ folderListItems, allFolders }) => {
     return (
         <ul className={classes.navFolderList}>
             {
