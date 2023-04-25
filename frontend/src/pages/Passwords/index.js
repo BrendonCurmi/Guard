@@ -144,7 +144,6 @@ const Passwords = () => {
                 <ListedViewItem
                     key={key} dkey={key}
                     account={account}
-                    dKey={key}
                     onEditClickHandler={onEditClickHandler}
                     onCopyClick={onCopyClick}
                     onShowClick={onShowClick}
