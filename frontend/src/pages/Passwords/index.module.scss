@@ -20,35 +20,18 @@ h2, h4 {
 }
 
 
-/*
-table {
-  border-collapse: collapse;
-  width: calc(min(100%, 50em));
-  margin: 25px auto;
-  thead {
-    border-bottom: 1px solid grey;
-    tr th {
-      font-size: 16px;
-      padding: 8px;
-      //letter-spacing: 1px;
-      text-align: left;
-    }
+button {
+  background-color: $background-colour;
+  color: $text-colour;
+  border-radius: 25px;
+  width: 32px;
+  padding: 8px;
+  border: 0;
+
+  &:hover {
+    background-color: $black-accent-colour;
   }
-  tbody {
-    tr:hover {
-      background-color: lighten($background-colour-tmp, 4%);
-    }
-    tr td {
-      padding: 8px;
-      p {
-        margin: 0;
-      }
-    }
-  }
-  thead tr th:nth-last-child(1), tbody tr td:nth-last-child(1) {
-    text-align: right;
-  }
-}*/
+}
 
 .accountTitle {
   color: white;
