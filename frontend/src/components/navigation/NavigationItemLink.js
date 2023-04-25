@@ -1,16 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import NavigationItem from "./NavigationItem";
 
-const NavigationItemLink = (props) => {
+const NavigationItemLink = ({ name, to, icon, ...props }) => {
     return (
-        <NavigationItem name={props.name}>
-            <Link to={props.to}>
-                <FontAwesomeIcon icon={props.icon}/>
-                <span>{props.name}</span>
+        <NavigationItem name={name}>
+            <Link to={to} {...props}>
+                <FontAwesomeIcon icon={icon}/>
+                <span>{name}</span>
             </Link>
         </NavigationItem>
     );
