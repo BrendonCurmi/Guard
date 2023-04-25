@@ -29,10 +29,10 @@ const ListedView = ({ children, shade, pageTitle, pageAction, pageActionClick, p
                     <tr>
                         <th width="1%">Title</th>
                         <th width="34%"></th>
-                        <th width="35%">
+                        <th width="30%">
                             <a onClick={changeOrder}>{timeName}</a>
                         </th>
-                        <th width="30%">Actions</th>
+                        <th width="35%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
