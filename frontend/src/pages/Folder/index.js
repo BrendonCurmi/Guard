@@ -1,23 +1,43 @@
-import React  from "react";
-import ListedView from "../../components/views/ListedView";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
-import { decode } from "../../utils/URLUtils";
+import ListedView from "../../components/views/ListedView";
+import ListedViewItem from "../../components/views/ListedViewItem";
+import useAsync from "../../hooks/use-async";
+
+import { decode, encode } from "../../utils/URLUtils";
+
+const API = "http://localhost:4000/api/folderView";
 
 const Folder = () => {
-    const getFolderName = () => {
-        const params = new URLSearchParams(window.location.search);
-        return decode(params.get("f"));
-    };
-    const folderName = getFolderName();
-    console.log("url", folderName);
+    const [items, setItems] = useState({});
+    const { name } = useParams();
+    const folderName = decode(name);
 
-    //const [accounts, setAccounts] = useState([]);
+    const getItems = async () => {
+        const rawResponse = await fetch(`${API}?f=${encode(folderName)}`, { method: "GET" });
+        if (rawResponse.status === 200) {
+            return await rawResponse.json();
+        }
+    };
+
+    useAsync(getItems(), data => setItems(data), [name]);
 
     return (
         <ListedView
             pageTitle={folderName}
             pageAction="Add Item"
             timeName="Last Used">
+            {items.folders && items.folders.map((account, key) => (
+                <ListedViewItem
+                    key={key} dkey={key}
+                    account={account}
+                    // onEditClickHandler={onEditClickHandler}
+                    // onCopyClick={onCopyClick}
+                    // onShowClick={onShowClick}
+                    // setConfirming={setConfirming}
+                />
+            ))}
         </ListedView>
     );
 };
