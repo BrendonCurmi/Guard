@@ -2,7 +2,7 @@
 
 .generatorPage {
   .generator {
-    @include padding();
+    @include padding(58px);
     background-color: $black-accent-colour;
   }
 
