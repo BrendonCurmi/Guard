@@ -25,9 +25,9 @@ const ListedViewItem = ({ dKey, account, onEditClickHandler, onCopyClick, onShow
                 <button onClick={() => onCopyClick(key)}>
                     <FontAwesomeIcon icon={faCopy}/>
                 </button>
-                <button onClick={() => onShowClick(key)}>
+                {/*<button onClick={() => onShowClick(key)}>
                     <FontAwesomeIcon icon={account.editing ? faEyeSlash : faEye}/>
-                </button>
+                </button>*/}
                 <button onClick={() => onEditClickHandler(key)}>
                     <FontAwesomeIcon icon={faPencil}/>
                 </button>
