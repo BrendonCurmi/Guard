@@ -89,7 +89,7 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
                     label="Email or username"
                     variant="outlined"
                     InputProps={{ readOnly: !isEditing }}
-                    InputLabelProps={!isEditing && { shrink: false }}
+                    InputLabelProps={!isEditing ? { shrink: false } : {}}
                     onChange={onChangeHandler}
                     value={userInput.email}
                 />
