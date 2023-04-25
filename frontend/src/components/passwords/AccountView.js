@@ -42,6 +42,10 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
             email: userInput.email,
             pw: userInput.pw
         };
+        
+        // Remove pw property from data before sending
+        // if pw hasn't been changed
+        if (data.pw === "") delete data.pw;
 
         createAccountRequest(data);
     };
