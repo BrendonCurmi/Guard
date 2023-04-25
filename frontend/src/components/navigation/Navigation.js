@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faRightToBracket, faRightFromBracket, faGamepad, faUser, faFolder } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faRightToBracket, faRightFromBracket, faGamepad, faUser, faFolder, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 
 import NavigationItem from "./NavigationItem";
 import NavigationItemLink from "./NavigationItemLink";
 import FolderList from "./FolderList";
 
 import { encode } from "../../utils/URLUtils";
+import useFolder from "../../hooks/use-folder";
 
 import classes from "./Navigation.module.scss";
 
@@ -18,6 +19,8 @@ import classes from "./Navigation.module.scss";
  */
 const Navigation = (props) => {
     const auth = props.auth;
+    const [creatingFolder, setCreatingFolder] = useState(false);
+    const [newFolderName, setNewFolderName] = useState("");
     const loginData = {
         link: auth ? "/logout" : "/login",
         text: auth ? "Logout" : "Login",
@@ -34,6 +37,34 @@ const Navigation = (props) => {
         );
     };
 
+    const edit = () => {
+        setCreatingFolder(!creatingFolder);
+    };
+
+    const [allFolders, getAllFolders] = useFolder();
+
+    const createFolder = async (event) => {
+        event.preventDefault();
+        const data = { name: newFolderName };
+
+        const create = async () => {
+            return await fetch("http://localhost:4000/api/folder", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                mode: "cors",
+                body: JSON.stringify(data)
+            }).then(value => value.json())
+        };
+
+        create().then(getAllFolders);
+
+        setNewFolderName("");
+        setCreatingFolder(false);
+    };
+
+    useEffect(getAllFolders, []);
+
     return (
         <header className={classes.wrapper}>
             <div className={classes.sidebar}>
@@ -41,7 +72,22 @@ const Navigation = (props) => {
                     <NavigationItemLink to="/" name="Home" icon={faHouse}/>
                     <NavigationItemLink to={loginData.link} name={loginData.text} icon={loginData.icon}/>
 
-                    <FolderList folderListItems={folderListItems}/>
+                    <span className={classes.folders}>
+                        <label>Folders</label>
+                        <button tooltip="Add Folder" tooltip-position="right"
+                                onClick={edit}>
+                            <FontAwesomeIcon icon={faFolderPlus}/>
+                        </button>
+                    </span>
+                    <FolderList folderListItems={folderListItems} allFolders={allFolders}/>
+                    {creatingFolder &&
+                        <form onSubmit={createFolder}>
+                            <input type="text"
+                                   autoFocus={true}
+                                   value={newFolderName}
+                                   onChange={event => setNewFolderName(event.target.value)}/>
+                        </form>
+                    }
 
                     {auth && (
                         <NavigationItem name={props.email}>
