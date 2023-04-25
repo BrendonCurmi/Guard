@@ -17,6 +17,7 @@ import { copyToClipboard } from "../../utils/CopyUtils";
  * @param fields the array of form fields.
  * @param page the page variables.
  * @param confirm the confirm variables.
+ * @param icon the icon.
  * @returns {JSX.Element}
  */
 const fullView = ({
@@ -161,11 +162,11 @@ const fullView = ({
                 <ListedViewItem
                     key={key} dKey={key}
                     account={item}
+                    icon={icon}
                     onEditClickHandler={onEditClickHandler}
                     onCopyClick={onCopyClick}
                     onShowClick={onShowClick}
-                    setConfirming={setConfirming}
-                />
+                    setConfirming={setConfirming}/>
             ))}
         </ListedView>
     );

@@ -8,7 +8,7 @@ import { describeDate } from "../../utils/DateUtils";
 
 import classes from "../../pages/Passwords/index.module.scss";
 
-const ListedViewItem = ({ dKey, account, onEditClickHandler, onCopyClick, onShowClick, setConfirming, icon }) => {
+const ListedViewItem = ({ dKey, account, icon, onEditClickHandler, onCopyClick, onShowClick, setConfirming }) => {
     const key = dKey;// "key" cannot be a prop
     const focusedIcon = useIcon(icon, account.site);
     return (

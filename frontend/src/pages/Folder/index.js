@@ -23,10 +23,24 @@ const Folder = () => {
 
     useAsync(getItems, data => setItems(data), [name]);
 
+    const deleteFolderHandler = async () => {
+        //todo implement
+        const rawResponse = await fetch(`http://localhost:4000/api/folder/`, {
+            method: "DELETE"
+        });
+
+        if (rawResponse.status === 200) {
+            const content = await rawResponse.json();
+            // console.log(content);
+            <Redirect to="/pass" push />
+        }
+    };
+
     return (
         <ListedView
             pageTitle={folderName}
             pageAction="Add Item"
+            pageActionClick={deleteFolderHandler}
             timeName="Last Used">
             {items.folders && items.folders.map((account, key) => (
                 <ListedViewItem
