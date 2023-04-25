@@ -20,23 +20,34 @@ const Passwords = () => {
     const [focusAccount, setFocusAccount] = useState();
     const [confirming, setConfirming] = useState(null);
 
-    const createAccountRequest = async (data) => {
-        const rawResponse = await fetch("http://localhost:4000/api/test", {
-            method: "POST",
+    const submitAccountRequest = async (data) => {
+        // console.log("data", data);
+        const rawResponse = await (focusAccount ? callUpdateAccount(focusAccount._id, data) : callCreateAccount(data));
+        if (rawResponse.status === 201 || rawResponse.status === 204) {
+            // const content = await rawResponse.json();
+            await getAccounts();
+            switchAccountViewHandler();
+        }
+    };
+
+    const callCreateAccount = (data) => {
+        return send("http://localhost:4000/api/test", "POST", data);
+    };
+
+    const callUpdateAccount = (id, data) => {
+        return send(`http://localhost:4000/api/account/${id}`, "PUT", data);
+    };
+
+    const send = (url, method, data) => {
+        return fetch(url, {
+            method: method,
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         });
-
-        if (rawResponse.status === 201) {
-            const content = await rawResponse.json();
-            await getAccounts();
-            switchAccountViewHandler()
-        }
     };
-
 
     // Load accounts after loading component
     useEffect(() => {
@@ -108,7 +119,7 @@ const Passwords = () => {
                     <div className={classes.viewWrapper}>
                         <AccountView onClick={switchAccountViewHandler}
                                      focus={focusAccount}
-                                     createAccountRequest={createAccountRequest}
+                                     submitAccountRequest={submitAccountRequest}
                                      getCreds={getCreds}
                         />
                     </div>}

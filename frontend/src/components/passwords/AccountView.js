@@ -7,7 +7,7 @@ import NiceButton from "../buttons/NiceButton";
 
 import classes from "./AccountView.module.scss";
 
-const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
+const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
     const getOr = (property) => {
         return focus && focus[property] ? focus[property] : "";
     };
@@ -47,7 +47,7 @@ const AccountView = ({ focus, createAccountRequest, onClick, getCreds }) => {
         // if pw hasn't been changed
         if (data.pw === "") delete data.pw;
 
-        createAccountRequest(data);
+        submitAccountRequest(data);
     };
 
     const inputPwValue = focus && userInput.pw === "" && !isEditing ? "............." : userInput.pw;
