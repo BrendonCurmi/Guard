@@ -2,18 +2,19 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faEye, faEyeSlash, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import SiteIcon from "../SiteIcon";
+import useIcon from "../../hooks/use-icon";
 
 import { describeDate } from "../../utils/DateUtils";
 
 import classes from "../../pages/Passwords/index.module.scss";
 
-const ListedViewItem = ({ dKey, account, onEditClickHandler, onCopyClick, onShowClick, setConfirming }) => {
+const ListedViewItem = ({ dKey, account, onEditClickHandler, onCopyClick, onShowClick, setConfirming, icon }) => {
     const key = dKey;// "key" cannot be a prop
+    const focusedIcon = useIcon(icon, account.site);
     return (
         <tr key={account.title}>
             <td onClick={() => onEditClickHandler(key)}>
-                <SiteIcon domain={account.site} size="32"/>
+                {focusedIcon}
             </td>
             <td onClick={() => onEditClickHandler(key)}>
                 <p className={classes.accountTitle}>{account.title}</p>

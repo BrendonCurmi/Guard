@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import SiteIcon from "../SiteIcon";
 import NiceButton from "../buttons/NiceButton";
 import FolderSelect from "./FolderSelect";
 
+import useIcon from "../../hooks/use-icon";
 import { useFolder } from "../../store/FolderProvider";
 
 import classes from "./FocusedView.module.scss";
@@ -17,10 +16,11 @@ import classes from "./FocusedView.module.scss";
  * @param onClick the function to execute when clicking Cancel button to close the view.
  * @param getCreds the function to execute when retrieving credentials.
  * @param fields the array of form fields.
+ * @param icon the icon.
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon }) => {
+const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon = "" }) => {
 
     /**
      * Get the specified value from the focus item. If it doesn't exist,
@@ -178,7 +178,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon
         return <TextField {...fieldProps}/>;
     });
 
-    const focusedIcon = icon ? <FontAwesomeIcon icon={icon}/> : <SiteIcon domain={userInput.site} size="32"/>;
+    const focusedIcon = useIcon(icon, userInput.site);
 
     return (
         <div className={classes.focusedViewWrapper}>
