@@ -23,10 +23,6 @@ header.wrapper {
         list-style-type: none;
         margin: 10px 0;
 
-        @media screen and (min-width: $medium_screen_size) {
-          padding: 7px;
-        }
-
         &:hover {
           background-color: rgba(217, 217, 217, 0.1);
           border-radius: 10px;
