@@ -1,0 +1,16 @@
+@import "../../utils/variables";
+
+.navFolderList {
+  li {
+    list-style-type: none;
+    padding: 5px;
+    a {
+      text-decoration: none;
+      > svg {
+        @media screen and (min-width: $medium_screen_size) {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
