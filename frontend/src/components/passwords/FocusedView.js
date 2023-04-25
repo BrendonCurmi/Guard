@@ -8,7 +8,7 @@ import FolderSelect from "./FolderSelect";
 
 import { useFolder } from "../../store/FolderProvider";
 
-import classes from "./AccountView.module.scss";
+import classes from "./FocusedView.module.scss";
 
 /**
  * @param focus the item to focus the view on.
@@ -19,7 +19,7 @@ import classes from "./AccountView.module.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const AccountView = ({ focus, submitAccountRequest, onClick, getCreds, fields }) => {
+const FocusedView = ({ focus, submitAccountRequest, onClick, getCreds, fields }) => {
 
     /**
      * Get the specified value from the focus item. If it doesn't exist,
@@ -178,7 +178,7 @@ const AccountView = ({ focus, submitAccountRequest, onClick, getCreds, fields })
     });
 
     return (
-        <div className={classes.accountViewWrapper}>
+        <div className={classes.focusedViewWrapper}>
             <div className={classes.icon}>
                 <SiteIcon domain={userInput.site} size="32"/>
             </div>
@@ -210,4 +210,4 @@ const AccountView = ({ focus, submitAccountRequest, onClick, getCreds, fields })
     );
 };
 
-export default AccountView;
+export default FocusedView;

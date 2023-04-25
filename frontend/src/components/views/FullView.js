@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import ListedView from "./ListedView";
 import ListedViewItem from "./ListedViewItem";
-import AccountView from "../passwords/AccountView";
+import FocusedView from "../passwords/FocusedView";
 import Confirm from "../confirm/Confirm";
 
 import { copyToClipboard } from "../../utils/CopyUtils";
@@ -44,7 +44,7 @@ const fullView = ({
     const [confirming, setConfirming] = useState(null);
 
     /**
-     * Submit create/update requests, reload all items, and close AccountView.
+     * Submit create/update requests, reload all items, and close FocusedView.
      * @param data the data to create/update.
      */
     const submitItemRequest = async (data) => {
@@ -52,7 +52,7 @@ const fullView = ({
         if (rawResponse.status === 201 || rawResponse.status === 204) {
             // const content = await rawResponse.json();
             await loadAllItems();
-            switchAccountViewHandler();
+            switchFocusedViewHandler();
         }
     };
 
@@ -93,7 +93,7 @@ const fullView = ({
     /**
      * Clear focused item and either open or close view.
      */
-    const switchAccountViewHandler = () => {
+    const switchFocusedViewHandler = () => {
         setIsEditing(prevState => !prevState);
         setFocused(null);
     };
@@ -137,7 +137,7 @@ const fullView = ({
             <>
                 {isEditing &&
                     <div>
-                        <AccountView onClick={switchAccountViewHandler}
+                        <FocusedView onClick={switchFocusedViewHandler}
                                      focus={focused}
                                      submitAccountRequest={submitItemRequest}
                                      getCreds={getCreds}
@@ -160,7 +160,7 @@ const fullView = ({
             pageTitle={pageTitle}
             pageAction={pageAction}
             timeName={timeName}
-            pageActionClick={switchAccountViewHandler}
+            pageActionClick={switchFocusedViewHandler}
             popups={<Popups/>}>
 
             {items && items.map((item, key) => (
