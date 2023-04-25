@@ -1,37 +1,36 @@
-import React, { createContext, useContext, useState } from "react";
-import useAsync from "../hooks/use-async";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const FolderContext = createContext([]);
 
 const FolderProvider = ({ children }) => {
-    const [folders, setFolders] = useState([]);
-
-    const getFolders = async () => {
-        const rawResponse = await fetch("http://localhost:4000/api/folders", {
-            method: "GET"
-        });
-
-        if (rawResponse.status === 200) {
-            return await rawResponse.json();
-        }
+    const loadFolders = () => {
+        fetch("http://localhost:4000/api/folders", { method: "GET" })
+            .then(value => value.json())
+            .then(data => {
+                const dict = {};
+                data.forEach(obj => {
+                    dict[obj._id] = obj.name;
+                });
+                setFoldersData(prevState => {
+                    return { ...prevState, folders: dict };
+                });
+            });
     };
 
-    useAsync(getFolders, data => {
-            const dict = {};
-            data.forEach(obj => {
-                dict[obj._id] = obj.name;
-            });
-            setFolders(dict);
-        }
-    );
+    const [foldersData, setFoldersData] = useState({
+        folders: [],
+        loadFolders
+    });
+
+    useEffect(loadFolders, []);
 
     return (
-        <FolderContext.Provider value={folders}>
+        <FolderContext.Provider value={foldersData}>
             {children}
         </FolderContext.Provider>
     );
 };
 
-export const useFolder = () => useContext(FolderContext);
+export const useFolders = () => useContext(FolderContext);
 
 export default FolderProvider;
