@@ -4,25 +4,36 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import SiteIcon from "../SiteIcon";
 import NiceButton from "../buttons/NiceButton";
+import FolderSelect from "./FolderSelect";
+
+import { useFolder } from "../../store/FolderProvider";
 
 import classes from "./AccountView.module.scss";
 
 const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
-    const getOr = (property) => {
-        return focus && focus[property] ? focus[property] : "";
+    const getOr = (property, defaultVal = "", fix = false) => {
+        let val = focus[property];
+        if (fix) val = fix(val);
+        return focus && focus[property] ? val : defaultVal;
+    };
+
+    const allFolders = useFolder();
+
+    const foldersIdsToNames = (ids) => {
+        return ids.map(id => allFolders[id]);
     };
 
     const [userInput, setUserInput] = useState({
         site: getOr("site"),
         title: getOr("title"),
         email: getOr("email"),
-        pw: getOr("pw")
+        pw: getOr("pw"),
+        folders: getOr("folders", [], foldersIdsToNames)
     });
     const [showPw, setShowPw] = useState(false);
     const [isEditing, setIsEditing] = useState(focus === null);
 
-    const onChangeHandler = (event) => {
-        const property = event.target.id.split("-")[1];
+    const onChangeHandler = (event, property = event.target.id.split("-")[1]) => {
         setUserInput({ ...userInput, [property]: event.target.value });
     };
 
@@ -47,6 +58,14 @@ const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
         // if pw hasn't been changed
         if (data.pw === "") delete data.pw;
 
+        // Update with folders if selected
+        if (userInput.folders !== []) {
+            // Convert selected folder Ids to folder names
+            data.folders = userInput.folders.map(name =>
+                Object.keys(allFolders).find(key => allFolders[key] === name)
+            );
+        }
+
         submitAccountRequest(data);
     };
 
@@ -57,8 +76,8 @@ const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
         setUserInput({ ...userInput, pw });
     };
 
-    const showPwHandler = () => {
-        // await initPw();// <- would cause issues because of inputPwValue defaulting when fields is empty
+    const showPwHandler = async () => {
+        await initPw();// <- would cause issues because of inputPwValue defaulting when fields is empty
         setShowPw(!showPw);
     };
 
@@ -131,6 +150,15 @@ const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
                         )
                     }}
                 />
+
+                <FolderSelect className={classes.folderSelect}
+                              onChange={event => onChangeHandler(event, "folders")}
+                              label="Folders"
+                              readOnly={!isEditing}
+                    // InputProps={{ readOnly: !isEditing }}
+                    // InputLabelProps={!isEditing ? { shrink: false } : {}}
+                              value={userInput.folders}
+                              allFolders={allFolders}/>
 
                 {isEditing ?
                     <NiceButton type="submit"
