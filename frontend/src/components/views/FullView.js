@@ -13,13 +13,10 @@ import { copyToClipboard } from "../../utils/CopyUtils";
  * @param updateApi the url of the api to update the item.
  * @param deleteApi the url of the api to delete the item.
  * @param credentialsApi the url of the api to retrieve the item's credentials.
- * @param copy
- * @param confirmTitle
- * @param confirmMsg
- * @param pageTitle
- * @param pageAction
- * @param timeName
- * @param fields
+ * @param copy the function to execute when copying the secure credentials.
+ * @param fields the array of form fields.
+ * @param page the page variables.
+ * @param confirm the confirm variables.
  * @returns {JSX.Element}
  */
 const fullView = ({
@@ -29,15 +26,10 @@ const fullView = ({
                       deleteApi = val => `${createApi}/${val}`,
                       credentialsApi = val => `${createApi}/${val}/credentials`,
                       copy,
-                      confirmTitle,
-                      confirmMsg,
-
-                      pageTitle,
-                      pageAction,
-                      timeName,
-                      fields
+                      fields,
+                      page = { title: "", action: "", timeName: "" },
+                      confirm = { title: "", msg: "" }
                   }) => {
-
     const [items, setItems] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [focused, setFocused] = useState();
@@ -147,8 +139,8 @@ const fullView = ({
                 {confirming !== null &&
                     <Confirm onCancel={() => setConfirming(null)}
                              onConfirm={deleteItemOnConfirmationHandler}>
-                        <h2>{confirmTitle}</h2>
-                        <h4>{confirmMsg}</h4>
+                        <h2>{confirm.title}</h2>
+                        <h4>{confirm.msg}</h4>
                     </Confirm>}
             </>
         );
@@ -157,9 +149,9 @@ const fullView = ({
     return (
         <ListedView
             shade={isEditing || confirming !== null}
-            pageTitle={pageTitle}
-            pageAction={pageAction}
-            timeName={timeName}
+            pageTitle={page.title}
+            pageAction={page.action}
+            timeName={page.timeName}
             pageActionClick={switchFocusedViewHandler}
             popups={<Popups/>}>
 
