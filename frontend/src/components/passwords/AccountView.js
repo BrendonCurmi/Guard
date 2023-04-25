@@ -10,7 +10,26 @@ import { useFolder } from "../../store/FolderProvider";
 
 import classes from "./AccountView.module.scss";
 
-const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
+/**
+ * @param focus the item to focus the view on.
+ * @param submitAccountRequest the function to execute when submitting (creating & updating).
+ * @param onClick the function to execute when clicking Cancel button to close the Account View.
+ * @param getCreds the function to execute when retrieving credentials.
+ * @param fields the array of form fields.
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const AccountView = ({ focus, submitAccountRequest, onClick, getCreds, fields }) => {
+
+    /**
+     * Get the specified value from the focus item. If it doesn't exist,
+     * return the specified default value. If it exists, fix it using
+     * the specified fix function if one is provided.
+     * @param property the name of the property.
+     * @param defaultVal the default value.
+     * @param fix the function to execute to fix the value if it exists.
+     * @returns {*|string}
+     */
     const getOr = (property, defaultVal = "", fix = false) => {
         return focus && focus[property] ?
             fix ? fix(focus[property]) : focus[property]
@@ -19,48 +38,68 @@ const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
 
     const allFolders = useFolder();
 
+    /**
+     * Convert an array of folder ids to an array of folder names.
+     * @param ids the array of folder ids.
+     * @returns {*} an array of folder names.
+     */
     const foldersIdsToNames = (ids) => {
         return ids.map(id => allFolders[id]);
     };
 
-    const [userInput, setUserInput] = useState({
-        site: getOr("site"),
-        title: getOr("title"),
-        email: getOr("email"),
-        pw: getOr("pw"),
+    // Set up initial user input values
+    let secureField = "";
+    const initialUserInput = {
         folders: getOr("folders", [], foldersIdsToNames)
+    };
+    fields.map(field => {
+        if (field instanceof Object && field.value) {
+            initialUserInput[field.value] = getOr(field.value);
+            if (field.secure) {
+                secureField = field.value;
+            }
+        }
     });
+    const [userInput, setUserInput] = useState(initialUserInput);
+
     const [showPw, setShowPw] = useState(false);
     const [isEditing, setIsEditing] = useState(focus === null);
 
+    /**
+     * Update user input property when changing field input values.
+     * @param event the event.
+     * @param property the property to update.
+     */
     const onChangeHandler = (event, property = event.target.id.split("-")[1]) => {
-        setUserInput({ ...userInput, [property]: event.target.value });
+        setUserInput(prevState => {
+            return { ...prevState, [property]: event.target.value };
+        });
     };
+    //todo check the target id property stuff
 
-    useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-        }, 3000)
+    // useEffect(() => {
+    //     const delayDebounceFn = setTimeout(() => {
+    //     }, 3000)
+    //
+    //     return () => clearTimeout(delayDebounceFn)
+    // }, [userInput.site])
 
-        return () => clearTimeout(delayDebounceFn)
-    }, [userInput.site])
-
+    /**
+     * Organise input data and submit.
+     * @param event the event.
+     */
     const onSubmitHandler = (event) => {
         event.preventDefault();
 
-        const data = {
-            title: userInput.title,
-            site: userInput.site,
-            email: userInput.email,
-            pw: userInput.pw
-        };
-        
-        // Remove pw property from data before sending
-        // if pw hasn't been changed
-        if (data.pw === "") delete data.pw;
+        const data = userInput;
+
+        // Remove secure property from data before sending
+        // if it hasn't been set
+        if (data[secureField] === "") delete data[secureField];
 
         // Update with folders if selected
         if (userInput.folders !== []) {
-            // Convert selected folder Ids to folder names
+            // Convert selected folder ids to folder names
             data.folders = userInput.folders.map(name =>
                 Object.keys(allFolders).find(key => allFolders[key] === name)
             );
@@ -69,23 +108,74 @@ const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
         submitAccountRequest(data);
     };
 
-    const inputPwValue = focus && userInput.pw === "" && !isEditing ? "............." : userInput.pw;
+    const secureUserInputValue = focus && userInput[secureField] === "" && !isEditing ? "............." : userInput[secureField];
 
-    const initPw = async () => {
-        let pw = focus && userInput.pw === "" ? (await getCreds(focus._id)).pw : userInput.pw;
-        setUserInput({ ...userInput, pw });
+    /**
+     * Load the secure value from getCreds or show secure user input value,
+     * if value from getCreds has already been loaded.
+     */
+    const loadSecureUserInputValue = async () => {
+        let secureVal = focus && userInput[secureField] === "" ? (await getCreds(focus._id))[secureField] : userInput[secureField];
+        setUserInput(prevState => {
+            return { ...prevState, [secureField]: secureVal };
+        });
     };
 
-    const showPwHandler = async () => {
-        await initPw();// <- would cause issues because of inputPwValue defaulting when fields is empty
+    const showSecureHandler = async () => {
+        await loadSecureUserInputValue();// <- would cause issues because of secureUserInputValue defaulting when field is empty
         setShowPw(!showPw);
     };
 
     const onEditBtnClick = async (event) => {
         event.preventDefault();
-        await initPw();// <- loading pw on edit instead fixes it
+        await loadSecureUserInputValue();// <- loading pw on edit instead fixes it
         setIsEditing(true);
     };
+
+    const formFields = fields.map(field => {
+        if (typeof field === "string" || field instanceof String) {
+            return <label key={field}>{field}</label>;
+        }
+
+        const fieldProps = {
+            // From field
+            key: field.id,
+            id: field.id,
+            label: field.label,
+            value: userInput[field.value],
+
+            // Defaults
+            className: classes.textField,
+            variant: "outlined",
+            onChange: onChangeHandler,
+            InputProps: { readOnly: !isEditing }
+        };
+
+        if (field.secure) {
+            fieldProps.InputProps = {
+                readOnly: !isEditing,
+                endAdornment: (
+                    <InputAdornment position="end">
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={showSecureHandler}
+                            onMouseDown={showSecureHandler}>
+                            {showPw ? <Visibility/> : <VisibilityOff/>}
+                        </IconButton>
+                    </InputAdornment>
+                )
+            }
+            fieldProps.type = showPw ? "text" : "password";
+            fieldProps.value = secureUserInputValue;
+            fieldProps.className = `${classes.textField} ${classes.pwTextField}`;
+        }
+
+        field.required
+            ? fieldProps.required = true
+            : fieldProps.InputLabelProps = !isEditing ? { shrink: false } : {};
+
+        return <TextField {...fieldProps}/>;
+    });
 
     return (
         <div className={classes.accountViewWrapper}>
@@ -93,63 +183,7 @@ const AccountView = ({ focus, submitAccountRequest, onClick, getCreds }) => {
                 <SiteIcon domain={userInput.site} size="32"/>
             </div>
             <form className={`${classes.inputForm} ${!isEditing ? classes.readOnly : ""}`} onSubmit={onSubmitHandler}>
-                <TextField
-                    className={classes.textField}
-                    required
-                    id="input-title"
-                    label="Title"
-                    variant="outlined"
-                    InputProps={{ readOnly: !isEditing }}
-                    onChange={onChangeHandler}
-                    value={userInput.title}
-                />
-
-                <TextField
-                    className={classes.textField}
-                    required
-                    id="input-site"
-                    label="Website Address"
-                    variant="outlined"
-                    InputProps={{ readOnly: !isEditing }}
-                    onChange={onChangeHandler}
-                    value={userInput.site}
-                />
-
-                <label>Login Details</label>
-                <TextField
-                    className={classes.textField}
-                    id="input-email"
-                    label="Email or username"
-                    variant="outlined"
-                    InputProps={{ readOnly: !isEditing }}
-                    InputLabelProps={!isEditing ? { shrink: false } : {}}
-                    onChange={onChangeHandler}
-                    value={userInput.email}
-                />
-
-                <TextField
-                    className={`${classes.textField} ${classes.pwTextField}`}
-                    required
-                    id="input-pw"
-                    label="Password"
-                    variant="outlined"
-                    type={showPw ? "text" : "password"}
-                    onChange={onChangeHandler}
-                    value={inputPwValue}
-                    InputProps={{
-                        readOnly: !isEditing,
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={showPwHandler}
-                                    onMouseDown={showPwHandler}>
-                                    {showPw ? <Visibility/> : <VisibilityOff/>}
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }}
-                />
+                {formFields}
 
                 <FolderSelect className={classes.folderSelect}
                               onChange={event => onChangeHandler(event, "folders")}
