@@ -142,7 +142,7 @@ const Passwords = () => {
 
             {accounts && accounts.map((account, key) => (
                 <ListedViewItem
-                    key={key} dkey={key}
+                    key={key} dKey={key}
                     account={account}
                     onEditClickHandler={onEditClickHandler}
                     onCopyClick={onCopyClick}
