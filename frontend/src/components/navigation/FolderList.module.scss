@@ -1,11 +1,17 @@
 @import "../../utils/variables";
 
-.navFolderList {
+ul.navFolderList {
+  padding-inline-start: 0;
+
   li {
     list-style-type: none;
-    padding: 5px;
+    @media screen and (min-width: $medium_screen_size) {
+      padding: 5px;
+    }
+
     a {
       text-decoration: none;
+
       > svg {
         @media screen and (min-width: $medium_screen_size) {
           margin-right: 5px;
