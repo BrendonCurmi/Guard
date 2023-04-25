@@ -27,7 +27,7 @@ const Navigation = (props) => {
     const folderListItems = (name, i) => {
         const url = encode(name);
         return (
-            <NavigationItemLink to={`/folder?f=${url}`}
+            <NavigationItemLink to={`/folder/${url}`}
                                 name={name}
                                 icon={faFolder}
                                 key={i}/>
