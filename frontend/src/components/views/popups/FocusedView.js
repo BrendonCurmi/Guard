@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -139,12 +139,13 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon
             return <label key={field}>{field}</label>;
         }
 
+        const { id, label, value, required = false, secure = false, ...extraProps } = field;
         const fieldProps = {
             // From field
-            key: field.id,
-            id: field.id,
-            label: field.label,
-            value: userInput[field.value],
+            key: id,
+            id: id,
+            label: label,
+            value: userInput[value],
 
             // Defaults
             className: classes.textField,
@@ -153,7 +154,14 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon
             InputProps: { readOnly: !isEditing }
         };
 
-        if (field.secure) {
+        // Add extra field props
+        if (extraProps) {
+            for (const extraPropKey in extraProps) {
+                fieldProps[extraPropKey] = extraProps[extraPropKey];
+            }
+        }
+
+        if (secure) {
             fieldProps.InputProps = {
                 readOnly: !isEditing,
                 endAdornment: (
@@ -166,15 +174,15 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon
                         </IconButton>
                     </InputAdornment>
                 )
-            }
+            };
             fieldProps.type = showPw ? "text" : "password";
             fieldProps.value = secureUserInputValue;
             fieldProps.className = `${classes.textField} ${classes.pwTextField}`;
         }
 
-        field.required
+        required
             ? fieldProps.required = true
-            : fieldProps.InputLabelProps = !isEditing && !userInput[field.value] ? { shrink: false } : {};
+            : fieldProps.InputLabelProps = !isEditing && !userInput[value] ? { shrink: false } : {};
 
         return <TextField {...fieldProps}/>;
     });
