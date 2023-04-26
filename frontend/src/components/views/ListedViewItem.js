@@ -8,7 +8,16 @@ import { describeDate } from "../../utils/DateUtils";
 
 import classes from "./ListedViewItem.module.scss";
 
-const ListedViewItem = ({ dKey, account, icon, onEditClickHandler, onCopyClick, setConfirming, listedViewProps }) => {
+const ListedViewItem = ({
+                            dKey,
+                            account,
+                            icon,
+                            onEditClickHandler,
+                            onCopyClick,
+                            setConfirming,
+                            listedViewProps,
+                            allowActions = true
+                        }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     listedViewProps = listedViewProps || {
@@ -29,7 +38,7 @@ const ListedViewItem = ({ dKey, account, icon, onEditClickHandler, onCopyClick, 
     const focusedIcon = useIcon(icon, site);
 
     const onClick = () => {
-        return canEdit ? onEditClickHandler(key) : "";
+        return canEdit && allowActions ? onEditClickHandler(key) : "";
     };
 
     const DefaultActionBtns = () => {
@@ -70,7 +79,7 @@ const ListedViewItem = ({ dKey, account, icon, onEditClickHandler, onCopyClick, 
                 <p className={classes.accountSubtitle}>{account.identity ? account.identity : ""}</p>
             </td>
             <td onClick={onClick}>{describeDate(account[time])}</td>
-            <td>{isHovered && actionBtns}</td>
+            <td>{isHovered && allowActions && actionBtns}</td>
         </tr>
     );
 };
