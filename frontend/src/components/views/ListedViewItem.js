@@ -29,7 +29,7 @@ const ListedViewItem = ({ dKey, account, icon, onEditClickHandler, onCopyClick, 
     const focusedIcon = useIcon(icon, site);
 
     const onClick = () => {
-        return canEdit ? () => onEditClickHandler(key) : "";
+        return canEdit ? onEditClickHandler(key) : "";
     };
 
     const DefaultActionBtns = () => {
