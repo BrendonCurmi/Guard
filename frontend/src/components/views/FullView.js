@@ -3,7 +3,7 @@ import { faFolder } from "@fortawesome/free-solid-svg-icons";
 
 import ListedView from "./ListedView";
 import ListedViewItem from "./ListedViewItem";
-import Popups from "./Popups";
+import PopupsView from "./popups/PopupsView";
 import { getData } from "../passwords/Profile";
 
 import { copyToClipboard } from "../../utils/CopyUtils";
@@ -157,7 +157,7 @@ const FullView = ({
         return optionalFn ? optionalFn : defaultFn;
     };
 
-    const popups = <Popups
+    const popupsView = <PopupsView
         className={classes.viewWrapper}
         onCancelFocused={switchFocusedViewHandler}
         onSubmitFocused={submitItemRequest}
@@ -184,7 +184,7 @@ const FullView = ({
             pageAction={action}
             timeName={timeName}
             pageActionClick={pageActionClick}
-            popups={popups}>
+            popups={popupsView}>
             {viewItems}
         </ListedView>
     );
