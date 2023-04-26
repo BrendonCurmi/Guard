@@ -10,6 +10,7 @@ const ListedViewItem = ({
                             dKey,
                             account,
                             icon,
+                            reload,
                             onEditClickHandler,
                             onCopyClick,
                             setConfirming,
@@ -18,7 +19,7 @@ const ListedViewItem = ({
                         }) => {
     const [isHovered, setIsHovered] = useState(false);
 
-    const { cells = {}, canCopy = true, canEdit = true, canDelete = true, customActionBtns = "" } = listedViewProps;
+    const { cells = {}, canCopy = true, canEdit = true, canDelete = true, customActionBtns = () => {} } = listedViewProps;
     const { time = "lastAccess" } = cells;
 
     const key = dKey;// "key" cannot be a prop
@@ -44,7 +45,7 @@ const ListedViewItem = ({
             </button>;
         return (
             <>
-                {customActionBtns}
+                {customActionBtns(account, reload)}
                 {canCopy && copyBtn}
                 {canEdit && editBtn}
                 {canDelete && deleteBtn}
@@ -52,7 +53,6 @@ const ListedViewItem = ({
         );
     };
 
-    const actionBtns = <DefaultActionBtns/>;
     return (
         <tr key={account.title}
             onMouseEnter={() => setIsHovered(true)}
@@ -65,7 +65,7 @@ const ListedViewItem = ({
                 <p className={classes.accountSubtitle}>{account.identity ? account.identity : ""}</p>
             </td>
             <td onClick={onClick}>{describeDate(account[time])}</td>
-            <td>{isHovered && allowActions && actionBtns}</td>
+            <td>{isHovered && allowActions && <DefaultActionBtns/>}</td>
         </tr>
     );
 };
