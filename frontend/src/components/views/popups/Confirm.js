@@ -1,5 +1,5 @@
 import React from "react";
-import NiceButton from "../buttons/NiceButton";
+import NiceButton from "../../buttons/NiceButton";
 
 const Confirm = ({ children, className, onCancel, onConfirm }) => {
     return (

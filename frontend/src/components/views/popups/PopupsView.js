@@ -1,6 +1,6 @@
 import React from "react";
 import FocusedView from "./FocusedView";
-import Confirm from "../../confirm/Confirm";
+import Confirm from "./Confirm";
 
 /**
  * Popups view for Focused View and Confirm View.
