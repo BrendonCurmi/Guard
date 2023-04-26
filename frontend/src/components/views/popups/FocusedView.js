@@ -3,7 +3,7 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import NiceButton from "../../buttons/NiceButton";
-import FolderSelect from "../../passwords/FolderSelect";
+import FolderSelect from "./FolderSelect";
 
 import useIcon from "../../../hooks/use-icon";
 import { useFolders } from "../../../store/FolderProvider";
