@@ -17,12 +17,12 @@ const ListedView = ({ children, shade, pageTitle, pageAction, pageActionClick, p
     return (
         <div className={classes.wrapper}>
             {popups}
-            <div className={classes.gamesWrapper}>
+            <div className={classes.contentWrapper}>
                 {shade &&
                     <div className={classes.shade}></div>
                 }
                 <h1 className={classes.title}>{pageTitle}</h1>
-                <a className={`${classes.button} ${classes.btn}`}
+                <a className={classes.button}
                    onClick={pageActionClick}>{pageAction}</a>
                 <table>
                     <thead>
