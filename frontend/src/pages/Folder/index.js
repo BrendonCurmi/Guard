@@ -4,12 +4,13 @@ import { faFolder } from "@fortawesome/free-solid-svg-icons";
 
 import ListedView from "../../components/views/ListedView";
 import ListedViewItem from "../../components/views/ListedViewItem";
-import useAsync from "../../hooks/use-async";
+import { getData } from "../../components/passwords/Profile";
 
 import { copyToClipboard } from "../../utils/CopyUtils";
 import { decode, encode } from "../../utils/URLUtils";
 import { useFolders } from "../../store/FolderProvider";
-import useFocus, { getData } from "../../hooks/use-focus";
+import useFocus  from "../../hooks/use-focus";
+import useAsync from "../../hooks/use-async";
 
 const API = "http://localhost:4000/api/folderView";
 

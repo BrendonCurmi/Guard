@@ -4,9 +4,9 @@ import ListedView from "./ListedView";
 import ListedViewItem from "./ListedViewItem";
 import FocusedView from "../passwords/FocusedView";
 import Confirm from "../confirm/Confirm";
+import { getData } from "../../hooks/use-focus";
 
 import { copyToClipboard } from "../../utils/CopyUtils";
-import { getData } from "../../hooks/use-focus";
 
 /**
  * ListedView that loads items into it.

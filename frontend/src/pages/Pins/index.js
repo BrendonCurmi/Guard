@@ -2,8 +2,6 @@ import React from "react";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import FullView from "../../components/views/FullView";
 
-const API = "http://localhost:4000/api/pins";
-
 export const PinData = {
     fields: [
         {

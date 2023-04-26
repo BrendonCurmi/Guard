@@ -3,8 +3,6 @@ import FullView from "../../components/views/FullView";
 
 import classes from "./index.module.scss";
 
-const API = "http://localhost:4000/api/accounts";
-
 export const PasswordData = {
     fields: [
         {

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { Profiler, useState } from "react";
 import FocusedView from "../components/passwords/FocusedView";
 import Confirm from "../components/confirm/Confirm";
 
-import { PasswordData } from "../pages/Passwords";
-import { PinData } from "../pages/Pins";
+import { getData } from "../components/passwords/Profile";
 
 import classes from "";
 
@@ -96,17 +95,7 @@ const useFocus = (loadAllItems, getCreds) => {
         );
     };
 
-
     return [focusOn, Popups, dataTypeData];
 };
-
-export const getData = (type) => {
-    switch (type) {
-        case "accounts":
-            return PasswordData;
-        case "pins":
-            return PinData;
-    }
-}
 
 export default useFocus;
