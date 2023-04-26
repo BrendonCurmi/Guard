@@ -19,6 +19,7 @@ header.wrapper {
         padding: 5px 20px;
       }
 
+      // Navigation links
       > li {
         list-style-type: none;
         margin: 10px 0;
@@ -58,6 +59,19 @@ header.wrapper {
         }
       }
 
+      // Folder links
+      li {
+        &:not(:hover) button {
+          visibility: hidden;
+        }
+
+        // Folder action buttons
+        button {
+          padding: 0;
+          background-color: transparent;
+        }
+      }
+
       .folders {
         margin-top: 10px;
 
@@ -67,6 +81,10 @@ header.wrapper {
             display: none;
           }
         }
+      }
+
+      .search {
+        background-color: $text-colour;
       }
     }
   }
