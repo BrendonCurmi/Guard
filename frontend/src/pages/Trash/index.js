@@ -1,8 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
+import { faTrashRestore, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import FullView from "../../components/views/FullView";
+import CircleButton from "../../components/buttons/CircleButton";
 
 const loadApi= "http://localhost:4000/api/trash"
 const deleteApi = val => `${loadApi}/${val}`;
@@ -17,9 +18,9 @@ const Trash = () => {
             await reload();
         };
         return (
-            <button onClick={restoreItem}>
+            <CircleButton tooltip="Restore" onClick={restoreItem} color="safe">
                 <FontAwesomeIcon icon={faTrashRestore}/>
-            </button>
+            </CircleButton>
         );
     };
 
@@ -31,6 +32,7 @@ const Trash = () => {
         page={{
             title: "Trash",
             actionTitle: "Clear Trash",
+            actionIcon: faTrashAlt,
             action: clearTrash,
             timeName: "Date Deleted"
         }}
