@@ -4,7 +4,8 @@ import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 
 import FullView from "../../components/views/FullView";
 
-const API = "http://localhost:4000/api/trash";
+const loadApi= "http://localhost:4000/api/trash"
+const deleteApi = val => `${loadApi}/${val}`;
 
 const Trash = () => {
     const ActionBtns = () => {
@@ -30,8 +31,8 @@ const Trash = () => {
             title: "Are you sure you want to permanently delete this?",
             msg: "This cannot be recovered once deleted"
         }}
-        loadApi={API}
-        deleteItemHandler={() => console.log("todo")}
+        loadApi={loadApi}
+        deleteApi={deleteApi}
         listedViewProps={{
             cells: { time: "deletedDate" },
             canCopy: false,
