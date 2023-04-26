@@ -98,16 +98,24 @@ table {
   }
 
   tbody {
-    tr:hover {
-      background-color: lighten($background-colour, 4%);
+    tr {
+      height: 60px;
+
+      &:hover {
+        background-color: lighten($background-colour, 4%);
+      }
+
+      td {
+        padding: 8px;
+
+        p {
+          margin: 0;
+        }
+      }
     }
 
-    tr td {
-      padding: 8px;
-
-      p {
-        margin: 0;
-      }
+    tr:not(tr:hover) td:nth-child(4) button {
+      visibility: hidden;
     }
   }
 
