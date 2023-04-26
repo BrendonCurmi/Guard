@@ -6,7 +6,7 @@ const FolderList = ({ folderListItems, allFolders }) => {
     return (
         <ul className={classes.navFolderList}>
             {
-                Object.keys(allFolders).map((key, i) => {
+                allFolders && Object.keys(allFolders).map((key, i) => {
                     const name = allFolders[key];
                     return folderListItems(name, i);
                 })
