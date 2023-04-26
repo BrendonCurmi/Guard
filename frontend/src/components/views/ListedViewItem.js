@@ -13,23 +13,13 @@ const ListedViewItem = ({
                             onEditClickHandler,
                             onCopyClick,
                             setConfirming,
-                            listedViewProps,
+                            listedViewProps = {},
                             allowActions = true
                         }) => {
     const [isHovered, setIsHovered] = useState(false);
 
-    listedViewProps = listedViewProps || {
-        cells: {
-            time: "lastAccess"
-        },
-        canCopy: true,
-        canEdit: true,
-        canDelete: true,
-        customActionBtns: ""
-    };
-
-    const { cells, canCopy, canEdit, canDelete, customActionBtns } = listedViewProps;
-    const { time } = cells;
+    const { cells = {}, canCopy = true, canEdit = true, canDelete = true, customActionBtns = "" } = listedViewProps;
+    const { time = "lastAccess" } = cells;
 
     const key = dKey;// "key" cannot be a prop
 
