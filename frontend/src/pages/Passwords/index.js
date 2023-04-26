@@ -1,8 +1,6 @@
 import React from "react";
 import FullView from "../../components/views/FullView";
 
-import classes from "./index.module.scss";
-
 export const PasswordData = {
     fields: [
         {
