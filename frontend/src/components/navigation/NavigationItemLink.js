@@ -4,13 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import NavigationItem from "./NavigationItem";
 
-const NavigationItemLink = ({ name, to, icon, ...props }) => {
+const NavigationItemLink = ({ name, to, icon, children, ...props }) => {
     return (
-        <NavigationItem name={name}>
-            <Link to={to} {...props}>
+        <NavigationItem name={name} {...props}>
+            <Link to={to}>
                 <FontAwesomeIcon icon={icon}/>
                 <span>{name}</span>
             </Link>
+            {children}
         </NavigationItem>
     );
 };
