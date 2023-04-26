@@ -21,36 +21,25 @@
   width: calc(min(97%, 50em));
   //overflow-y: auto;
 
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px 200px;
-  grid-template-areas:
-          "title button"
-          "tables tables";
-  display: grid;
+  .header {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50px;
+    grid-template-areas: "title button";
+    display: grid;
+    margin-left: 10px;
+  }
 
   .title {
     grid-area: title;
+    margin: 0;
   }
 
-  .button {
+  .pageActionBtns {
     grid-area: button;
-    cursor: pointer;
-    border-radius: 35px;
-    text-decoration: none;
-    padding: 12px 18px;
-    font-size: 16px;
-    transition: all .4s ease-in-out;
-
-    margin: auto 0 auto auto;
     text-align: right;
-
-    background: #000;
-    border: solid 2px #fff;
-    color: #fff;
   }
 
   table {
-    grid-area: tables;
     border-collapse: collapse;
     width: calc(min(100%, 50em));
     margin: 20px auto;
