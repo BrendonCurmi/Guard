@@ -120,6 +120,7 @@ const FullView = ({
     const deleteItemOnConfirmationHandler = async () => {
         if (confirming === null) return;
         const [type, index] = confirming.split("-");
+        //todo this
         console.log("2", items[type][index]._id);
         return;
         const rawResponse = await fetch(dataTypeData.endpoints.deleteApi(items[type][index]._id), { method: "DELETE" });
@@ -130,30 +131,6 @@ const FullView = ({
             setConfirming(null);
         }
     };
-
-    const viewItems = Object.keys(items).map((type) => {
-        // Define type-specific props
-        const itemProps = {};
-        switch (type) {
-            case "accounts":
-                break;
-            case "pins":
-                itemProps.icon = faFolder;
-                break;
-        }
-        itemProps.type = type;
-        return items[type].map((item, itemIndex) => {
-            const key = `${type}-${itemIndex}`;
-            return <ListedViewItem
-                key={key} dKey={key}
-                account={item}
-                {...itemProps}
-                onEditClickHandler={onEditClickHandler}
-                onCopyClick={onCopyClick}
-                setConfirming={setConfirming}
-                listedViewProps={listedViewProps}/>;
-        });
-    });
 
     const call = (defaultFn, optionalFn) => {
         return optionalFn ? optionalFn : defaultFn;
@@ -178,6 +155,32 @@ const FullView = ({
     const isShade = isEditing || confirming !== null;
     const { title, actionTitle, action, timeName } = page;
     const pageActionClick = call(switchFocusedViewHandler, action);
+
+    const viewItems = Object.keys(items).map((type) => {
+        // Define type-specific props
+        const itemProps = {};
+        switch (type) {
+            case "accounts":
+                break;
+            case "pins":
+                itemProps.icon = faFolder;
+                break;
+        }
+        itemProps.type = type;
+        return items[type].map((item, itemIndex) => {
+            const key = `${type}-${itemIndex}`;
+            return <ListedViewItem
+                key={key} dKey={key}
+                account={item}
+                {...itemProps}
+                onEditClickHandler={onEditClickHandler}
+                onCopyClick={onCopyClick}
+                setConfirming={setConfirming}
+                listedViewProps={listedViewProps}
+                allowActions={!isShade}/>;
+        });
+    });
+
     return (
         <ListedView
             shade={isShade}
