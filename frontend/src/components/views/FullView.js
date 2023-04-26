@@ -6,31 +6,21 @@ import FocusedView from "../passwords/FocusedView";
 import Confirm from "../confirm/Confirm";
 
 import { copyToClipboard } from "../../utils/CopyUtils";
+import { getData } from "../../hooks/use-focus";
 
 /**
- * @param loadApi the url of the api to load all items.
- * @param createApi the url of the api to create an item.
- * @param updateApi the url of the api to update the item.
- * @param deleteApi the url of the api to delete the item.
- * @param credentialsApi the url of the api to retrieve the item's credentials.
- * @param copy the function to execute when copying the secure credentials.
- * @param fields the array of form fields.
+ * ListedView that loads items into it.
  * @param page the page variables.
  * @param confirm the confirm variables.
  * @param icon the icon.
+ * @param dataType the item type.
  * @returns {JSX.Element}
  */
-const fullView = ({
-                      loadApi,
-                      createApi,
-                      updateApi = val => `${createApi}/${val}`,
-                      deleteApi = val => `${createApi}/${val}`,
-                      credentialsApi = val => `${createApi}/${val}/credentials`,
-                      copy,
-                      fields,
+const FullView = ({
                       page = { title: "", action: "", timeName: "" },
                       confirm = { title: "", msg: "" },
-                      icon
+                      icon,
+                      dataType
                   }) => {
     const [items, setItems] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
@@ -110,8 +100,8 @@ const fullView = ({
     };
 
     const onCopyClick = async (key) => {
-        const creds = await getCreds(items[key]._id);
-        copyToClipboard(copy(creds));
+        const creds = await getCreds(dataType, items[key]._id);
+        copyToClipboard(copyField(creds));
     };
 
     const onShowClick = (key) => {
@@ -121,8 +111,9 @@ const fullView = ({
         });
     };
 
-    const getCreds = async (id) => {
-        const res = await fetch(credentialsApi(id));
+    const getCreds = async (dataType, id) => {
+        const itemData = getData(dataType);
+        const res = await fetch(itemData.endpoints.credentialsApi(id));
         return await res.json();
     };
 
@@ -137,6 +128,7 @@ const fullView = ({
                                      getCreds={getCreds}
                                      fields={fields}
                                      icon={icon}
+                                     dataType={dataType}
                         />
                     </div>}
                 {confirming !== null &&
@@ -172,4 +164,4 @@ const fullView = ({
     );
 };
 
-export default fullView;
+export default FullView;

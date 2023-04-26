@@ -17,10 +17,11 @@ import classes from "./FocusedView.module.scss";
  * @param getCreds the function to execute when retrieving credentials.
  * @param fields the array of form fields.
  * @param icon the icon.
+ * @param dataType the item type.
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon = "" }) => {
+const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon = "", dataType }) => {
 
     /**
      * Get the specified value from the focus item. If it doesn't exist,
@@ -116,7 +117,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon
      * if value from getCreds has already been loaded.
      */
     const loadSecureUserInputValue = async () => {
-        let secureVal = focus && userInput[secureField] === "" ? (await getCreds(focus._id))[secureField] : userInput[secureField];
+        let secureVal = focus && userInput[secureField] === "" ? (await getCreds(dataType, focus._id))[secureField] : userInput[secureField];
         setUserInput(prevState => {
             return { ...prevState, [secureField]: secureVal };
         });

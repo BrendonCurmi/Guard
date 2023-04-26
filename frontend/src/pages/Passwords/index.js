@@ -5,8 +5,8 @@ import classes from "./index.module.scss";
 
 const API = "http://localhost:4000/api/accounts";
 
-const Passwords = () => {
-    const fields = [
+export const PasswordData = {
+    fields: [
         {
             label: "Title",
             required: true,
@@ -32,18 +32,25 @@ const Passwords = () => {
             id: "input-pw",
             value: "pw"
         }
-    ];
+    ],
+    endpoints: {
+        loadApi: "http://localhost:4000/api/accounts",
+        createApi: "http://localhost:4000/api/account",
+        updateApi: val => `${PasswordData.endpoints.createApi}/${val}`,
+        deleteApi: val => `${PasswordData.endpoints.createApi}/${val}`,
+        credentialsApi: val => `${PasswordData.endpoints.createApi}/${val}/credentials`
+    },
+    copyField: creds => creds.pw
+}
 
+const Passwords = () => {
     return <FullView
-        loadApi={API}
-        createApi="http://localhost:4000/api/account"
-        copy={creds => creds.pw}
         page={{ title: "Passwords", action: "Add Item", timeName: "Last Used" }}
         confirm={{
             title: "Are you sure?",
             msg: "Do you really want to delete this account? It can't be recovered once it's deleted"
         }}
-        fields={fields}/>;
+        dataType="accounts"/>;
 };
 
 export default Passwords;
