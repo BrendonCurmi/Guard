@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import SiteIcon from "../../components/SiteIcon";
-import Confirm from "../../components/confirm/Confirm";
+import ConfirmView from "../../components/views/popups/ConfirmView";
 import ListedView from "../../components/views/ListedView";
 
 import { describeDate } from "../../utils/DateUtils";
@@ -49,12 +49,12 @@ const Trash = () => {
     const Popup = () => {
         return (
             confirming !== null &&
-            <Confirm className={classes.viewWrapper}
-                     onCancel={() => setConfirming(null)}
-                     onConfirm={deleteAccountOnConfirmationHandler}>
+            <ConfirmView className={classes.viewWrapper}
+                         onCancel={() => setConfirming(null)}
+                         onConfirm={deleteAccountOnConfirmationHandler}>
                 <h2>Are you sure?</h2>
                 <h4>Do you really want to delete this account? It can't be recovered once it's deleted</h4>
-            </Confirm>
+            </ConfirmView>
         );
     };
 
