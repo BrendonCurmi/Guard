@@ -3,25 +3,6 @@
 .wrapper {
   position: relative;
   //background: #414141;
-
-  .viewWrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #484545;
-    //background: white;
-    z-index: 2;
-    width: 90%;
-    border-radius: 10px;
-    padding: 10px;
-
-    p {
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
-
-  }
 }
 
 .shade {
@@ -32,7 +13,7 @@
   z-index: 1;
 }
 
-.gamesWrapper {
+.contentWrapper {
   //margin-left: 10px;
   padding-top: 10px;
   height: 100vh;
@@ -45,27 +26,13 @@
           "title button"
           "tables tables";
   display: grid;
+
   .title {
     grid-area: title;
   }
+
   .button {
     grid-area: button;
-  }
-  table {
-    grid-area: tables;
-  }
-
-
-
-
-
-
-
-
-
-
-
-  .btn {
     cursor: pointer;
     border-radius: 35px;
     text-decoration: none;
@@ -80,46 +47,48 @@
     border: solid 2px #fff;
     color: #fff;
   }
-}
 
-table {
-  border-collapse: collapse;
-  width: calc(min(100%, 50em));
-  margin: 20px auto;
+  table {
+    grid-area: tables;
+    border-collapse: collapse;
+    width: calc(min(100%, 50em));
+    margin: 20px auto;
 
-  thead {
-    border-bottom: 1px solid grey;
-    tr th {
-      font-size: 16px;
-      padding: 8px;
-      //letter-spacing: 1px;
-      text-align: left;
-    }
-  }
+    thead {
+      border-bottom: 1px solid grey;
 
-  tbody {
-    tr {
-      height: 60px;
-
-      &:hover {
-        background-color: lighten($background-colour, 4%);
-      }
-
-      td {
+      tr th {
+        font-size: 16px;
         padding: 8px;
+        //letter-spacing: 1px;
+        text-align: left;
+      }
+    }
 
-        p {
-          margin: 0;
+    tbody {
+      tr {
+        height: 60px;
+
+        &:hover {
+          background-color: lighten($background-colour, 4%);
+        }
+
+        td {
+          padding: 8px;
+
+          p {
+            margin: 0;
+          }
         }
       }
+
+      tr:not(tr:hover) td:nth-child(4) button {
+        visibility: hidden;
+      }
     }
 
-    tr:not(tr:hover) td:nth-child(4) button {
-      visibility: hidden;
+    thead tr th:nth-last-child(1), tbody tr td:nth-last-child(1) {
+      text-align: right;
     }
-  }
-
-  thead tr th:nth-last-child(1), tbody tr td:nth-last-child(1) {
-    text-align: right;
   }
 }
