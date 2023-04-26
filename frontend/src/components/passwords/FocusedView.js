@@ -6,7 +6,7 @@ import NiceButton from "../buttons/NiceButton";
 import FolderSelect from "./FolderSelect";
 
 import useIcon from "../../hooks/use-icon";
-import { useFolder } from "../../store/FolderProvider";
+import { useFolders } from "../../store/FolderProvider";
 
 import classes from "./FocusedView.module.scss";
 
@@ -37,7 +37,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon
             : defaultVal;
     };
 
-    const allFolders = useFolder();
+    const allFolders = useFolders().folders;
 
     /**
      * Convert an array of folder ids to an array of folder names.
