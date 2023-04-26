@@ -17,8 +17,17 @@ const Trash = () => {
         );
     };
 
+    const clearTrash = () => {
+        console.log("trash clear");//todo trash clear
+    };
+
     return <FullView
-        page={{ title: "Trash", action: "Clear Trash", timeName: "Date Deleted" }}
+        page={{
+            title: "Trash",
+            actionTitle: "Clear Trash",
+            action: clearTrash,
+            timeName: "Date Deleted"
+        }}
         confirm={{
             title: "Are you sure you want to permanently delete this?",
             msg: "This cannot be recovered once deleted"
