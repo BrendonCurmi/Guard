@@ -41,7 +41,7 @@ export const PasswordData = {
 
 const Passwords = () => {
     return <FullView
-        page={{ title: "Passwords", action: "Add Item", timeName: "Last Used" }}
+        page={{ title: "Passwords", actionTitle: "Add Item", timeName: "Last Used" }}
         confirm={{
             title: "Are you sure?",
             msg: "Do you really want to delete this account? It can't be recovered once it's deleted"
