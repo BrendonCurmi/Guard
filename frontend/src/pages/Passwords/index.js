@@ -22,8 +22,8 @@ const Passwords = () => {
         "Login Details",
         {
             label: "Email or username",
-            id: "input-email",
-            value: "email"
+            id: "input-identity",
+            value: "identity"
         },
         {
             label: "Password",
