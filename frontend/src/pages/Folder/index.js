@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import ListedView from "../../components/views/ListedView";
 import ListedViewItem from "../../components/views/ListedViewItem";
 import useAsync from "../../hooks/use-async";
 
 import { decode, encode } from "../../utils/URLUtils";
+import { useFolders } from "../../store/FolderProvider";
 
 const API = "http://localhost:4000/api/folderView";
 
@@ -23,23 +24,28 @@ const Folder = () => {
 
     useAsync(getItems, data => setItems(data), [name]);
 
+    const navigate = useNavigate();
+    const folders = useFolders();
+
     const deleteFolderHandler = async () => {
-        //todo implement
         const rawResponse = await fetch(`http://localhost:4000/api/folder/`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ search: folderName })
         });
 
         if (rawResponse.status === 200) {
             const content = await rawResponse.json();
             // console.log(content);
-            <Redirect to="/pass" push />
+            folders.loadFolders();
+            navigate("/pass");
         }
     };
 
     return (
         <ListedView
             pageTitle={folderName}
-            pageAction="Add Item"
+            pageAction="Delete Folder"
             pageActionClick={deleteFolderHandler}
             timeName="Last Used">
             {items.folders && items.folders.map((account, key) => (
