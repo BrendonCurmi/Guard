@@ -18,8 +18,7 @@ const ListedViewItem = ({ dKey, account, icon, onEditClickHandler, onCopyClick, 
             </td>
             <td onClick={() => onEditClickHandler(key)}>
                 <p className={classes.accountTitle}>{account.title}</p>
-                {/*<p>{product.email || product.username}</p>*/}
-                <p className={classes.accountSubtitle}>Test</p>
+                <p className={classes.accountSubtitle}>{account.identity ? account.identity : ""}</p>
             </td>
             <td onClick={() => onEditClickHandler(key)}>{describeDate(account.lastAccess)}</td>
             <td>
