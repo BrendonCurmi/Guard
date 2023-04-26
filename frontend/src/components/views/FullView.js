@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
 
 import ListedView from "./ListedView";
 import ListedViewItem from "./ListedViewItem";
 import PopupsView from "./popups/PopupsView";
-import { getData } from "./Profile";
+import CircleButton from "../buttons/CircleButton";
 
+import { getData } from "./Profile";
 import { copyToClipboard } from "../../utils/CopyUtils";
 
 import classes from "FullView.module.scss";
@@ -22,7 +25,7 @@ import classes from "FullView.module.scss";
  * @returns {JSX.Element}
  */
 const FullView = ({
-                      page = { title: "", actionTitle: "", timeName: "", action: "" },
+                      page = { title: "", actionTitle: "", timeName: "", action: "", actions: "" },
                       confirm = { title: "", msg: "" },
                       loadApi,
                       deleteApi = "",
@@ -159,7 +162,7 @@ const FullView = ({
         confirmVals={confirm}/>;
 
     const isShade = isEditing || confirming !== null;
-    const { title, actionTitle, action, timeName } = page;
+    const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
     const pageActionClick = call(switchFocusedViewHandler, action);
 
     const viewItems = Object.keys(items).map((type) => {
@@ -180,14 +183,28 @@ const FullView = ({
         });
     });
 
+    const DefaultPageActions = () => {
+        return (
+            <CircleButton type="button"
+                          color="secondary"
+                          tooltip={actionTitle}
+                          onClick={pageActionClick}>
+                <FontAwesomeIcon icon={actionIcon}/>
+            </CircleButton>
+        );
+        //return <a className={classes.button} onClick={pageActionClick}>{actionTitle}</a>;
+    };
+
+    const pageActions = actions || DefaultPageActions;
+
     return (
         <ListedView
             shade={isShade}
             pageTitle={title}
             pageAction={actionTitle}
             timeName={timeName}
-            pageActionClick={pageActionClick}
-            popups={popupsView}>
+            popups={popupsView}
+            PageActions={pageActions}>
             {viewItems}
         </ListedView>
     );
