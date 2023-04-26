@@ -6,11 +6,18 @@ import FullView from "../../components/views/FullView";
 
 const loadApi= "http://localhost:4000/api/trash"
 const deleteApi = val => `${loadApi}/${val}`;
+const restoreApi = val => `${loadApi}/${val}/restore`;
 
 const Trash = () => {
-    const ActionBtns = () => {
+    const createActionBtns = (item, reload) => {
+        const restoreItem = async () => {
+            const res = await fetch(restoreApi(item._id));
+            const data = await res.json();
+            const status = res.status;
+            await reload();
+        };
         return (
-            <button onClick={() => console.log("todo")}>
+            <button onClick={restoreItem}>
                 <FontAwesomeIcon icon={faTrashRestore}/>
             </button>
         );
@@ -38,7 +45,7 @@ const Trash = () => {
             canCopy: false,
             canEdit: false,
             canDelete: true,
-            customActionBtns: <ActionBtns/>
+            customActionBtns: createActionBtns
         }}
     />;
 };
