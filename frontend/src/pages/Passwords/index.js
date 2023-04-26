@@ -48,7 +48,8 @@ const Passwords = () => {
             title: "Are you sure?",
             msg: "Do you really want to delete this account? It can't be recovered once it's deleted"
         }}
-        dataType="accounts"/>;
+        dataType="accounts"
+        loadApi={PasswordData.endpoints.loadApi}/>;
 };
 
 export default Passwords;
