@@ -38,7 +38,7 @@ const Passwords = () => {
         loadApi={API}
         createApi="http://localhost:4000/api/account"
         copy={creds => creds.pw}
-        page={{ title: "Passwords", action: "Add Item", timeNow: "Last Used" }}
+        page={{ title: "Passwords", action: "Add Item", timeName: "Last Used" }}
         confirm={{
             title: "Are you sure?",
             msg: "Do you really want to delete this account? It can't be recovered once it's deleted"
