@@ -4,10 +4,8 @@ import { faHouse, faRightToBracket, faRightFromBracket, faGamepad, faUser, faFol
 
 import NavigationItem from "./NavigationItem";
 import NavigationItemLink from "./NavigationItemLink";
-import NavigationFolderItem from "./NavigationFolderItem";
 import FolderList from "./FolderList";
 
-import { encode } from "../../utils/URLUtils";
 import { useFolders } from "../../store/FolderProvider";
 
 import classes from "./Navigation.module.scss";
@@ -25,14 +23,6 @@ const Navigation = (props) => {
         link: auth ? "/logout" : "/login",
         text: auth ? "Logout" : "Login",
         icon: auth ? faRightFromBracket : faRightToBracket
-    };
-
-    const folderListItems = (name, i) => {
-        const url = encode(name);
-        return <NavigationFolderItem to={`/folder/${url}`}
-                                     name={name}
-                                     icon={faFolder}
-                                     key={i}/>;
     };
 
     const edit = () => {
@@ -77,7 +67,7 @@ const Navigation = (props) => {
                             <FontAwesomeIcon icon={faFolderPlus}/>
                         </button>
                     </span>
-                    <FolderList folderListItems={folderListItems} allFolders={folders.folders}/>
+                    <FolderList allFolders={folders.folders}/>
                     {creatingFolder &&
                         <form onSubmit={createFolder}>
                             <input type="text"
