@@ -21,7 +21,7 @@ export const PinData = {
     endpoints: {
         loadApi: "http://localhost:4000/api/pins",
         createApi: "http://localhost:4000/api/pin",
-        updateApi: val => `${PinData.endpoints}/${val}`,
+        updateApi: val => `${PinData.endpoints.createApi}/${val}`,
         deleteApi: val => `${PinData.endpoints.createApi}/${val}`,
         credentialsApi: val => `${PinData.endpoints.createApi}/${val}/credentials`
     },
@@ -36,6 +36,7 @@ const Pins = () => {
             msg: "Do you really want to delete this pin? It can't be recovered once it's deleted"
         }}
         dataType="pins"
+        loadApi={PinData.endpoints.loadApi}
         icon={faFolder}/>;
 };
 
