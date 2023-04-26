@@ -41,8 +41,7 @@ const Folder = () => {
             msg: "Do you really want to delete this? It can't be recovered once it's deleted"
         }}
         loadApi={`${API}?f=${encode(folderName)}`}
-        loadDeps={[name]}
-        deleteItem={deleteFolderHandler}/>;
+        loadDeps={[name]}/>;
 };
 
 export default Folder;
