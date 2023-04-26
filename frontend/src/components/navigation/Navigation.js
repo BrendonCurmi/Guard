@@ -5,6 +5,7 @@ import { faHouse, faRightToBracket, faRightFromBracket, faGamepad, faUser, faFol
 import NavigationItem from "./NavigationItem";
 import NavigationItemLink from "./NavigationItemLink";
 import FolderList from "./FolderList";
+import CircleButton from "../buttons/CircleButton";
 
 import { useFolders } from "../../store/FolderProvider";
 
@@ -62,10 +63,9 @@ const Navigation = (props) => {
 
                     <span className={classes.folders}>
                         <label>Folders</label>
-                        <button tooltip="Add Folder" tooltip-position="right"
-                                onClick={edit}>
+                        <CircleButton tooltip="Add Folder" placement="right" onClick={edit}>
                             <FontAwesomeIcon icon={faFolderPlus}/>
-                        </button>
+                        </CircleButton>
                     </span>
                     <FolderList allFolders={folders.folders}/>
                     {creatingFolder &&
