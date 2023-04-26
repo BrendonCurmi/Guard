@@ -4,7 +4,7 @@ import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import ListedView from "./ListedView";
 import ListedViewItem from "./ListedViewItem";
 import PopupsView from "./popups/PopupsView";
-import { getData } from "../passwords/Profile";
+import { getData } from "./Profile";
 
 import { copyToClipboard } from "../../utils/CopyUtils";
 
