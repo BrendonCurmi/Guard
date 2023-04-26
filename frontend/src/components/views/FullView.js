@@ -175,7 +175,8 @@ const FullView = ({
                 onCopyClick={onCopyClick}
                 setConfirming={setConfirming}
                 listedViewProps={listedViewProps}
-                allowActions={!isShade}/>;
+                allowActions={!isShade}
+                reload={loadAllItems}/>;
         });
     });
 
