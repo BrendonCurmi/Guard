@@ -44,7 +44,7 @@ const Passwords = () => {
         page={{ title: "Passwords", actionTitle: "Add Item", timeName: "Last Used" }}
         confirm={{
             title: "Are you sure?",
-            msg: "Do you really want to delete this account? It can't be recovered once it's deleted"
+            msg: "Do you really want to delete this account? It will be moved to Trash"
         }}
         dataType="accounts"
         loadApi={PasswordData.endpoints.loadApi}/>;

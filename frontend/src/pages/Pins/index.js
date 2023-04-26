@@ -33,7 +33,7 @@ const Pins = () => {
         page={{ title: "Pins", actionTitle: "Add Pin", timeName: "Last Seen" }}
         confirm={{
             title: "Are you sure?",
-            msg: "Do you really want to delete this pin? It can't be recovered once it's deleted"
+            msg: "Do you really want to delete this pin? It will be moved to Trash"
         }}
         dataType="pins"
         loadApi={PinData.endpoints.loadApi}
