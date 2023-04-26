@@ -23,3 +23,8 @@ a {
   @extend p;
   padding: 5px;
 }
+
+// Set global MUI tooltip font
+div[role="tooltip"] > div {
+  font-size: 15px;
+}
