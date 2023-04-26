@@ -1,9 +1,9 @@
 import React from "react";
 
-const NavigationItem = (props) => {
+const NavigationItem = ({ name, children, ...props }) => {
     return (
-        <li tooltip={props.name} tooltip-position="right">
-            {props.children}
+        <li tooltip={name} tooltip-position="right" {...props}>
+            {children}
         </li>
     );
 };
