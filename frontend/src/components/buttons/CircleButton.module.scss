@@ -16,4 +16,8 @@
   &.danger:hover {
     background-color: $error-colour;
   }
+
+  &.safe:hover {
+    background-color: $safe-color;
+  }
 }
