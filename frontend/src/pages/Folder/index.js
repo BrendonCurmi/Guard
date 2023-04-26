@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { faFolder } from "@fortawesome/free-solid-svg-icons";
 
 import ListedView from "../../components/views/ListedView";
 import ListedViewItem from "../../components/views/ListedViewItem";
@@ -43,10 +44,20 @@ const Folder = () => {
     };
 
     const viewItems = Object.keys(items).map((type) => {
+        // Define type-specific props
+        const itemProps = {};
+        switch (type) {
+            case "accounts":
+                break;
+            case "pins":
+                itemProps.icon = faFolder;
+                break;
+        }
         return items[type].map((account, key) => (
             <ListedViewItem
                 key={key} dkey={key}
                 account={account}
+                {...itemProps}
                 // onEditClickHandler={onEditClickHandler}
                 // onCopyClick={onCopyClick}
                 // onShowClick={onShowClick}
