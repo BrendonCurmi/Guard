@@ -20,7 +20,7 @@ import { copyToClipboard } from "../../utils/CopyUtils";
  * @returns {JSX.Element}
  */
 const FullView = ({
-                      page = { title: "", action: "", timeName: "" },
+                      page = { title: "", actionTitle: "", timeName: "", action: "" },
                       confirm = { title: "", msg: "" },
                       icon,
                       loadApi,
@@ -176,14 +176,13 @@ const FullView = ({
         confirmVals={confirm}/>;
 
     const isShade = isEditing || confirming !== null;
-    const pageActionClick = call(switchFocusedViewHandler, deleteItemHandler);
-    const { title, action, timeName } = page;
-
+    const { title, actionTitle, action, timeName } = page;
+    const pageActionClick = call(switchFocusedViewHandler, action);
     return (
         <ListedView
             shade={isShade}
             pageTitle={title}
-            pageAction={action}
+            pageAction={actionTitle}
             timeName={timeName}
             pageActionClick={pageActionClick}
             popups={popupsView}>
