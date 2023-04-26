@@ -1,22 +1,5 @@
 @import "../../utils/variables";
 
-button {
-  background-color: $background-colour;
-  color: $text-colour;
-  border-radius: 25px;
-  width: 32px;
-  padding: 8px;
-  border: 0;
-
-  &:hover {
-    background-color: $black-accent-colour;
-  }
-
-  &.danger:hover {
-    background-color: $error-colour;
-  }
-}
-
 .accountTitle {
   color: white;
 }
