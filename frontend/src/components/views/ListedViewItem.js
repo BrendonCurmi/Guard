@@ -21,7 +21,7 @@ const ListedViewItem = ({ dKey, account, icon, onEditClickHandler, onCopyClick, 
                 {/*<p>{product.email || product.username}</p>*/}
                 <p className={classes.accountSubtitle}>Test</p>
             </td>
-            <td onClick={() => onEditClickHandler(key)}>{describeDate(account.lastUsed)}</td>
+            <td onClick={() => onEditClickHandler(key)}>{describeDate(account.lastAccess)}</td>
             <td>
                 <button onClick={() => onCopyClick(key)}>
                     <FontAwesomeIcon icon={faCopy}/>
