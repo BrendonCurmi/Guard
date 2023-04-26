@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import NiceButton from "../buttons/NiceButton";
-import FolderSelect from "./FolderSelect";
+import NiceButton from "../../buttons/NiceButton";
+import FolderSelect from "../../passwords/FolderSelect";
 
-import useIcon from "../../hooks/use-icon";
-import { useFolders } from "../../store/FolderProvider";
+import useIcon from "../../../hooks/use-icon";
+import { useFolders } from "../../../store/FolderProvider";
 
 import classes from "./FocusedView.module.scss";
 

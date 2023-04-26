@@ -1,5 +1,5 @@
 import React from "react";
-import FocusedView from "../../passwords/FocusedView";
+import FocusedView from "./FocusedView";
 import Confirm from "../../confirm/Confirm";
 
 /**
