@@ -155,7 +155,8 @@ const FullView = ({
 
     const viewItems = Object.keys(items).map((type) => {
         return items[type].map((item, itemIndex) => {
-            const itemDataType = getData(type);
+            const itemType = item.type || type;
+            const itemDataType = getData(itemType);
             const key = `${type}-${itemIndex}`;
             return <ListedViewItem
                 key={key} dKey={key}
