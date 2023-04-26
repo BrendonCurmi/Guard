@@ -19,7 +19,7 @@ import ConfirmView from "./ConfirmView";
  * @returns {JSX.Element}
  * @constructor
  */
-const Popups = ({
+const PopupsView = ({
                     className, isEditing, confirming, focused,
                     onCancelFocused, onSubmitFocused, onConfirmConfirm, onCancelConfirm,
                     dataType, getCreds, focusedIcon, confirmVals
@@ -52,4 +52,4 @@ const Popups = ({
     );
 };
 
-export default Popups;
+export default PopupsView;
