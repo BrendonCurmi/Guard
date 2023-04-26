@@ -14,7 +14,6 @@ import ConfirmView from "./ConfirmView";
  * @param onCancelConfirm handler for cancelling ConfirmView.
  * @param dataType the datatype.
  * @param getCreds the function to retrieve credentials.
- * @param focusedIcon the icon for FocusedView.
  * @param confirmVals the ConfirmView values.
  * @returns {JSX.Element}
  * @constructor
@@ -22,7 +21,7 @@ import ConfirmView from "./ConfirmView";
 const PopupsView = ({
                     className, isEditing, confirming, focused,
                     onCancelFocused, onSubmitFocused, onConfirmConfirm, onCancelConfirm,
-                    dataType, getCreds, focusedIcon, confirmVals
+                    dataType, getCreds, confirmVals
                 }) => {
     const focusedView =
         <div className={className}>
@@ -31,8 +30,7 @@ const PopupsView = ({
                          submitItemRequest={onSubmitFocused}
                          getCreds={getCreds}
                          dataType={dataType}
-                         fields={dataType.fields}
-                         icon={focusedIcon}/>
+                         fields={dataType.fields}/>
         </div>;
 
     const { title, msg } = confirmVals;

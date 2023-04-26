@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import useIcon from "../../hooks/use-icon";
-
 import { describeDate } from "../../utils/DateUtils";
 
 import classes from "./ListedViewItem.module.scss";
@@ -34,8 +32,6 @@ const ListedViewItem = ({
     const { time } = cells;
 
     const key = dKey;// "key" cannot be a prop
-    const { site, title } = account;
-    const focusedIcon = useIcon(icon, site);
 
     const onClick = () => {
         return canEdit && allowActions ? onEditClickHandler(key) : "";
@@ -68,11 +64,11 @@ const ListedViewItem = ({
 
     const actionBtns = <DefaultActionBtns/>;
     return (
-        <tr key={title}
+        <tr key={account.title}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
             <td onClick={onClick}>
-                {focusedIcon}
+                {icon}
             </td>
             <td onClick={onClick}>
                 <p className={classes.accountTitle}>{account.title}</p>

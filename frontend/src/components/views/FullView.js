@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { faFolder } from "@fortawesome/free-solid-svg-icons";
 
 import ListedView from "./ListedView";
 import ListedViewItem from "./ListedViewItem";
@@ -14,7 +13,6 @@ import classes from "FullView.module.scss";
  * ListedView that loads items into it.
  * @param page the page variables.
  * @param confirm the confirm variables.
- * @param icon the icon.
  * @param loadApi the API to load items.
  * @param dataType the optional item type.
  * @param deleteItemHandler the optional delete handler.
@@ -24,7 +22,6 @@ import classes from "FullView.module.scss";
 const FullView = ({
                       page = { title: "", actionTitle: "", timeName: "", action: "" },
                       confirm = { title: "", msg: "" },
-                      icon,
                       loadApi,
                       dataType,
                       deleteItemHandler,
@@ -150,7 +147,6 @@ const FullView = ({
 
         dataType={dataTypeData}
         getCreds={getCreds}
-        focusedIcon={icon}
         confirmVals={confirm}/>;
 
     const isShade = isEditing || confirming !== null;
@@ -158,22 +154,13 @@ const FullView = ({
     const pageActionClick = call(switchFocusedViewHandler, action);
 
     const viewItems = Object.keys(items).map((type) => {
-        // Define type-specific props
-        const itemProps = {};
-        switch (type) {
-            case "accounts":
-                break;
-            case "pins":
-                itemProps.icon = faFolder;
-                break;
-        }
-        itemProps.type = type;
         return items[type].map((item, itemIndex) => {
+            const itemDataType = getData(type);
             const key = `${type}-${itemIndex}`;
             return <ListedViewItem
                 key={key} dKey={key}
                 account={item}
-                {...itemProps}
+                icon={itemDataType.icon(item)}
                 onEditClickHandler={onEditClickHandler}
                 onCopyClick={onCopyClick}
                 setConfirming={setConfirming}

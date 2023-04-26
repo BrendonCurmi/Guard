@@ -5,7 +5,6 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import NiceButton from "../../buttons/NiceButton";
 import FolderSelect from "./FolderSelect";
 
-import useIcon from "../../../hooks/use-icon";
 import { useFolders } from "../../../store/FolderProvider";
 
 import classes from "./FocusedView.module.scss";
@@ -16,12 +15,11 @@ import classes from "./FocusedView.module.scss";
  * @param onClick the function to execute when clicking Cancel button to close the view.
  * @param getCreds the function to execute when retrieving credentials.
  * @param fields the array of form fields.
- * @param icon the icon.
  * @param dataType the item type.
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon = "", dataType }) => {
+const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, dataType }) => {
 
     /**
      * Get the specified value from the focus item. If it doesn't exist,
@@ -187,12 +185,12 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon
         return <TextField {...fieldProps}/>;
     });
 
-    const focusedIcon = useIcon(icon, userInput.site);
+    const icon = dataType.icon(focus);
 
     return (
         <div className={classes.focusedViewWrapper}>
             <div className={classes.icon}>
-                {focusedIcon}
+                {icon}
             </div>
             <form className={`${classes.inputForm} ${!isEditing ? classes.readOnly : ""}`} onSubmit={onSubmitHandler}>
                 {formFields}
