@@ -10,14 +10,10 @@ const API = "http://localhost:4000/api/trash";
 
 const Trash = () => {
     const ActionBtns = () => {
-        const deleteBtn =
+        return (
             <button onClick={() => console.log("todo")}>
                 <FontAwesomeIcon icon={faTrashRestore}/>
-            </button>;
-        return (
-            <>
-                {deleteBtn}
-            </>
+            </button>
         );
     };
 
