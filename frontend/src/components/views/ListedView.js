@@ -17,10 +17,7 @@ const ListedView = ({ children, shade, pageTitle, pageAction, pageActionClick, p
     return (
         <div className={classes.wrapper}>
             {popups}
-            <div className={classes.contentWrapper}>
-                {shade &&
-                    <div className={classes.shade}></div>
-                }
+            <div className={`${classes.contentWrapper} ${shade ? classes.shade : ""}`}>
                 <h1 className={classes.title}>{pageTitle}</h1>
                 <a className={classes.button}
                    onClick={pageActionClick}>{pageAction}</a>
