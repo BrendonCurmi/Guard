@@ -1,7 +1,7 @@
 import React from "react";
 import NiceButton from "../../buttons/NiceButton";
 
-const Confirm = ({ children, className, onCancel, onConfirm }) => {
+const ConfirmView = ({ children, className, onCancel, onConfirm }) => {
     return (
         <div className={className}>
             {children}
@@ -15,4 +15,4 @@ const Confirm = ({ children, className, onCancel, onConfirm }) => {
     );
 };
 
-export default Confirm;
+export default ConfirmView;

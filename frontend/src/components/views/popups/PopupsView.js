@@ -1,6 +1,6 @@
 import React from "react";
 import FocusedView from "./FocusedView";
-import Confirm from "./Confirm";
+import ConfirmView from "./ConfirmView";
 
 /**
  * Popups view for Focused View and Confirm View.
@@ -37,12 +37,12 @@ const Popups = ({
 
     const { title, msg } = confirmVals;
     const confirmView =
-        <Confirm className={className}
-                 onCancel={onCancelConfirm}
-                 onConfirm={onConfirmConfirm}>
+        <ConfirmView className={className}
+                     onCancel={onCancelConfirm}
+                     onConfirm={onConfirmConfirm}>
             <h2>{title}</h2>
             <h4>{msg}</h4>
-        </Confirm>;
+        </ConfirmView>;
 
     return (
         <>
