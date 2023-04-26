@@ -1,4 +1,5 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import FullView from "../../components/views/FullView";
 
@@ -25,7 +26,8 @@ export const PinData = {
         deleteApi: val => `${PinData.endpoints.createApi}/${val}`,
         credentialsApi: val => `${PinData.endpoints.createApi}/${val}/credentials`
     },
-    copyField: creds => creds.pin
+    copyField: creds => creds.pin,
+    icon: () => <FontAwesomeIcon icon={faFolder}/>
 };
 
 const Pins = () => {
@@ -36,8 +38,7 @@ const Pins = () => {
             msg: "Do you really want to delete this pin? It will be moved to Trash"
         }}
         dataType="pins"
-        loadApi={PinData.endpoints.loadApi}
-        icon={faFolder}/>;
+        loadApi={PinData.endpoints.loadApi}/>;
 };
 
 export default Pins;
