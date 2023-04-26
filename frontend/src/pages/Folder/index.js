@@ -30,7 +30,12 @@ const Folder = () => {
     };
 
     return <FullView
-        page={{ title: folderName, action: "Delete Folder", timeName: "Last Used" }}
+        page={{
+            title: folderName,
+            actionTitle: "Delete Folder",
+            action: deleteFolderHandler,
+            timeName: "Last Used"
+        }}
         confirm={{
             title: "Are you sure?",
             msg: "Do you really want to delete this? It can't be recovered once it's deleted"
