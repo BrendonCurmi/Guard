@@ -173,7 +173,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, icon
 
         field.required
             ? fieldProps.required = true
-            : fieldProps.InputLabelProps = !isEditing ? { shrink: false } : {};
+            : fieldProps.InputLabelProps = !isEditing && !userInput[field.value] ? { shrink: false } : {};
 
         return <TextField {...fieldProps}/>;
     });
