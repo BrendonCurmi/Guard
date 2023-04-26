@@ -42,22 +42,26 @@ const Folder = () => {
         }
     };
 
+    const viewItems = Object.keys(items).map((type) => {
+        return items[type].map((account, key) => (
+            <ListedViewItem
+                key={key} dkey={key}
+                account={account}
+                // onEditClickHandler={onEditClickHandler}
+                // onCopyClick={onCopyClick}
+                // onShowClick={onShowClick}
+                // setConfirming={setConfirming}
+            />
+        ));
+    });
+
     return (
         <ListedView
             pageTitle={folderName}
             pageAction="Delete Folder"
             pageActionClick={deleteFolderHandler}
             timeName="Last Used">
-            {items.folders && items.folders.map((account, key) => (
-                <ListedViewItem
-                    key={key} dkey={key}
-                    account={account}
-                    // onEditClickHandler={onEditClickHandler}
-                    // onCopyClick={onCopyClick}
-                    // onShowClick={onShowClick}
-                    // setConfirming={setConfirming}
-                />
-            ))}
+            {viewItems}
         </ListedView>
     );
 };
