@@ -14,15 +14,18 @@ import classes from "FullView.module.scss";
  * @param page the page variables.
  * @param confirm the confirm variables.
  * @param loadApi the API to load items.
+ * @param deleteApi the optional API function to delete items.
  * @param dataType the optional item type.
  * @param deleteItemHandler the optional delete handler.
  * @param loadDeps the dependencies for reloading items.
+ * @param listedViewProps the props for ListedViewItems.
  * @returns {JSX.Element}
  */
 const FullView = ({
                       page = { title: "", actionTitle: "", timeName: "", action: "" },
                       confirm = { title: "", msg: "" },
                       loadApi,
+                      deleteApi = "",
                       dataType,
                       deleteItemHandler,
                       loadDeps = [],
@@ -119,8 +122,14 @@ const FullView = ({
     const deleteItemOnConfirmationHandler = async () => {
         if (confirming === null) return;
         const [type, index] = confirming.split("-");
-        const dataType = getData(type);
-        const deleteUrl = dataType.endpoints.deleteApi(items[type][index]._id);
+        const deleteId = items[type][index]._id;
+
+        const getEndpointDeleteApi = (deleteId) => {
+            const dataType = getData(type);
+            return dataType.endpoints.deleteApi(deleteId);
+        };
+
+        const deleteUrl = deleteApi ? deleteApi(deleteId) : getEndpointDeleteApi(deleteId);
         const rawResponse = await fetch(deleteUrl, { method: "DELETE" });
         if (rawResponse.status === 200) {
             const content = await rawResponse.json();
