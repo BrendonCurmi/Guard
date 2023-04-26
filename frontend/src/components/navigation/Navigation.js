@@ -4,6 +4,7 @@ import { faHouse, faRightToBracket, faRightFromBracket, faGamepad, faUser, faFol
 
 import NavigationItem from "./NavigationItem";
 import NavigationItemLink from "./NavigationItemLink";
+import NavigationFolderItem from "./NavigationFolderItem";
 import FolderList from "./FolderList";
 
 import { encode } from "../../utils/URLUtils";
@@ -28,12 +29,10 @@ const Navigation = (props) => {
 
     const folderListItems = (name, i) => {
         const url = encode(name);
-        return (
-            <NavigationItemLink to={`/folder/${url}`}
-                                name={name}
-                                icon={faFolder}
-                                key={i}/>
-        );
+        return <NavigationFolderItem to={`/folder/${url}`}
+                                     name={name}
+                                     icon={faFolder}
+                                     key={i}/>;
     };
 
     const edit = () => {
