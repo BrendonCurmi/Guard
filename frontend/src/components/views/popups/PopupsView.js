@@ -1,6 +1,6 @@
 import React from "react";
-import FocusedView from "../passwords/FocusedView";
-import Confirm from "../confirm/Confirm";
+import FocusedView from "../../passwords/FocusedView";
+import Confirm from "../../confirm/Confirm";
 
 /**
  * Popups view for Focused View and Confirm View.
