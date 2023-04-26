@@ -1,5 +1,6 @@
 import React from "react";
 import FullView from "../../components/views/FullView";
+import SiteIcon from "../../components/SiteIcon";
 
 export const PasswordData = {
     fields: [
@@ -36,7 +37,8 @@ export const PasswordData = {
         deleteApi: val => `${PasswordData.endpoints.createApi}/${val}`,
         credentialsApi: val => `${PasswordData.endpoints.createApi}/${val}/credentials`
     },
-    copyField: creds => creds.pw
+    copyField: creds => creds.pw,
+    icon: item => <SiteIcon domain={item.site} size="32"/>
 }
 
 const Passwords = () => {
