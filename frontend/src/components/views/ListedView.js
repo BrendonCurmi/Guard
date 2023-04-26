@@ -4,7 +4,7 @@ import classes from "./ListedView.module.scss";
 
 const API = "http://localhost:4000/api/accounts";
 
-const ListedView = ({ children, shade, pageTitle, pageAction, pageActionClick, popups, timeName }) => {
+const ListedView = ({ children, shade, pageTitle, popups, timeName, PageActions }) => {
     const changeOrder = (field) => {
         // setAccounts(prevState => {
         //     // console.log(accounts.sort((a, b) => (new Date(a) - new Date(b))));
@@ -20,8 +20,9 @@ const ListedView = ({ children, shade, pageTitle, pageAction, pageActionClick, p
             <div className={`${classes.contentWrapper} ${shade ? classes.shade : ""}`}>
                 <div className={classes.header}>
                     <h1 className={classes.title}>{pageTitle}</h1>
-                    <a className={classes.button}
-                       onClick={pageActionClick}>{pageAction}</a>
+                    <div className={classes.pageActionBtns}>
+                        <PageActions/>
+                    </div>
                 </div>
                 <table>
                     <thead>
