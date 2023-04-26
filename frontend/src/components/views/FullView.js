@@ -122,10 +122,9 @@ const FullView = ({
     const deleteItemOnConfirmationHandler = async () => {
         if (confirming === null) return;
         const [type, index] = confirming.split("-");
-        //todo this
-        console.log("2", items[type][index]._id);
-        return;
-        const rawResponse = await fetch(dataTypeData.endpoints.deleteApi(items[type][index]._id), { method: "DELETE" });
+        const dataType = getData(type);
+        const deleteUrl = dataType.endpoints.deleteApi(items[type][index]._id);
+        const rawResponse = await fetch(deleteUrl, { method: "DELETE" });
         if (rawResponse.status === 200) {
             const content = await rawResponse.json();
             // console.log(content);
