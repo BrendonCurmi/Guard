@@ -82,7 +82,7 @@ const Generator = () => {
     return (
         <div className={classes.generatorPage}>
             <div className={classes.generator}>
-                <p className={classes.text}>
+                <p className={classes.text} onClick={onCopyClick}>
                     {generated}
                 </p>
                 <div className={classes.actions}>
