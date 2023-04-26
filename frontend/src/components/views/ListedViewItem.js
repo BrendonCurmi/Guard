@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
+import CircleButton from "../buttons/CircleButton";
 import { describeDate } from "../../utils/DateUtils";
 
 import classes from "./ListedViewItem.module.scss";
@@ -30,19 +31,19 @@ const ListedViewItem = ({
 
     const DefaultActionBtns = () => {
         const copyBtn =
-            <button onClick={() => onCopyClick(key)}>
+            <CircleButton tooltip="Copy" onClick={() => onCopyClick(key)}>
                 <FontAwesomeIcon icon={faCopy}/>
-            </button>;
+            </CircleButton>;
 
         const editBtn =
-            <button onClick={onClick}>
+            <CircleButton tooltip="Edit" onClick={onClick}>
                 <FontAwesomeIcon icon={faPencil}/>
-            </button>;
+            </CircleButton>;
 
         const deleteBtn =
-            <button onClick={() => setConfirming(key)} className={classes.danger}>
+            <CircleButton tooltip="Delete" onClick={() => setConfirming(key)} color="danger">
                 <FontAwesomeIcon icon={faTrash}/>
-            </button>;
+            </CircleButton>;
         return (
             <>
                 {customActionBtns(account, reload)}
