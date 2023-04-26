@@ -1,9 +1,11 @@
 import React from "react";
 import NiceButton from "../../buttons/NiceButton";
 
+import classes from "./ConfirmView.module.scss";
+
 const ConfirmView = ({ children, className, onCancel, onConfirm }) => {
     return (
-        <div className={className}>
+        <div className={`${classes.view} ${className}`}>
             {children}
             <NiceButton type="button"
                         onClick={onCancel}
