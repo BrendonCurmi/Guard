@@ -28,8 +28,8 @@ const Trash = () => {
             timeName: "Date Deleted"
         }}
         confirm={{
-            title: "Are you sure you want to permanently delete this?",
-            msg: "This cannot be recovered once deleted"
+            title: "Are you sure? This will be permanently deleted",
+            msg: "This action cannot be reversed and item cannot be recovered"
         }}
         loadApi={loadApi}
         deleteApi={deleteApi}
