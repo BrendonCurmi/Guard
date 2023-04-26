@@ -26,7 +26,8 @@ const FullView = ({
                       loadApi,
                       dataType,
                       deleteItemHandler,
-                      loadDeps = []
+                      loadDeps = [],
+                      listedViewProps
                   }) => {
     const [items, setItems] = useState([]);
 
@@ -149,7 +150,8 @@ const FullView = ({
                 {...itemProps}
                 onEditClickHandler={onEditClickHandler}
                 onCopyClick={onCopyClick}
-                setConfirming={setConfirming}/>;
+                setConfirming={setConfirming}
+                listedViewProps={listedViewProps}/>;
         });
     });
 
