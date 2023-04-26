@@ -4,8 +4,6 @@ import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 
 import FullView from "../../components/views/FullView";
 
-import classes from "./index.module.scss";
-
 const API = "http://localhost:4000/api/trash";
 
 const Trash = () => {
