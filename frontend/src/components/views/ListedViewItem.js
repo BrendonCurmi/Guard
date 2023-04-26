@@ -44,7 +44,7 @@ const ListedViewItem = ({ dKey, account, icon, onEditClickHandler, onCopyClick, 
             </button>;
 
         const deleteBtn =
-            <button onClick={() => setConfirming(key)}>
+            <button onClick={() => setConfirming(key)} className={classes.danger}>
                 <FontAwesomeIcon icon={faTrash}/>
             </button>;
         return (
