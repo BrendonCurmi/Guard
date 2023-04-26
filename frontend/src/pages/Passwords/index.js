@@ -36,8 +36,7 @@ const Passwords = () => {
 
     return <FullView
         loadApi={API}
-        updateApi={val => `http://localhost:4000/api/account/${val}`}
-        credentialsApi={val => `http://localhost:4000/api/account/${val}/credentials`}
+        createApi="http://localhost:4000/api/account"
         copy={creds => creds.pw}
         page={{ title: "Passwords", action: "Add Item", timeNow: "Last Used" }}
         confirm={{
