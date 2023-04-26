@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faRightToBracket, faRightFromBracket, faGamepad, faUser, faFolder, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,7 +7,7 @@ import NavigationItemLink from "./NavigationItemLink";
 import FolderList from "./FolderList";
 
 import { encode } from "../../utils/URLUtils";
-import useFolder from "../../hooks/use-folder";
+import { useFolders } from "../../store/FolderProvider";
 
 import classes from "./Navigation.module.scss";
 
@@ -41,7 +40,7 @@ const Navigation = (props) => {
         setCreatingFolder(!creatingFolder);
     };
 
-    const [allFolders, getAllFolders] = useFolder();
+    const folders = useFolders();
 
     const createFolder = async (event) => {
         event.preventDefault();
@@ -57,13 +56,13 @@ const Navigation = (props) => {
             }).then(value => value.json())
         };
 
-        create().then(getAllFolders);
+        create().then(folders.loadFolders);
 
         setNewFolderName("");
         setCreatingFolder(false);
     };
 
-    useEffect(getAllFolders, []);
+    useEffect(folders.loadFolders, []);
 
     return (
         <header className={classes.wrapper}>
@@ -79,7 +78,7 @@ const Navigation = (props) => {
                             <FontAwesomeIcon icon={faFolderPlus}/>
                         </button>
                     </span>
-                    <FolderList folderListItems={folderListItems} allFolders={allFolders}/>
+                    <FolderList folderListItems={folderListItems} allFolders={folders.folders}/>
                     {creatingFolder &&
                         <form onSubmit={createFolder}>
                             <input type="text"
