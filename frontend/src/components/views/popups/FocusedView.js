@@ -185,7 +185,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
         return <TextField {...fieldProps}/>;
     });
 
-    const icon = dataType.icon(focus);
+    const icon = userInput ? dataType.icon(userInput) : "";
 
     return (
         <div className={classes.focusedViewWrapper}>
