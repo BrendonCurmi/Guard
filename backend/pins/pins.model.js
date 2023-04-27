@@ -7,6 +7,9 @@ const schema = new mongoose.Schema({
         default: ""
     },
     pin: String,
+    folders: [{
+        type: String
+    }],
     lastUsed: { type: Date, default: Date.now, required: true }
 });
 
