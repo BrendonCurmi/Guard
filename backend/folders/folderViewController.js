@@ -7,7 +7,7 @@ exports.getFromFolder = async (req, res) => {
     const folderByName = await FolderTemplate.findOne({ name: folderName });
     if (!folderByName) return res.status(404).json({ ok: false });
     const folderId = folderByName._id;
-    data.folders = await AccountTemplate.find({ "folders": folderId }).select("-pw");
+    data.accounts = await AccountTemplate.find({ "folders": folderId }).select("-pw");
 
     res.json(data);
 };
