@@ -11,11 +11,12 @@ import { useAuth } from "./context/AuthProvider";
 
 import classes from "./App.module.scss";
 
+//todo in focus view hide empty fields
 const App = () => {
     const { auth } = useAuth();
     return (
         <div className={classes.wrapper}>
-            <Navigation auth={auth} email/>
+            <Navigation/>
             <main>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
