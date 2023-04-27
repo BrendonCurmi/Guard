@@ -11,4 +11,6 @@ router.route("/trash/:id/")
     .put(trashController.updateById)
     .delete(trashController.deleteAccount);
 
+router.route("/trash/:id/restore").get(trashController.restoreFromTrash);
+
 module.exports = router;
