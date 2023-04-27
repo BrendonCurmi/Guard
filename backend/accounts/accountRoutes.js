@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const AccountTemplate = require("../models/accounts.model");
+const AccountTemplate = require("./accounts.model");
 
 router.post("/test", (req, res) => {
     const test = new AccountTemplate({
@@ -17,7 +17,7 @@ router.post("/test", (req, res) => {
         });
 });
 
-const accountController = require("../controllers/accountController");
+const accountController = require("./accountController");
 
 router.route("/accounts").get(accountController.getAllAccounts);
 

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const AccountTemplate = require("../models/accounts.model");
-const TrashTemplate = require("../models/trash.model");
+const AccountTemplate = require("./accounts.model");
+const TrashTemplate = require("../trash/trash.model");
 
 /**
  * Retrieves all accounts, excluding pw field.

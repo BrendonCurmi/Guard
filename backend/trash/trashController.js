@@ -1,4 +1,4 @@
-const TrashTemplate = require("../models/trash.model");
+const TrashTemplate = require("./trash.model");
 
 /**
  * Retrieves all accounts, excluding pw field.

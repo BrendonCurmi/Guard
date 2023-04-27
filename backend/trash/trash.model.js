@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const AccountTemplate = require("./accounts.model");
+const AccountTemplate = require("../accounts/accounts.model");
 
 const trashSchema = AccountTemplate.schema.clone();
 trashSchema.add({

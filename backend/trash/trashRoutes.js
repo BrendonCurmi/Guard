@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const trashController = require("../controllers/trashController");
+const trashController = require("./trashController");
 router.route("/trash").get(trashController.getAllAccounts);
 
 router.route("/trash/:id/")
