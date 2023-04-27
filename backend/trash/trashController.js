@@ -1,6 +1,27 @@
 const TrashTemplate = require("./trash.model");
 
 /**
+ * Moves item from model to trash.
+ * @param model the model template.
+ * @param type the data type string.
+ * @param req the request.
+ */
+exports.moveToTrash = async (model, type, req) => {
+    model.findOne({ _id: req.params.id }, (err, result) => {
+        const swap = new TrashTemplate(result.toJSON());
+        swap.type = type;
+
+        /*
+        swap._id = mongoose.Types.ObjectId()
+        swap.isNew = true
+        */
+
+        swap.save();
+        result.remove();
+    });
+};
+
+/**
  * Retrieves all accounts, excluding pw field.
  */
 exports.getAllAccounts = async (req, res) => {
