@@ -17,6 +17,9 @@ const accountSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    folders: [{
+        type: String
+    }],
 
     date: { type: Date, default: Date.now, required: true },
     lastUsed: { type: Date, default: Date.now, required: true }
