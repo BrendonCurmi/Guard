@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
-const AccountTemplate = require("../accounts/accounts.model");
 
-const trashSchema = AccountTemplate.schema.clone();
-trashSchema.add({
+const trashSchema = new mongoose.Schema({
+    type: String,
     deletedDate: {
         type: Date, default: Date.now, required: true
     }
-});
+}, { strict: false });
 
 module.exports = mongoose.model("TrashTemplate", trashSchema, "trash");
