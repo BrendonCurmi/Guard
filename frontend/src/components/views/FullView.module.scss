@@ -1,30 +1,93 @@
 @import "../../utils/variables";
 
-.viewWrapper {
-  position: absolute;
-  background: #484545;
-  //background: white;
-  z-index: 2;
-  //width: 90%;
-  border-radius: 10px;
-  //top: 50%;
-  //left: 50%;
-  //transform: translate(-50%, 50%);
+.wrapper {
+  position: relative;
+  //background: #414141;
 
-  //top: 50%;
+  .contentWrapper {
+    //margin-left: 10px;
+    padding-top: 10px;
+    height: 100vh;
+    width: calc(min(97%, 50em));
+    //overflow-y: auto;
 
-  width: 67%;
-  margin: auto;
-  left: 0;
-  right: 0;
-  transform: translateY(5%);
+    .header {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 50px;
+      grid-template-areas: "title button";
+      display: grid;
+      margin-left: 10px;
+    }
 
-  p {
-    margin-top: 5px;
-    margin-bottom: 10px;
+    .title {
+      grid-area: title;
+      margin: 0;
+    }
+
+    .pageActionBtns {
+      grid-area: button;
+      text-align: right;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: calc(min(100%, 50em));
+      margin: 20px auto;
+
+      thead {
+        border-bottom: 1px solid grey;
+
+        tr th {
+          font-size: 16px;
+          padding: 8px;
+          //letter-spacing: 1px;
+          text-align: left;
+        }
+      }
+
+      tbody {
+        tr {
+          height: 60px;
+
+          &:hover {
+            background-color: lighten($background-colour, 4%);
+          }
+
+          td {
+            padding: 8px;
+
+            p {
+              margin: 0;
+            }
+          }
+        }
+
+        tr:not(tr:hover) td:nth-child(4) button {
+          visibility: hidden;
+        }
+      }
+
+      thead tr th:nth-last-child(1), tbody tr td:nth-last-child(1) {
+        text-align: right;
+      }
+    }
   }
+}
 
-  h2, h4 {
-    text-align: center;
-  }
+//todo this
+.button {
+  grid-area: button;
+  cursor: pointer;
+  border-radius: 35px;
+  text-decoration: none;
+  padding: 12px 18px;
+  font-size: 16px;
+  transition: all .4s ease-in-out;
+
+  margin: auto 0 auto auto;
+  text-align: right;
+
+  background: #000;
+  border: solid 2px #fff;
+  color: #fff;
 }

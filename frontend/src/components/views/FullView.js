@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 
-import ListedView from "./ListedView";
 import ListedViewItem from "./ListedViewItem";
-import PopupsView from "./popups/PopupsView";
 import CircleButton from "../buttons/CircleButton";
+import FocusedView from "./popups/FocusedView";
+import ConfirmView from "./popups/ConfirmView";
 
 import { getData } from "./Profile";
 import { copyToClipboard } from "../../utils/CopyUtils";
@@ -146,21 +146,6 @@ const FullView = ({
         return optionalFn ? optionalFn : defaultFn;
     };
 
-    const popupsView = <PopupsView
-        className={classes.viewWrapper}
-        onCancelFocused={switchFocusedViewHandler}
-        onSubmitFocused={submitItemRequest}
-        onConfirmConfirm={call(deleteItemOnConfirmationHandler, deleteItemHandler)}
-        onCancelConfirm={() => setConfirming(null)}
-
-        isEditing={isEditing}
-        confirming={confirming}
-        focused={focused}
-
-        dataType={dataTypeData}
-        getCreds={getCreds}
-        confirmVals={confirm}/>;
-
     const isShade = isEditing || confirming !== null;
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
     const pageActionClick = call(switchFocusedViewHandler, action);
@@ -195,18 +180,55 @@ const FullView = ({
         //return <a className={classes.button} onClick={pageActionClick}>{actionTitle}</a>;
     };
 
-    const pageActions = actions || DefaultPageActions;
+    const PageActions = actions || DefaultPageActions;
+
+    // todo order
+    const changeOrder = (field) => {
+    };
 
     return (
-        <ListedView
-            shade={isShade}
-            pageTitle={title}
-            pageAction={actionTitle}
-            timeName={timeName}
-            popups={popupsView}
-            PageActions={pageActions}>
-            {viewItems}
-        </ListedView>
+        <div id="wrapper" className={classes.wrapper}>
+            <FocusedView
+                show={isEditing}
+                onClick={switchFocusedViewHandler}
+                focus={focused}
+                submitItemRequest={submitItemRequest}
+                getCreds={getCreds}
+                dataType={dataTypeData}
+                fields={dataTypeData.fields}/>
+
+            <ConfirmView
+                show={confirming !== null}
+                // onCancel={onCancelConfirm}
+                onCancel={() => setConfirming(null)}
+                // onConfirm={onConfirmConfirm}
+                onConfirm={call(deleteItemOnConfirmationHandler, deleteItemHandler)}
+                confirm={confirm}/>
+
+            <div className={classes.contentWrapper}>
+                <div className={classes.header}>
+                    <h1 className={classes.title}>{title}</h1>
+                    <div className={classes.pageActionBtns}>
+                        <PageActions/>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th width="1%">Title</th>
+                        <th width="34%"></th>
+                        <th width="30%">
+                            <a onClick={changeOrder}>{timeName}</a>
+                        </th>
+                        <th width="35%">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {viewItems}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     );
 };
 

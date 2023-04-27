@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
+import Modal from "../../modals/Modal";
 import NiceButton from "../../buttons/NiceButton";
 import FolderSelect from "./FolderSelect";
 
@@ -19,7 +20,8 @@ import classes from "./FocusedView.module.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, dataType }) => {
+const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, dataType, show }) => {
+    if (!show) return null;
 
     /**
      * Get the specified value from the focus item. If it doesn't exist,
@@ -188,7 +190,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
     const icon = userInput ? dataType.icon(userInput) : "";
 
     return (
-        <div className={classes.focusedViewWrapper}>
+        <Modal className={classes.focusedViewWrapper} show={show} onClose={onClick}>
             <div className={classes.icon}>
                 {icon}
             </div>
@@ -216,7 +218,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
                     // disabled
                 >Cancel</NiceButton>
             </form>
-        </div>
+        </Modal>
     );
 };
 
