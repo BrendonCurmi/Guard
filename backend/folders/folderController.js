@@ -1,4 +1,6 @@
 const FolderTemplate = require("./folders.model");
+const AccountTemplate = require("../accounts/accounts.model");
+const TrashTemplate = require("../trash/trash.model");
 
 /**
  * Retrieves all accounts, excluding pw field.
@@ -32,6 +34,16 @@ exports.createFolder = (req, res) => {
 exports.deleteFolder = async (req, res) => {
     try {
         await FolderTemplate.findByIdAndDelete(req.params.id);
+        res.status(200).json({ });
+    } catch (err) {
+        res.status(500).json({ err: err.message });
+    }
+};
+
+exports.deleteFolderByName = async (req, res) => {
+    try {
+        await FolderTemplate.findOneAndDelete({ "name": req.body.search });
+
         res.status(200).json({ });
     } catch (err) {
         res.status(500).json({ err: err.message });
