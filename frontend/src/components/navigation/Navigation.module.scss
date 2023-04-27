@@ -12,8 +12,8 @@ header.wrapper {
     grid-area: sidebar;
 
     > ul {
-      padding: 0 40px;
-      //overflow-y: auto;//todo breaks tooltips
+      overflow-y: auto;
+      overflow-x: hidden;
       height: 100vh;
       margin: 0;
 
