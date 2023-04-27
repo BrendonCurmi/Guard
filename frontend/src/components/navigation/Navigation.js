@@ -1,17 +1,18 @@
 import React from "react";
-import { faHouse, faRightToBracket, faRightFromBracket, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faRightToBracket, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 import NavigationItemLink from "./NavigationItemLink";
+import NavigationFolderSection from "./NavigationFolderSection";
+
 import { useAuth } from "../../context/AuthProvider";
 
 import classes from "./Navigation.module.scss";
 
 /**
  * Creates the Navigation of the app.
- * @param props nav properties.
  * @constructor
  */
-const Navigation = (props) => {
+const Navigation = () => {
     const { auth } = useAuth();
     const isLoggedIn = auth?.user;
     const show = isLoggedIn;
