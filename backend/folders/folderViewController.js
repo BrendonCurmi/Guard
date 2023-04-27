@@ -1,5 +1,6 @@
 const FolderTemplate = require("./folders.model");
 const AccountTemplate = require("../accounts/accounts.model");
+const PinTemplate = require("../pins/pins.model");
 
 exports.getFromFolder = async (req, res) => {
     const data = {};
@@ -8,6 +9,6 @@ exports.getFromFolder = async (req, res) => {
     if (!folderByName) return res.status(404).json({ ok: false });
     const folderId = folderByName._id;
     data.accounts = await AccountTemplate.find({ "folders": folderId }).select("-pw");
-
+    data.pins = await PinTemplate.find({ "folders": folderId }).select("-pin");
     res.json(data);
 };
