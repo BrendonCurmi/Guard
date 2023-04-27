@@ -1,7 +1,5 @@
-const mongoose = require("mongoose");
-
 const AccountTemplate = require("./accounts.model");
-const TrashTemplate = require("../trash/trash.model");
+const { moveToTrash } = require("../trash/trashController");
 
 /**
  * Retrieves all accounts, excluding pw field.
@@ -33,24 +31,7 @@ exports.createAccount = (req, res) => {
  */
 exports.deleteAccount = async (req, res) => {
     try {
-        AccountTemplate.findOne({ _id: req.params.id }, (err, result) => {
-            const swap = new TrashTemplate(result.toJSON());
-            /*
-            swap._id = mongoose.Types.ObjectId()
-            swap.isNew = true
-            */
-
-            result.remove();
-            swap.save();
-        });
-
-        // await AccountTemplate.findByIdAndDelete(req.params.id);
-        //
-        // const successful = await AccountTemplate.countDocuments({ _id: req.params.id }) === 0;
-        // const code = successful ? 200 : 400;
-        // const message = successful ? "successful" : "unsuccessful";
-        // res.status(code).json({ message });
-
+        await moveToTrash(AccountTemplate, "accounts", req);
         res.status(200).json({ message: "ok" });
     } catch (err) {
         res.status(500).json({ err: err.message });
