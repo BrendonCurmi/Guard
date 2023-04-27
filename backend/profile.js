@@ -1,4 +1,4 @@
-const TrashTemplate = require("../trash/trash.model.js");
+const TrashTemplate = require("./trash/trash.model.js");
 
 class Profile {
     constructor(model, name, secure) {
