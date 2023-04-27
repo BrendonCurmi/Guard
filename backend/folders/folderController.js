@@ -40,10 +40,23 @@ exports.deleteFolder = async (req, res) => {
     }
 };
 
+const moveToTrash = (err, result) => {
+    const swap = new TrashTemplate(result.toJSON());
+    /*
+    swap._id = mongoose.Types.ObjectId()
+    swap.isNew = true
+    */
+
+    result.remove();
+    swap.save();
+};
+
 exports.deleteFolderByName = async (req, res) => {
     try {
         await FolderTemplate.findOneAndDelete({ "name": req.body.search });
 
+        // await AccountTemplate.findOne({ "name": req.body.search }, (err, result) => moveToTrash(err, result));
+        
         res.status(200).json({ });
     } catch (err) {
         res.status(500).json({ err: err.message });
