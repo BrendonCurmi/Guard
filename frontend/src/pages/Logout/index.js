@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthProvider";
 
 // Milliseconds to wait before redirecting
 const redirectionWait = 3000;
@@ -12,8 +13,10 @@ const redirectionWait = 3000;
  */
 const Logout = () => {
     const navigate = useNavigate();
+    const { setAuth, setPersist } = useAuth();
     useEffect(() => {
-        //todo logout
+        setAuth({});
+        setPersist(false);
 
         setTimeout(() => navigate("/login"), redirectionWait)
     }, [])
