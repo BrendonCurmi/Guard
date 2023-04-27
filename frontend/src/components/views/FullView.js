@@ -114,7 +114,7 @@ const FullView = ({
 
 
         const rawResponse = await (focused ? callUpdateItem(focused._id, data) : callCreateItem(data));
-        if (rawResponse.status === 201 || rawResponse.status === 204) {
+        if (rawResponse.ok) {
             // const content = await rawResponse.json();
             await loadAllItems();
             switchFocusedViewHandler();
