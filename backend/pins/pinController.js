@@ -1,6 +1,5 @@
-const mongoose = require("mongoose");
-
 const PinTemplate = require("./pins.model");
+const { moveToTrash } = require("../trash/trashController");
 
 /**
  * Retrieves all accounts, excluding pw field.
@@ -35,11 +34,7 @@ exports.createPins = (req, res) => {
  */
 exports.deletePin = async (req, res) => {
     try {
-        // PinTemplate.findOne({ _id: req.params.id }, (err, result) => {
-        //     const swap = new TrashTemplate(result.toJSON());
-        //     result.remove();
-        //     swap.save();
-        // });
+        await moveToTrash(PinTemplate, "pins", req);
         res.status(200).json({ message: "ok" });
     } catch (err) {
         res.status(500).json({ err: err.message });
