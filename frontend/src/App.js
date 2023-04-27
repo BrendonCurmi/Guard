@@ -10,6 +10,14 @@ import Login from "./pages/Login";
 import { useAuth } from "./context/AuthProvider";
 
 import classes from "./App.module.scss";
+import AuthRoute from "./components/AuthRoute";
+import Logout from "./pages/Logout";
+import Passwords from "./pages/Passwords";
+import Pins from "./pages/Pins";
+import Notes from "./pages/Notes";
+import Trash from "./pages/Trash";
+import Generator from "./pages/Generator";
+import Folder from "./pages/Folder";
 
 //todo in focus view hide empty fields
 const App = () => {
@@ -20,7 +28,31 @@ const App = () => {
             <main>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path="/login" element={<Login/>}/>
+
+                    <Route path="/login" element={<AuthRoute loginStatus={false}/>}>
+                        <Route path="/login" element={<Login/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/logout" element={<Logout/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/pass" element={<Passwords/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/pins" element={<Pins/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/notes" element={<Notes/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/trash" element={<Trash/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/gen" element={<Generator/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/folder/:name" element={<Folder/>}/>
+                    </Route>
 
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
