@@ -10,7 +10,7 @@ import ConfirmView from "./popups/ConfirmView";
 import { getData } from "./Profile";
 import { copyToClipboard } from "../../utils/CopyUtils";
 
-import classes from "FullView.module.scss";
+import classes from "./FullView.module.scss";
 
 /**
  * ListedView that loads items into it.
