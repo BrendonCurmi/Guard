@@ -175,6 +175,10 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
                     </InputAdornment>
                 )
             };
+
+            // Disable/Remove multiline prop when hiding since they are mutually exclusive
+            if (!showPw && fieldProps.multiline) fieldProps.multiline = false;
+            
             fieldProps.type = showPw ? "text" : "password";
             fieldProps.value = secureUserInputValue;
             fieldProps.className = `${classes.textField} ${classes.pwTextField}`;
