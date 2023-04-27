@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faRightToBracket, faRightFromBracket, faGamepad, faUser, faFolder, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faRightToBracket, faRightFromBracket, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 
-import NavigationItem from "./NavigationItem";
 import NavigationItemLink from "./NavigationItemLink";
 import FolderList from "./FolderList";
 import CircleButton from "../buttons/CircleButton";
 
+import { useAuth } from "../../context/AuthProvider";
 import { useFolders } from "../../store/FolderProvider";
 
 import classes from "./Navigation.module.scss";
@@ -17,13 +17,17 @@ import classes from "./Navigation.module.scss";
  * @constructor
  */
 const Navigation = (props) => {
-    const auth = props.auth;
     const [creatingFolder, setCreatingFolder] = useState(false);
     const [newFolderName, setNewFolderName] = useState("");
+
+    const { auth } = useAuth();
+    const isLoggedIn = auth?.user;
+    const show = isLoggedIn;
+
     const loginData = {
-        link: auth ? "/logout" : "/login",
-        text: auth ? "Logout" : "Login",
-        icon: auth ? faRightFromBracket : faRightToBracket
+        link: isLoggedIn ? "/logout" : "/login",
+        text: isLoggedIn ? "Logout" : "Login",
+        icon: isLoggedIn ? faRightFromBracket : faRightToBracket
     };
 
     const edit = () => {
@@ -54,6 +58,28 @@ const Navigation = (props) => {
 
     useEffect(folders.loadFolders, []);
 
+    const FolderSection = () => {
+        return (
+            <>
+                <span className={classes.folders}>
+                    <label>Folders</label>
+                    <CircleButton tooltip="Add Folder" placement="right" onClick={edit}>
+                        <FontAwesomeIcon icon={faFolderPlus}/>
+                    </CircleButton>
+                </span>
+                <FolderList allFolders={folders.folders}/>
+                {creatingFolder &&
+                    <form onSubmit={createFolder}>
+                        <input type="text"
+                               autoFocus={true}
+                               value={newFolderName}
+                               onChange={event => setNewFolderName(event.target.value)}/>
+                    </form>
+                }
+            </>
+        );
+    };
+
     return (
         <header className={classes.wrapper}>
             <div className={classes.sidebar}>
@@ -61,33 +87,7 @@ const Navigation = (props) => {
                     <NavigationItemLink to="/" name="Home" icon={faHouse}/>
                     <NavigationItemLink to={loginData.link} name={loginData.text} icon={loginData.icon}/>
 
-                    <span className={classes.folders}>
-                        <label>Folders</label>
-                        <CircleButton tooltip="Add Folder" placement="right" onClick={edit}>
-                            <FontAwesomeIcon icon={faFolderPlus}/>
-                        </CircleButton>
-                    </span>
-                    <FolderList allFolders={folders.folders}/>
-                    {creatingFolder &&
-                        <form onSubmit={createFolder}>
-                            <input type="text"
-                                   autoFocus={true}
-                                   value={newFolderName}
-                                   onChange={event => setNewFolderName(event.target.value)}/>
-                        </form>
-                    }
-
-                    {auth && (
-                        <NavigationItem name={props.email}>
-                            <a className={classes.default}>
-                                <FontAwesomeIcon icon={faUser}/>
-                                <span>{props.email}</span>
-                            </a>
-                        </NavigationItem>
-                    )}
-                    {auth && (
-                        <NavigationItemLink to="/test" name="Test" icon={faGamepad}/>
-                    )}
+                    {show && <FolderSection/>}
                 </ul>
             </div>
         </header>
