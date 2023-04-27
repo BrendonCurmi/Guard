@@ -21,7 +21,6 @@ import Folder from "./pages/Folder";
 
 //todo in focus view hide empty fields
 const App = () => {
-    const { auth } = useAuth();
     return (
         <div className={classes.wrapper}>
             <Navigation/>
