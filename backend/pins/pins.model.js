@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
     folders: [{
         type: String
     }],
-    lastUsed: { type: Date, default: Date.now, required: true }
+    lastAccess: { type: Date, default: Date.now, required: true }
 });
 
 module.exports = mongoose.model("PinTemplate", schema);

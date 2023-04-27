@@ -22,7 +22,7 @@ const accountSchema = new mongoose.Schema({
     }],
 
     date: { type: Date, default: Date.now, required: true },
-    lastUsed: { type: Date, default: Date.now, required: true }
+    lastAccess: { type: Date, default: Date.now, required: true }
 });
 
 module.exports = mongoose.model("AccountTemplate", accountSchema);

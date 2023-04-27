@@ -137,13 +137,13 @@ const requestCatch = (data, res) => {
 
 /**
  * Retrieves only the credentials of the specified account,
- * while updating account's lastUsed property.
+ * while updating account's lastAccess property.
  * @param req the request.
  * @param res the response.
  * @returns {Promise<void>}
  */
 exports.getCredentialsById = async (req, res) => {
-    const data = await AccountTemplate.findOneAndUpdate({ _id: req.params.id }, { lastUsed: Date.now() }).select("pw");
+    const data = await AccountTemplate.findOneAndUpdate({ _id: req.params.id }, { lastAccess: Date.now() }).select("pw");
     requestCatch(data, res);
 };
 
