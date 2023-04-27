@@ -10,7 +10,6 @@ exports.getAllFolders = async (req, res) => {
 
 exports.createFolder = (req, res) => {
     const test = new FolderTemplate({
-        _id: req.body.id,
         name: req.body.name
     });
     test.save()
