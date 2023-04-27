@@ -1,31 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-/*router.post("/test", (req, res) => {
-    const test = new AccountTemplate({
-        site: req.body.site,
-        title: req.body.title,
-        pw: req.body.pw
-    });
-    test.save()
-        .then(data => {
-            res.status(201).json(data);
-        })
-        .catch(err => {
-            res.status(400).json({ message: err.message });
-        });
-});*/
+const AccountController = require("./accountController");
+const accountController = new AccountController();
 
-const accountController = require("./accountController");
+router.route("/accounts").get(accountController.getAll);
 
-router.route("/accounts").get(accountController.getAllAccounts);
-
-router.route("/account").post(accountController.createAccount);
+router.route("/account").post(accountController.create);
 
 router.route("/account/:id")
-    .get(accountController.getAccountById)
+    .get(accountController.getById)
     .put(accountController.updateById)
-    .delete(accountController.deleteAccount);
+    .delete(accountController.delete);
 
 router.route("/account/:id/credentials")
     .get(accountController.getCredentialsById);
