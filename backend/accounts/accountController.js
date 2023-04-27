@@ -13,12 +13,8 @@ exports.getAllAccounts = async (req, res) => {
 
 
 exports.createAccount = (req, res) => {
-    const test = new AccountTemplate({
-        site: req.body.site,
-        title: req.body.title,
-        pw: req.body.pw
-    });
-    test.save()
+    new AccountTemplate({ ...req.body })
+        .save()
         .then(data => {
             res.status(201).json(data);
         })
