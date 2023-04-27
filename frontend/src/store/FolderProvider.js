@@ -22,7 +22,7 @@ const FolderProvider = ({ children }) => {
         loadFolders
     });
 
-    useEffect(loadFolders, []);
+    //useEffect(loadFolders, []);
 
     return (
         <FolderContext.Provider value={foldersData}>
