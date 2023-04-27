@@ -14,7 +14,7 @@ import classes from "./Navigation.module.scss";
  */
 const Navigation = () => {
     const { auth } = useAuth();
-    const isLoggedIn = auth?.user;
+    const isLoggedIn = auth?.accessToken;
     const show = isLoggedIn;
 
     const loginData = {
