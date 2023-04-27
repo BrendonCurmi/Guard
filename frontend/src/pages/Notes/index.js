@@ -18,7 +18,6 @@ export const NoteData = {
             id: "input-note",
             value: "note",
             multiline: true,
-            minRows: 4,
             maxRows: 7
         }
     ],
