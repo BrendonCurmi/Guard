@@ -5,7 +5,9 @@ const controller = require("./folderController");
 
 router.route("/folders").get(controller.getAllFolders);
 
-router.route("/folder").post(controller.createFolder);
+router.route("/folder")
+    .post(controller.createFolder)
+    .delete(controller.deleteFolderByName);
 
 router.route("/folder/:id")
     .get(controller.getFolderById)
