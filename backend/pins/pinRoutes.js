@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const pinController = require("./pinController");
+const PinController = require("./pinController");
+const pinController = new PinController();
 
-router.route("/pins").get(pinController.getAllPins);
+router.route("/pins").get(pinController.getAll);
 
-router.route("/pin").post(pinController.createPins)
+router.route("/pin").post(pinController.create)
 
 router.route("/pin/:id")
-    .get(pinController.getPinById)
+    .get(pinController.getById)
     .put(pinController.updateById)
-    .delete(pinController.deletePin);
+    .delete(pinController.delete);
 
 router.route("/pin/:id/credentials")
     .get(pinController.getCredentialsById);
