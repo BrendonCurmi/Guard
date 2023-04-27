@@ -8,7 +8,7 @@ const TrashTemplate = require("../trash/trash.model");
  */
 exports.getAllAccounts = async (req, res) => {
     const data = await AccountTemplate.find().select("-pw");
-    requestCatch(data, res);
+    requestCatch({ "accounts": data }, res);
 };
 
 

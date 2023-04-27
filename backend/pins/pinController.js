@@ -7,7 +7,7 @@ const PinTemplate = require("./pins.model");
  */
 exports.getAllPins = async (req, res) => {
     const data = await PinTemplate.find().select("-pin");
-    requestCatch(data, res);
+    requestCatch({ "pins": data }, res);
 };
 
 
