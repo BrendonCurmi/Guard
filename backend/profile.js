@@ -7,6 +7,8 @@ class Profile {
         //todo trash uncomment
         this.secure = secure;
 
+        Profile.profiles = { ...Profile.profiles, [name]: model };
+
         // Bind to keep this context
         this.getAll = this.getAll.bind(this);
         this.create = this.create.bind(this);
@@ -27,6 +29,13 @@ class Profile {
         };
         this.exclude = getExclude();
     }
+
+    // Map of item name: item template model
+    static profiles = {};
+
+    static getTemplate = (name) => {
+        return Profile.profiles[name];
+    };
 
     request = async (promise, action, res, messages) => {
         if (!messages) {
