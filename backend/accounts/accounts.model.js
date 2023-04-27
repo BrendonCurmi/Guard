@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const accountSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
     site: {
         type: String,
         required: true,
@@ -11,8 +11,9 @@ const accountSchema = new mongoose.Schema({
         required: true,
         default: ""
     },
-    email: String,
-    username: String,
+    // email: String,
+    // username: String,
+    identity: String,
     pw: {
         type: String,
         required: true
@@ -25,4 +26,4 @@ const accountSchema = new mongoose.Schema({
     lastAccess: { type: Date, default: Date.now, required: true }
 });
 
-module.exports = mongoose.model("AccountTemplate", accountSchema);
+module.exports = mongoose.model("AccountTemplate", schema);
