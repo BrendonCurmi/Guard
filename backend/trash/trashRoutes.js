@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const trashController = require("./trashController");
-router.route("/trash").get(trashController.getAllAccounts);
+const TrashController = require("./trashController");
+const trashController = new TrashController();
+
+router.route("/trash").get(trashController.getAll);
 
 router.route("/trash/:id/")
-    .get(trashController.getAccountById)
+    .get(trashController.getById)
     .put(trashController.updateById)
     .delete(trashController.deleteAccount);
 
