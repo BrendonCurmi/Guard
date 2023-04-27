@@ -13,12 +13,7 @@ const NavigationFolderSection = () => {
     const [newFolderName, setNewFolderName] = useState("");
     const folders = useFolders();
 
-    useEffect(() => {
-        if (show) {
-            console.log("load folders now pls");//todo
-            folders.loadFolders();
-        }
-    }, []);
+    useEffect(folders.loadFolders, []);
 
     const edit = () => {
         setCreatingFolder(!creatingFolder);
