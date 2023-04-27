@@ -1,11 +1,17 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
+    const [persist, setPersist] = useState(localStorage.getItem("persist") === "true" || false);
+
+    // When updating persist, update value in localStorage
+    useEffect(() => {
+        localStorage.setItem("persist", `${persist}`);
+    }, [persist]);
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
             {children}
         </AuthContext.Provider>
     );
