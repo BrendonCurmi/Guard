@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const AccountTemplate = require("./accounts.model");
 
-router.post("/test", (req, res) => {
+/*router.post("/test", (req, res) => {
     const test = new AccountTemplate({
         site: req.body.site,
         title: req.body.title,
@@ -15,13 +15,13 @@ router.post("/test", (req, res) => {
         .catch(err => {
             res.status(400).json({ message: err.message });
         });
-});
+});*/
 
 const accountController = require("./accountController");
 
 router.route("/accounts").get(accountController.getAllAccounts);
 
-// router.route("/credentials/:id").get(accountController.getCredentials);
+router.route("/account").post(accountController.createAccount);
 
 router.route("/account/:id")
     .get(accountController.getAccountById)
