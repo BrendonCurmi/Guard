@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
+// Import cookie-parser middleware
+const cookies = require("cookie-parser");
+app.use(cookies());
+
 // Import middleware
 app.use(express.json());
 
