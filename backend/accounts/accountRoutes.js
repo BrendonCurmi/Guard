@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const AccountTemplate = require("./accounts.model");
 
 /*router.post("/test", (req, res) => {
     const test = new AccountTemplate({
