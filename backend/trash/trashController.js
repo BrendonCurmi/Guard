@@ -23,6 +23,25 @@ class TrashController extends Profile {
             res.status(500).json({ err: err.message });
         }
     };
+
+    /**
+     * Restores item from trash.
+     */
+    restoreFromTrash = async (req, res) => {
+        try {
+            await TrashTemplate.findOne({ _id: req.params.id }, (err, result) => {
+                const data = result.toJSON();
+                const type = data.type;
+                const model = Profile.getTemplate(type);
+                const swap = new model(data);
+                swap.save();
+                result.remove();
+            });
+            res.status(200).json({ message: "ok" });
+        } catch (err) {
+            res.status(500).json({ err: err.message });
+        }
+    };
 }
 
 module.exports = TrashController;
