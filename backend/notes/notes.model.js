@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     },
     note: String,
     folders: [{
-        type: String
+        type: mongoose.Schema.Types.ObjectId
     }],
     lastAccess: { type: Date, default: Date.now, required: true }
 });

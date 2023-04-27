@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
         required: true
     },
     folders: [{
-        type: String
+        type: mongoose.Schema.Types.ObjectId
     }],
 
     date: { type: Date, default: Date.now, required: true },
