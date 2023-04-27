@@ -2,12 +2,25 @@ import React, { useState } from "react";
 import { TextField } from "@mui/material";
 
 import NiceButton from "../../components/buttons/NiceButton";
+
 import { useAuth } from "../../context/AuthProvider";
 
 import classes from "./index.module.scss";
 
 const Login = () => {
     const { setAuth, persist, setPersist } = useAuth();
+
+    const API = "http://localhost:4000/api/auth";
+    const LOGIN_API = API + "/login";
+
+    const formSubmissionHandler = event => {
+        event.preventDefault();
+
+        const pw = userInput.pw;
+        const user = userInput.username;
+
+        //todo fetch
+    };
 
     const [userInput, setUserInput] = useState({ username: "", pw: "" });
 
@@ -20,7 +33,7 @@ const Login = () => {
     return (
         <>
             <h2 className={classes.title}>Sign in</h2>
-            <form className={classes.loginForm}>
+            <form onSubmit={formSubmissionHandler} className={classes.loginForm}>
                 <TextField id="username"
                            name="username"
                            value={userInput["username"]}

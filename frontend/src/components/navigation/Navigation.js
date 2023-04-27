@@ -1,5 +1,12 @@
 import React from "react";
-import { faHouse, faRightToBracket, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+    faHouse,
+    faRightToBracket,
+    faRightFromBracket,
+    faKey,
+    faLock,
+    faStickyNote, faTrash, faArrowRotateForward
+} from "@fortawesome/free-solid-svg-icons";
 
 import NavigationItemLink from "./NavigationItemLink";
 import NavigationFolderSection from "./NavigationFolderSection";
@@ -29,6 +36,12 @@ const Navigation = () => {
                 <ul>
                     <NavigationItemLink to="/" name="Home" icon={faHouse}/>
                     <NavigationItemLink to={loginData.link} name={loginData.text} icon={loginData.icon}/>
+
+                    <NavigationItemLink to="/pass" name="Passwords" icon={faKey} show/>
+                    <NavigationItemLink to="/pins" name="Pins" icon={faLock} show/>
+                    <NavigationItemLink to="/notes" name="Secure Notes" icon={faStickyNote} show/>
+                    <NavigationItemLink to="/trash" name="Trash" icon={faTrash} show/>
+                    <NavigationItemLink to="/gen" name="Password Generator" icon={faArrowRotateForward} show/>
 
                     {show && <NavigationFolderSection/>}
                 </ul>
