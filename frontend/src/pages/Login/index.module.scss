@@ -1,0 +1,30 @@
+$input-border: 10px;
+$input-colour: white;
+//$input-background-colour: #e30f0f;
+$input-background-colour: #2a2a2a;
+
+.title {
+  text-align: center;
+}
+
+.loginForm {
+  text-align: center;
+  margin: auto;
+  display: grid;
+  width: 70%;
+
+  .textField {
+    color: $input-colour;
+    background-color: $input-background-colour;
+    border-radius: $input-border;
+    margin-bottom: 10px;
+  }
+
+  .checkbox {
+    margin-right: 10px;
+  }
+
+  .left {
+    text-align: left;
+  }
+}
