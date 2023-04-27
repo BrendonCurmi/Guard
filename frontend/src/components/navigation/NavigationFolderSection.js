@@ -15,7 +15,7 @@ const NavigationFolderSection = () => {
 
     useEffect(() => {
         if (show) {
-            console.log("load folders now pls");
+            console.log("load folders now pls");//todo
             folders.loadFolders();
         }
     }, []);
