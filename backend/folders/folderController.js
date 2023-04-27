@@ -56,7 +56,7 @@ exports.deleteFolderByName = async (req, res) => {
         await FolderTemplate.findOneAndDelete({ "name": req.body.search });
 
         // await AccountTemplate.findOne({ "name": req.body.search }, (err, result) => moveToTrash(err, result));
-        
+
         res.status(200).json({ });
     } catch (err) {
         res.status(500).json({ err: err.message });
