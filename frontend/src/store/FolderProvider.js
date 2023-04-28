@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { safeFetch } from "../utils/SafeFetch";
 
 export const FolderContext = createContext([]);
 
 const FolderProvider = ({ children }) => {
     const loadFolders = () => {
-        fetch("http://localhost:4000/api/folders", { method: "GET" })
+        safeFetch("http://localhost:4000/api/folders")
             .then(value => value.json())
             .then(data => {
                 const dict = {};
