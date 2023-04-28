@@ -1,5 +1,5 @@
-const safeFetch = (url, method = "GET", data) => {
-    return fetch(url, {
+const safeFetch = (url, method = "GET", data = {}) => {
+    const init = {
         method: method,
         headers: {
             "Accept": "application/json",
@@ -7,9 +7,13 @@ const safeFetch = (url, method = "GET", data) => {
             "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").getAttribute("content")
         },
         credentials: "include",
-        // mode: "cors",
-        body: JSON.stringify(data)
-    }).catch(console.log);
+        // mode: "cors"
+    };
+    if (method !== "GET") {
+        init.body = JSON.stringify(data);
+    }
+    return fetch(url, init);
+    //.catch(console.log)
 };
 
 module.exports = { safeFetch };
