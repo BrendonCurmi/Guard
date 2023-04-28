@@ -19,11 +19,12 @@ const schema = new mongoose.Schema({
         required: true
     },
     folders: [{
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "folders"
     }],
 
     date: { type: Date, default: Date.now, required: true },
     lastAccess: { type: Date, default: Date.now, required: true }
 });
 
-module.exports = mongoose.model("AccountTemplate", schema);
+module.exports = mongoose.model("AccountTemplate", schema, "accounts");

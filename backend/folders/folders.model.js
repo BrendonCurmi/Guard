@@ -10,4 +10,4 @@ const foldersSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("FolderTemplate", foldersSchema);
+module.exports = mongoose.model("FolderTemplate", foldersSchema, "folders");

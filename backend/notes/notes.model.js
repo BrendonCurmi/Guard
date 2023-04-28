@@ -8,9 +8,10 @@ const schema = new mongoose.Schema({
     },
     note: String,
     folders: [{
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "folders"
     }],
     lastAccess: { type: Date, default: Date.now, required: true }
 });
 
-module.exports = mongoose.model("NoteTemplate", schema);
+module.exports = mongoose.model("NoteTemplate", schema, "notes");
