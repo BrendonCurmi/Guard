@@ -1,13 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 
 import NiceButton from "../../components/buttons/NiceButton";
 import { useAuth } from "../../context/AuthProvider";
+import { safeFetch } from "../../utils/SafeFetch";
 
 import classes from "./index.module.scss";
 
 const Login = () => {
     const { setAuth, persist, setPersist } = useAuth();
+
+    const API = "http://localhost:4000/api/auth";
+    const REFRESH_API = API + "/refreshToken";
+
+    // If persist is enabled, try to auto sign in using refresh token
+    useEffect(() => {
+        if (persist) {
+            safeFetch(REFRESH_API)
+                .then(res => res.status === 200 ? res.json() : null)
+                .then(data => {
+                    if (data === null || !data.accessToken) return;
+                    const accessToken = data.accessToken;
+                    setAuth({ accessToken });
+                    navigate(from, { replace: true });
+                })
+                .catch(console.log);
+        }
+    }, []);
+
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [userInput, setUserInput] = useState({ username: "", pw: "" });
 
