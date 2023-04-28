@@ -8,6 +8,7 @@ import FocusedView from "./popups/FocusedView";
 import ConfirmView from "./popups/ConfirmView";
 
 import { getData } from "./Profile";
+import { safeFetch } from "../../utils/SafeFetch";
 import { copyToClipboard } from "../../utils/CopyUtils";
 
 import classes from "./FullView.module.scss";
@@ -40,7 +41,7 @@ const FullView = ({
      * Load all items in the view.
      */
     const loadAllItems = async () => {
-        const res = await fetch(loadApi);
+        const res = await safeFetch(loadApi);
         const accountData = await res.json();
         console.log("API REQUEST SHOULD BE DONE ONCE")
         setItems(accountData);
@@ -63,7 +64,7 @@ const FullView = ({
     };
 
     const getCreds = async (dataType, id) => {
-        const res = await fetch(dataType.endpoints.credentialsApi(id));
+        const res = await safeFetch(dataType.endpoints.credentialsApi(id));
         return await res.json();
     };
 
@@ -102,14 +103,7 @@ const FullView = ({
         };
 
         const send = (url, method, data) => {
-            return fetch(url, {
-                method: method,
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
+            return safeFetch(url, method, data);
         };
 
 
@@ -133,7 +127,7 @@ const FullView = ({
         };
 
         const deleteUrl = deleteApi ? deleteApi(deleteId) : getEndpointDeleteApi(deleteId);
-        const rawResponse = await fetch(deleteUrl, { method: "DELETE" });
+        const rawResponse = await safeFetch(deleteUrl, "DELETE");
         if (rawResponse.status === 200) {
             const content = await rawResponse.json();
             // console.log(content);
