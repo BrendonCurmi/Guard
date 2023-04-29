@@ -3,7 +3,7 @@
 ul.navFolderList {
   padding-inline-start: 0;
   height: 85px;
-  overflow-y: auto;
+  //overflow-y: auto;
   width: 97%;
 
   li {
@@ -18,6 +18,12 @@ ul.navFolderList {
       > svg {
         @media screen and (min-width: $medium_screen_size) {
           margin-right: 5px;
+        }
+      }
+
+      svg {
+        @media screen and (max-width: $medium_screen_size) {
+          display: none;
         }
       }
     }
