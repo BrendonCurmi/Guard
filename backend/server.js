@@ -23,8 +23,22 @@ app.use(cors(corsOptions));
 // Connect to db
 mongoose.connect(process.env.DATABASE_URI, () => console.log("Db"));
 
+const routeRouter = require("./accounts/accountRoutes");
+app.use("/api", routeRouter);
+
+const trashRouter = require("./trash/trashRoutes");
+app.use("/api", trashRouter);
+
+const pinRouter = require("./pins/pinRoutes");
+app.use("/api", pinRouter);
+
+const folderRoutes = require("./folders/folderRoutes");
+app.use("/api", folderRoutes);
+
+const noteRoutes = require("./notes/noteRoutes");
+app.use("/api", noteRoutes);
+
 const server = https.createServer({key: key, cert: cert }, app);
-app.get("/", (req, res) => { res.send("This is a test") });
 
 const port = process.env.SERVER_PORT
 server.listen(port, () => console.log("Server is up"));
