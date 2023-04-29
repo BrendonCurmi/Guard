@@ -23,19 +23,19 @@ app.use(cors(corsOptions));
 // Connect to db
 mongoose.connect(process.env.DATABASE_URI, () => console.log("Db"));
 
-const routeRouter = require("./accounts/accountRoutes");
+const routeRouter = require("./components/accounts/accountRoutes");
 app.use("/api", routeRouter);
 
-const trashRouter = require("./trash/trashRoutes");
+const trashRouter = require("./components/trash/trashRoutes");
 app.use("/api", trashRouter);
 
-const pinRouter = require("./pins/pinRoutes");
+const pinRouter = require("./components/pins/pinRoutes");
 app.use("/api", pinRouter);
 
-const folderRoutes = require("./folders/folderRoutes");
+const folderRoutes = require("./components/folders/folderRoutes");
 app.use("/api", folderRoutes);
 
-const noteRoutes = require("./notes/noteRoutes");
+const noteRoutes = require("./components/notes/noteRoutes");
 app.use("/api", noteRoutes);
 
 const server = https.createServer({key: key, cert: cert }, app);
