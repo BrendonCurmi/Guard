@@ -41,10 +41,26 @@ const Login = () => {
         });
     };
 
+    const [isLoggingIn, setIsLoggingIn] = useState(true);
+    const isRegistering = !isLoggingIn;
+
+    const title = isLoggingIn ? "Sign in" : "Sign up";
+    const buttonText = isLoggingIn ? "Login" : "Register";
+    const switchButtonText = isLoggingIn ? "Create new account" : "Log into existing account";
+
     return (
         <>
-            <h2 className={classes.title}>Sign in</h2>
+            <h2 className={classes.title}>{title}</h2>
             <form className={classes.loginForm}>
+                {isRegistering &&
+                    <TextField id="email"
+                               name="email"
+                               value={userInput["email"]}
+                               onChange={onChangeHandler}
+                               label="Email"
+                               className={classes.textField}
+                               variant="filled"
+                               type="text"/>}
                 <TextField id="username"
                            name="username"
                            value={userInput["username"]}
@@ -61,6 +77,15 @@ const Login = () => {
                            className={classes.textField}
                            variant="filled"
                            type="text"/>
+                {isRegistering &&
+                    <TextField id="pw-confirm"
+                               name="pw-confirm"
+                               value={userInput["pw-confirm"]}
+                               onChange={onChangeHandler}
+                               label="Confirm Password"
+                               className={classes.textField}
+                               variant="filled"
+                               type="text"/>}
                 <div className={classes.left}>
                     <input id="persist"
                            checked={persist}
@@ -70,8 +95,9 @@ const Login = () => {
                     <label htmlFor="persist">Stay logged in</label>
                 </div>
                 <NiceButton type="submit"
-                            color="primary">Login</NiceButton>
-                <a className={classes.left}>Create new account</a>
+                            color="primary">{buttonText}</NiceButton>
+                <a className={classes.left}
+                   onClick={() => setIsLoggingIn(prevState => !prevState)}>{switchButtonText}</a>
             </form>
         </>
     );
