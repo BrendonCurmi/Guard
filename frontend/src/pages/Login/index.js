@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { TextField } from "@mui/material";
 
+import FormInput from "./FormInput";
 import NiceButton from "../../components/buttons/NiceButton";
 import { useAuth } from "../../context/AuthProvider";
 import { safeFetch } from "../../utils/SafeFetch";
@@ -35,12 +35,6 @@ const Login = () => {
 
     const [userInput, setUserInput] = useState({ username: "", pw: "" });
 
-    const onChangeHandler = (event, property = event.target.id) => {
-        setUserInput(prevState => {
-            return { ...prevState, [property]: event.target.value };
-        });
-    };
-
     const [isLoggingIn, setIsLoggingIn] = useState(true);
     const isRegistering = !isLoggingIn;
 
@@ -48,44 +42,82 @@ const Login = () => {
     const buttonText = isLoggingIn ? "Login" : "Register";
     const switchButtonText = isLoggingIn ? "Create new account" : "Log into existing account";
 
+    const onChangeHandler = (event, property) => {
+        setUserInput(prevState => {
+            return { ...prevState, [property]: event.target.value };
+        });
+    };
+
+    // Adapted from https://stackoverflow.com/a/46181
+    const validateEmail = (value) => {
+        return value.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    }
+
+    const emailValidation = (value, setErrorMsg) => {
+        setErrorMsg(!validateEmail(value) ? "Not a valid email" : "");
+    }
+
+    const validateUsername = (value) => {
+        return value.length > 5;
+    }
+
+    const usernameValidation = (value, setErrorMsg) => {
+        setErrorMsg(!validateUsername(value) ? "Username is too short" : "");
+    }
+
+    const validatePw = (value) => {
+        return value.length > 5;
+    }
+
+    const pwValidation = (value, setErrorMsg) => {
+        setErrorMsg(!validatePw(value) ? "Password is too short" : "");
+    }
+
+    const validatePwConfirm = (value) => {
+        return value === userInput.pw;
+    }
+
+    const pwConfirmValidation = (value, setErrorMsg) => {
+        setErrorMsg(!validatePwConfirm(value) ? "Passwords do not match" : "");
+    }
+
+
     return (
         <>
             <h2 className={classes.title}>{title}</h2>
             <form className={classes.loginForm}>
                 {isRegistering &&
-                    <TextField id="email"
+                    <FormInput id="email"
                                name="email"
                                value={userInput["email"]}
                                onChange={onChangeHandler}
                                label="Email"
                                className={classes.textField}
-                               variant="filled"
-                               type="text"/>}
-                <TextField id="username"
+                               onChangeValidation={emailValidation}/>}
+                <FormInput id="username"
                            name="username"
                            value={userInput["username"]}
                            onChange={onChangeHandler}
                            label="User"
                            className={classes.textField}
-                           variant="filled"
-                           type="text"/>
-                <TextField id="pw"
+                           onChangeValidation={usernameValidation}/>
+                <FormInput id="pw"
                            name="pw"
                            value={userInput["pw"]}
                            onChange={onChangeHandler}
                            label="Password"
                            className={classes.textField}
-                           variant="filled"
-                           type="text"/>
+                           onChangeValidation={pwValidation}/>
                 {isRegistering &&
-                    <TextField id="pw-confirm"
+                    <FormInput id="pw-confirm"
                                name="pw-confirm"
                                value={userInput["pw-confirm"]}
                                onChange={onChangeHandler}
                                label="Confirm Password"
                                className={classes.textField}
-                               variant="filled"
-                               type="text"/>}
+                               onChangeValidation={pwConfirmValidation}/>}
                 <div className={classes.left}>
                     <input id="persist"
                            checked={persist}
