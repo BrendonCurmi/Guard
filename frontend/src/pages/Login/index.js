@@ -6,13 +6,12 @@ import NiceButton from "../../components/buttons/NiceButton";
 import { useAuth } from "../../context/AuthProvider";
 import { safeFetch } from "../../utils/SafeFetch";
 
+import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
+
 import classes from "./index.module.scss";
 
 const Login = () => {
     const { setAuth, persist, setPersist } = useAuth();
-
-    const API = "http://localhost:4000/api/auth";
-    const REFRESH_API = API + "/refreshToken";
 
     // If persist is enabled, try to auto sign in using refresh token
     useEffect(() => {
@@ -34,6 +33,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
 
     const [userInput, setUserInput] = useState({ username: "", pw: "" });
+    const [isFailed, setIsFailed] = useState(false);
 
     const [isLoggingIn, setIsLoggingIn] = useState(true);
     const isRegistering = !isLoggingIn;
@@ -42,10 +42,36 @@ const Login = () => {
     const buttonText = isLoggingIn ? "Login" : "Register";
     const switchButtonText = isLoggingIn ? "Create new account" : "Log into existing account";
 
-    const onChangeHandler = (event, property) => {
+    const onChangeHandler = (event, property = event.target.id) => {
         setUserInput(prevState => {
             return { ...prevState, [property]: event.target.value };
         });
+    };
+
+    const formSubmissionHandler = event => {
+        event.preventDefault();
+        const user = userInput["username"];
+        const pw = userInput["pw"];
+
+        let valid = validateUsername(user) && validatePw(pw);
+
+        const url = isRegistering ? CREATE_API : LOGIN_API;
+        let data = {};
+        if (isRegistering) {
+            const pwConfirm = userInput["pw-confirm"];
+            const email = userInput["email"];
+
+            valid = valid && validatePwConfirm(pwConfirm) && validateEmail(email) && pw === pwConfirm;
+
+            data = { user, email, pw };
+        } else {
+        }
+
+        if (valid) {
+            console.log("sent " + url + " " + data);
+        } else {
+            setIsFailed(true);
+        }
     };
 
     // Adapted from https://stackoverflow.com/a/46181
@@ -55,39 +81,22 @@ const Login = () => {
         );
     }
 
-    const emailValidation = (value, setErrorMsg) => {
-        setErrorMsg(!validateEmail(value) ? "Not a valid email" : "");
-    }
-
     const validateUsername = (value) => {
         return value.length > 5;
-    }
-
-    const usernameValidation = (value, setErrorMsg) => {
-        setErrorMsg(!validateUsername(value) ? "Username is too short" : "");
     }
 
     const validatePw = (value) => {
         return value.length > 5;
     }
 
-    const pwValidation = (value, setErrorMsg) => {
-        setErrorMsg(!validatePw(value) ? "Password is too short" : "");
-    }
-
     const validatePwConfirm = (value) => {
         return value === userInput.pw;
     }
 
-    const pwConfirmValidation = (value, setErrorMsg) => {
-        setErrorMsg(!validatePwConfirm(value) ? "Passwords do not match" : "");
-    }
-
-
     return (
         <>
             <h2 className={classes.title}>{title}</h2>
-            <form className={classes.loginForm}>
+            <form className={classes.loginForm} onSubmit={formSubmissionHandler}>
                 {isRegistering &&
                     <FormInput id="email"
                                name="email"
@@ -95,21 +104,30 @@ const Login = () => {
                                onChange={onChangeHandler}
                                label="Email"
                                className={classes.textField}
-                               onChangeValidation={emailValidation}/>}
+                               showError={isFailed}
+                               validation={validateEmail}
+                               errorMsg={"Enter a valid email address"}
+                    />}
                 <FormInput id="username"
                            name="username"
                            value={userInput["username"]}
                            onChange={onChangeHandler}
                            label="User"
                            className={classes.textField}
-                           onChangeValidation={usernameValidation}/>
+                           showError={isFailed}
+                           validation={validateUsername}
+                           errorMsg={"Enter a unique username"}
+                />
                 <FormInput id="pw"
                            name="pw"
                            value={userInput["pw"]}
                            onChange={onChangeHandler}
                            label="Password"
                            className={classes.textField}
-                           onChangeValidation={pwValidation}/>
+                           showError={isFailed}
+                           validation={validatePw}
+                           errorMsg={"Enter a valid password"}
+                />
                 {isRegistering &&
                     <FormInput id="pw-confirm"
                                name="pw-confirm"
@@ -117,7 +135,10 @@ const Login = () => {
                                onChange={onChangeHandler}
                                label="Confirm Password"
                                className={classes.textField}
-                               onChangeValidation={pwConfirmValidation}/>}
+                               showError={isFailed}
+                               validation={validatePwConfirm}
+                               errorMsg={"Passwords do not match"}
+                    />}
                 <div className={classes.left}>
                     <input id="persist"
                            checked={persist}

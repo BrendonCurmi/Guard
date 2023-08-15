@@ -1,18 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { TextField } from "@mui/material";
 
-const FormInput = ({ onChangeValidation, onChange, ...props }) => {
-    const [errorMsg, setErrorMsg] = useState(false);
-
-    const errorProps = errorMsg ? { error: true, helperText: errorMsg } : "";
-
-    const onChangeHandler = (event, property = event.target.id) => {
-        onChangeValidation(event.target.value, setErrorMsg);
-        onChange(event, property);
-    };
-
-    return <TextField onChange={onChangeHandler}
-                      variant="filled"
+const FormInput = ({ onChangeValidation, showError, errorMsg, validation, value, ...props }) => {
+    const valid = validation(value || "");
+    const errorProps = showError && !valid ? { error: true, helperText: errorMsg } : "";
+    return <TextField variant="filled"
                       type="text"
                       {...props}
                       {...errorProps}/>;
