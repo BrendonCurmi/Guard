@@ -104,16 +104,23 @@ const Login = () => {
     }
 
     const validateUsername = (value) => {
-        return value.length > 5;
+        return value.length >= 6
+            && value.length <= 30
+            && isAlphanumeric(value);
     }
 
     const validatePw = (value) => {
-        return value.length > 5;
+        return value.length > 8;
     }
 
     const validatePwConfirm = (value) => {
         return value === userInput.pw;
     }
+
+    // Adapted from https://javascript.plainenglish.io/check-if-string-is-alphanumeric-in-javascript-e325caa3ee
+    const isAlphanumeric = (str) => {
+        return str.match(/^[a-zA-Z0-9]+$/) !== null;
+    };
 
     return (
         <>
@@ -137,7 +144,7 @@ const Login = () => {
                            className={classes.textField}
                            showError={isFailed}
                            validation={validateUsername}
-                           errorMsg={"Enter a unique username"}
+                           errorMsg={"Enter a unique username of length 6-30 without special characters"}
                            {...userErr}/>
                 <FormInput id="pw"
                            name="pw"
@@ -147,7 +154,7 @@ const Login = () => {
                            className={classes.textField}
                            showError={isFailed}
                            validation={validatePw}
-                           errorMsg={"Enter a valid password"}/>
+                           errorMsg={"Enter a valid password longer than 8 characters"}/>
                 {isRegistering &&
                     <FormInput id="pw-confirm"
                                name="pw-confirm"
