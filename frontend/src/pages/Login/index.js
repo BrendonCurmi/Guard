@@ -6,6 +6,7 @@ import NiceButton from "../../components/buttons/NiceButton";
 import { useAuth } from "../../context/AuthProvider";
 import { safeFetch } from "../../utils/SafeFetch";
 
+import { setEncryptionKey } from "../../../security/EncryptionKeyUtils";
 import { generateHashes } from "../../../security/SecurityUtils";
 
 import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
@@ -36,6 +37,8 @@ const Login = () => {
 
     const [userInput, setUserInput] = useState({ username: "", pw: "" });
     const [isFailed, setIsFailed] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+    const userErr = errorMsg ? { error: true, helperText: errorMsg } : "";
 
     const [isLoggingIn, setIsLoggingIn] = useState(true);
     const isRegistering = !isLoggingIn;
@@ -71,12 +74,26 @@ const Login = () => {
             data = { email, ...data };
         }
 
-        if (valid) {
-            console.log("sent " + url);
-            console.log(data);
-        } else {
+        if (!valid) {
             setIsFailed(true);
+            return;
         }
+
+        safeFetch(url, "POST", data)
+            .then(res => res.json())
+            .then(data => {
+                if (data.err) {
+                    setErrorMsg(data.err);
+                    return;
+                }
+
+                console.log(data);
+                const accessToken = data.accessToken;
+                setAuth({ user, accessToken });
+                setEncryptionKey(encryptionHash);
+                navigate(from, { replace: true });
+            })
+            .catch(console.log);
     };
 
     // Adapted from https://stackoverflow.com/a/46181
@@ -111,8 +128,7 @@ const Login = () => {
                                className={classes.textField}
                                showError={isFailed}
                                validation={validateEmail}
-                               errorMsg={"Enter a valid email address"}
-                    />}
+                               errorMsg={"Enter a valid email address"}/>}
                 <FormInput id="username"
                            name="username"
                            value={userInput["username"]}
@@ -122,7 +138,7 @@ const Login = () => {
                            showError={isFailed}
                            validation={validateUsername}
                            errorMsg={"Enter a unique username"}
-                />
+                           {...userErr}/>
                 <FormInput id="pw"
                            name="pw"
                            value={userInput["pw"]}
@@ -131,8 +147,7 @@ const Login = () => {
                            className={classes.textField}
                            showError={isFailed}
                            validation={validatePw}
-                           errorMsg={"Enter a valid password"}
-                />
+                           errorMsg={"Enter a valid password"}/>
                 {isRegistering &&
                     <FormInput id="pw-confirm"
                                name="pw-confirm"
@@ -142,8 +157,7 @@ const Login = () => {
                                className={classes.textField}
                                showError={isFailed}
                                validation={validatePwConfirm}
-                               errorMsg={"Passwords do not match"}
-                    />}
+                               errorMsg={"Passwords do not match"}/>}
                 <div className={classes.left}>
                     <input id="persist"
                            checked={persist}
