@@ -6,6 +6,8 @@ import NiceButton from "../../components/buttons/NiceButton";
 import { useAuth } from "../../context/AuthProvider";
 import { safeFetch } from "../../utils/SafeFetch";
 
+import { generateHashes } from "../../../security/SecurityUtils";
+
 import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 
 import classes from "./index.module.scss";
@@ -55,20 +57,23 @@ const Login = () => {
 
         let valid = validateUsername(user) && validatePw(pw);
 
+        const { encryptionHash, authHash } = generateHashes(pw, user);
+
         const url = isRegistering ? CREATE_API : LOGIN_API;
-        let data = {};
+        let data = { user, pw: authHash };
+
         if (isRegistering) {
             const pwConfirm = userInput["pw-confirm"];
             const email = userInput["email"];
 
             valid = valid && validatePwConfirm(pwConfirm) && validateEmail(email) && pw === pwConfirm;
 
-            data = { user, email, pw };
-        } else {
+            data = { email, ...data };
         }
 
         if (valid) {
-            console.log("sent " + url + " " + data);
+            console.log("sent " + url);
+            console.log(data);
         } else {
             setIsFailed(true);
         }
