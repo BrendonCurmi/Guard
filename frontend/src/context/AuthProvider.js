@@ -10,8 +10,9 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem("persist", `${persist}`);
     }, [persist]);
+    const authenticated = !!auth?.accessToken;
     return (
-        <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
+        <AuthContext.Provider value={{ authenticated, auth, setAuth, persist, setPersist }}>
             {children}
         </AuthContext.Provider>
     );
