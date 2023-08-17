@@ -36,6 +36,8 @@
 
   table {
     background-color: $background-colour;
+    width: 100%;
+    padding: 25px;
 
     thead {
       display: none;
@@ -43,7 +45,7 @@
 
     .length {
       grid-template-columns: 1fr 30px;
-      grid-template-areas:"slider value";
+      grid-template-areas: "slider value";
       display: grid;
 
       & > span {
@@ -52,6 +54,7 @@
 
       & > p {
         grid-area: value;
+        margin: 0 0 0 15px;
       }
     }
   }
