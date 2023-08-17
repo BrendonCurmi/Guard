@@ -1,43 +1,70 @@
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
-const UserTemplate = require("./users.model");
+const { UserTemplate } = require("./users.model");
 
 const { saltAndHash } = require("../security/encrypt");
+
+const accessTokenCookieName = "x-auth-token";
+const refreshTokenCookieName = "x-refresh-token";
+
+const generateAccessToken = (payload) => jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });//15m
+const generateRefreshToken = (payload) => jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "20m" });//20m
+
+const sendCookies = (user, res) => {
+    const payload = {
+        userId: user._id,
+        userEmail: user.email
+    };
+
+    const accessToken = generateAccessToken(payload);
+    const refreshToken = generateRefreshToken(payload);
+
+    const options = {
+        httpOnly: true,
+        // sameSite: "None",
+        sameSite: true,
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000 //1 day
+        // maxAge: 3 * 60 * 1000
+    };
+    //set maxAge to jwt age
+
+    res.cookie(accessTokenCookieName, accessToken, options);
+    res.cookie(refreshTokenCookieName, refreshToken, options);
+    return accessToken;
+};
 
 exports.createUser = async (req, res) => {
     await new UserTemplate({
         email: req.body.email,
-        username: req.body.user,
-        pw: saltAndHash(req.body.pw),
+        username: req.body.username,
+        // authHash: saltAndHash(req.body.pw),
+        authHash: req.body.authHash,
     })
         .save()
-        .then(data => res.status(201).json(data))
+        .then(user => {
+            const accessToken = sendCookies(user, res);
+            res.status(201).json({ accessToken });
+        })
         .catch(err => res.status(400).json({ err: err.message }));
 };
 
 exports.loginUser = async (req, res) => {
-    const { user, authHash } = req.body;
-    UserTemplate.findOne({ username: user })
+    const { username, authHash } = req.body;
+    UserTemplate.findOne({ username })
         .then((user) => {
             //keep access tokens in memory, refresh tokens in httponly cookie
             // const [salt, hash] = user.pw.split("$");
             // const newHash = hashKey(req.body.login, Buffer.from(salt, "base64"));
 
-            const compare = user.pw === authHash;
+            const compare = user.authHash === authHash;
             if (!compare) {
                 return res.status(401).json({ err: "Authentication failed" })
             }
 
-            const payload = {
-                userId: user._id,
-                userEmail: user.email
-            };
-
-            // const accessToken = sendCookies(res, payload);
-            console.log("boo");
-
-            // res.status(200).json({ accessToken });
-            res.status(200).json({ msg: "ok" });
+            const accessToken = sendCookies(user, res);
+            res.status(200).json({ accessToken });
         })
         .catch(() => res.status(400).json({ err: "User does not exist" }));
 };
