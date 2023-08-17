@@ -55,15 +55,15 @@ const Login = () => {
 
     const formSubmissionHandler = event => {
         event.preventDefault();
-        const user = userInput["username"];
+        const username = userInput["username"];
         const pw = userInput["pw"];
 
-        let valid = validateUsername(user) && validatePw(pw);
+        let valid = validateUsername(username) && validatePw(pw);
 
-        const { encryptionHash, authHash } = generateHashes(pw, user);
+        const { encryptionHash, authHash } = generateHashes(pw, username);
 
         const url = isRegistering ? CREATE_API : LOGIN_API;
-        let data = { user, pw: authHash };
+        let data = { username, authHash };
 
         if (isRegistering) {
             const pwConfirm = userInput["pw-confirm"];
@@ -89,7 +89,7 @@ const Login = () => {
 
                 console.log(data);
                 const accessToken = data.accessToken;
-                setAuth({ user, accessToken });
+                setAuth({ username, accessToken });
                 // setEncryptionKey(encryptionHash);
                 // navigate(from, { replace: true });
             })
@@ -146,7 +146,7 @@ const Login = () => {
                            name="username"
                            value={userInput["username"]}
                            onChange={onChangeHandler}
-                           label="User"
+                           label="Username"
                            className={classes.textField}
                            showError={isFailed}
                            validation={validateUsername}
