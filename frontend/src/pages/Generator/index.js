@@ -99,12 +99,6 @@ const Generator = () => {
                 </div>
             </div>
             <table>
-                <thead>
-                <tr>
-                    <th width="50%"></th>
-                    <th width="50%"></th>
-                </tr>
-                </thead>
                 <tbody>
                 <tr>
                     <td>Length</td>
