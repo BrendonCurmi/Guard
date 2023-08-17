@@ -12,17 +12,18 @@ import classes from "./index.module.scss";
 
 const label = { inputProps: { "aria-label": "Switch test" } };
 
-const min = 20;
-const max = 60;
+const minLength = 10;
+const maxLength = 60;
+const initialLength = 16;
 
 const marks = [];
-for (let i = 20; i <= 60; i += 10) {
+for (let i = minLength; i <= maxLength; i += 10) {
     marks.push({ value: i });
 }
 
 const Generator = () => {
     const [values, setValues] = useState({
-        length: (min + max) / 2,
+        length: initialLength,
         useCapitals: true,
         useDigits: true,
         useSymbols: true
@@ -113,8 +114,8 @@ const Generator = () => {
                             // aria-label="Default"
                                 marks={marks}
                             // step={10}
-                                min={min}
-                                max={max}
+                                min={minLength}
+                                max={maxLength}
                                 color="secondary"
                             // valueLabelDisplay="on"
                                 onChange={(event, value) => set({ length: value })}
