@@ -27,10 +27,8 @@ const App = () => {
             <main>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
+                    <Route path="/login" element={<Login/>}/>
 
-                    <Route path="/login" element={<AuthRoute loginStatus={false}/>}>
-                        <Route path="/login" element={<Login/>}/>
-                    </Route>
                     <Route element={<AuthRoute/>}>
                         <Route path="/logout" element={<Logout/>}/>
                     </Route>
