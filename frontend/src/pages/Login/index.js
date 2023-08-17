@@ -90,7 +90,7 @@ const Login = () => {
                 console.log(data);
                 const accessToken = data.accessToken;
                 setAuth({ username, accessToken });
-                // setEncryptionKey(encryptionHash);
+                setEncryptionKey(encryptionHash);
                 // navigate(from, { replace: true });
             })
             .catch(console.log);
