@@ -38,13 +38,20 @@
     background-color: $background-colour;
     width: 100%;
     padding: 25px;
+    font-size: larger;
+    border-spacing: 0 20px;
+    border-collapse: separate;
 
     thead {
       display: none;
     }
 
+    td:nth-child(2) {
+      text-align: right;
+    }
+
     .length {
-      grid-template-columns: 1fr 30px;
+      grid-template-columns: 4fr 1fr;
       grid-template-areas: "slider value";
       display: grid;
 
@@ -54,7 +61,7 @@
 
       & > p {
         grid-area: value;
-        margin: 0 0 0 15px;
+        margin: 0;
       }
     }
   }
