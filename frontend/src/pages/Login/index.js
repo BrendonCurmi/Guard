@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import FormInput from "./FormInput";
 import NiceButton from "../../components/buttons/NiceButton";
@@ -14,7 +14,7 @@ import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 import classes from "./index.module.scss";
 
 const Login = () => {
-    const { setAuth, persist, setPersist } = useAuth();
+    const { authenticated, setAuth, persist, setPersist } = useAuth();
 
     // If persist is enabled, try to auto sign in using refresh token
     useEffect(() => {
@@ -90,8 +90,8 @@ const Login = () => {
                 console.log(data);
                 const accessToken = data.accessToken;
                 setAuth({ user, accessToken });
-                setEncryptionKey(encryptionHash);
-                navigate(from, { replace: true });
+                // setEncryptionKey(encryptionHash);
+                // navigate(from, { replace: true });
             })
             .catch(console.log);
     };
@@ -121,6 +121,12 @@ const Login = () => {
     const isAlphanumeric = (str) => {
         return str.match(/^[a-zA-Z0-9]+$/) !== null;
     };
+
+    // If already logged in, send away or to home page
+    if (authenticated) {
+        const to = from === "/login" ? "/" : from;
+        return (<Navigate to={to} replace/>);
+    }
 
     return (
         <>
