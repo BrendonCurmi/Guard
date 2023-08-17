@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
         min: 6,
         max: 30
     },
-    pw: {
+    authHash: {
         type: String,
         required: true,
     },
@@ -31,13 +31,13 @@ const UserTemplate =  mongoose.model("UserTemplate", schema, "users");
 
 const emailSchema = Joi.string().trim().lowercase().min(4).max(30).email();
 const usernameSchema = Joi.string().trim().lowercase().min(6).max(30).alphanum();
-const passwordSchema = Joi.string();
+const authHashSchema = Joi.string();
 
 const validateUser = (user) => {
     const schema = Joi.object({
         email: emailSchema.required(),
         username: usernameSchema.required(),
-        pw: passwordSchema.required()
+        authHash: authHashSchema.required()
     });
     return schema.validate(user);
 };
