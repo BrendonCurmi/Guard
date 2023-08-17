@@ -87,7 +87,6 @@ const Login = () => {
                     return;
                 }
 
-                console.log(data);
                 const accessToken = data.accessToken;
                 setAuth({ username, accessToken });
                 setEncryptionKey(encryptionHash);
