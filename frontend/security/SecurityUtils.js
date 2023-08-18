@@ -75,7 +75,7 @@ const encrypt = (text, masterKey) => {
     });
     return {
         ciphertext: encrypted.toString(),
-        salt: salt.toString()
+        salt: salt.toString(CryptoJS.enc.Base64)
     };
 };
 
@@ -87,7 +87,7 @@ const encrypt = (text, masterKey) => {
  * @returns {string} the decrypted text.
  */
 const decrypt = (encryptedText, masterKey, salt) => {
-    const { key, iv } = getKeyIV(masterKey, CryptoJS.enc.Hex.parse(salt));
+    const { key, iv } = getKeyIV(masterKey, CryptoJS.enc.Base64.parse(salt));
     const decrypted = CryptoJS.AES.decrypt(encryptedText, CryptoJS.lib.WordArray.create(key), {
         iv: CryptoJS.lib.WordArray.create(iv),
         padding: CryptoJS.pad.Pkcs7,
