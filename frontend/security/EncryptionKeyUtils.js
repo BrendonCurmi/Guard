@@ -6,6 +6,9 @@ const setEncryptionKey = (key) => {
 };
 
 const getEncryptionKey = () => {
+    if (!encryptionKey) {
+        throw new Error("Encryption key has not been defined");
+    }
     return encryptionKey;
 };
 
