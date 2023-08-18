@@ -88,8 +88,8 @@ const Login = () => {
                 }
 
                 const accessToken = data.accessToken;
-                setAuth({ username, accessToken });
                 setEncryptionKey(encryptionHash);
+                setAuth({ username, accessToken });
                 // navigate(from, { replace: true });
             })
             .catch(console.log);
