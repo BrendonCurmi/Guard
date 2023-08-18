@@ -96,16 +96,27 @@ const decrypt = (encryptedText, masterKey, salt) => {
     return decrypted.toString(CryptoJS.enc.Utf8);
 };
 
-
+/**
+ * Encrypts the specified data with the encryption key,
+ * and returns the full encrypted text and salt as a
+ * base64 string.
+ * @param text string to encrypt.
+ * @returns {string} base64 string of encrypted text.
+ */
 const encryptData = (text) => {
     const { ciphertext, salt } = encrypt(text, getEncryptionKey());
-    return salt + "$" + ciphertext;
+    return btoa(salt + "$" + ciphertext);
 };
 
+/**
+ * Decrypts the specified data with the encryption key
+ * from base64 and returns the decrypted text.
+ * @param encryptedSaltedText base64 encrypted data.
+ * @returns {string} decrypted text.
+ */
 const decryptData = (encryptedSaltedText) => {
-    const [salt, encryptedText] = encryptedSaltedText.split("$");
+    const [salt, encryptedText] = atob(encryptedSaltedText).split("$");
     return decrypt(encryptedText, getEncryptionKey(), salt);
 };
 
-// module.exports = { generateHashes };
 export { generateHashes, encryptData, decryptData };
