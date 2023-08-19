@@ -29,10 +29,10 @@ module.exports = {
     devServer: {
         // Enabled to allow router to route urls
         historyApiFallback: true,
-        https: {
-            key: fs.readFileSync("../security/key.pem"),
-            cert: fs.readFileSync("../security/cert.pem")
-        },
+        // https: {
+        //     key: fs.readFileSync("../security/key.pem"),
+        //     cert: fs.readFileSync("../security/cert.pem")
+        // },
     },
     plugins: [htmlPlugin]
 };
