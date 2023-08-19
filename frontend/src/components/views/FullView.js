@@ -10,6 +10,7 @@ import ConfirmView from "./popups/ConfirmView";
 import { getData } from "./Profile";
 import { safeFetch } from "../../utils/SafeFetch";
 import { copyToClipboard } from "../../utils/CopyUtils";
+import { decryptData } from "../../../security/SecurityUtils";
 
 import classes from "./FullView.module.scss";
 
@@ -147,7 +148,20 @@ const FullView = ({
     const pageActionClick = call(switchFocusedViewHandler, action);
 
     const viewItems = Object.keys(items).map((type) => {
-        return items[type].map((item, itemIndex) => {
+        // Decrypt data from server
+        const decryptedData = structuredClone(items[type]);
+        for (let i = 0; i < items[type].length; i++) {
+            for (let key in items[type][i]) {
+                let value = items[type][i][key];
+                console.log(value);
+                if (typeof value === "string" && !key.startsWith("_")
+                    && !(key === "date" || key === "lastAccess")) {
+                    value = decryptData(value);
+                }
+                decryptedData[i][key] = value;
+            }
+        }
+        return decryptedData.map((item, itemIndex) => {
             const itemType = item.type || type;
             const itemDataType = getData(itemType);
             const key = `${type}-${itemIndex}`;
