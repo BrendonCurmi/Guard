@@ -18,6 +18,7 @@ import Notes from "./pages/Notes";
 import Trash from "./pages/Trash";
 import Generator from "./pages/Generator";
 import Folder from "./pages/Folder";
+import Folders from "./pages/Folders";
 
 //todo in focus view hide empty fields
 const App = () => {
@@ -46,6 +47,9 @@ const App = () => {
                     </Route>
                     <Route element={<AuthRoute/>}>
                         <Route path="/gen" element={<Generator/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/folders" element={<Folders/>}/>
                     </Route>
                     <Route element={<AuthRoute/>}>
                         <Route path="/folder/:name" element={<Folder/>}/>
