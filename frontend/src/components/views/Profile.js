@@ -1,6 +1,7 @@
 import { PasswordData } from "../../pages/Passwords";
 import { PinData } from "../../pages/Pins";
 import { NoteData } from "../../pages/Notes";
+import { FolderData } from "../../pages/Folders";
 
 export const getData = (type) => {
     switch (type) {
@@ -10,5 +11,7 @@ export const getData = (type) => {
             return PinData;
         case "notes":
             return NoteData;
+        case "folders":
+            return FolderData;
     }
 };
