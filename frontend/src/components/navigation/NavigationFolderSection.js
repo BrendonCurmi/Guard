@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import CircleButton from "../buttons/CircleButton";
@@ -42,7 +43,9 @@ const NavigationFolderSection = () => {
     return (
         <>
                 <span className={classes.folders}>
-                    <label>Folders</label>
+                    <Link to="/folders">
+                        <span>Folders</span>
+                    </Link>
                     <CircleButton tooltip="Add Folder" placement="right" onClick={edit}>
                         <FontAwesomeIcon icon={faFolderPlus}/>
                     </CircleButton>
