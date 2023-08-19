@@ -5,6 +5,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Modal from "../../modals/Modal";
 import NiceButton from "../../buttons/NiceButton";
 import FolderSelect from "./FolderSelect";
+import { encryptData } from "../../../../security/SecurityUtils";
 
 import { useFolders } from "../../../store/FolderProvider";
 
@@ -107,7 +108,17 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
             );
         }
 
-        submitItemRequest(data);
+        // Encrypt data before sending to server
+        const encryptedData = {};
+        for (let key in data) {
+            let value = data[key];
+            if (typeof value === "string") {
+                value = encryptData(data[key]);
+            }
+            encryptedData[key] = value;
+        }
+
+        submitItemRequest(encryptedData);
     };
 
     const secureUserInputValue = focus && userInput[secureField] === "" && !isEditing ? "............." : userInput[secureField];
