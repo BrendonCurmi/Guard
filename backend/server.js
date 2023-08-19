@@ -1,12 +1,12 @@
 const express = require("express");
-const https = require("https");
+// const https = require("https");
 const app = express();
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const fs = require("fs");
-const key = fs.readFileSync("../security/key.pem");
-const cert = fs.readFileSync("../security/cert.pem");
+// const fs = require("fs");
+// const key = fs.readFileSync("../security/key.pem");
+// const cert = fs.readFileSync("../security/cert.pem");
 
 // Import cookie-parser middleware
 const cookies = require("cookie-parser");
@@ -41,7 +41,7 @@ app.use("/api", folderRoutes);
 const noteRoutes = require("./components/notes/noteRoutes");
 app.use("/api", noteRoutes);
 
-const server = https.createServer({key: key, cert: cert }, app);
+// const server = https.createServer({key: key, cert: cert }, app);
 
 const port = process.env.SERVER_PORT
-server.listen(port, () => console.log("Server is up"));
+app.listen(port, () => console.log("Server is up"));
