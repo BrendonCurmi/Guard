@@ -41,6 +41,9 @@ app.use("/api", folderRoutes);
 const noteRoutes = require("./components/notes/noteRoutes");
 app.use("/api", noteRoutes);
 
+const vaultRoutes = require("./components/vault/vaultRoutes");
+app.use("/api", vaultRoutes);
+
 // const server = https.createServer({key: key, cert: cert }, app);
 
 const port = process.env.SERVER_PORT
