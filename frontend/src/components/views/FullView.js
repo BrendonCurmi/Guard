@@ -186,10 +186,6 @@ const FullView = ({
 
     const PageActions = actions || DefaultPageActions;
 
-    // todo order
-    const changeOrder = (field) => {
-    };
-
     return (
         <div id="wrapper" className={classes.wrapper}>
             <FocusedView
@@ -221,7 +217,7 @@ const FullView = ({
                         <th width="1%">Title</th>
                         <th width="34%"></th>
                         <th width="30%">
-                            <a onClick={changeOrder}>{timeName}</a>
+                            <a>{timeName}</a>
                         </th>
                         <th width="35%">Actions</th>
                     </tr>
