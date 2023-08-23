@@ -140,6 +140,21 @@ const FullView = ({
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
     const pageActionClick = call(switchFocusedViewHandler, action);
 
+    const getDecryptedData = (items) => {
+        const decryptedData = structuredClone(items);
+        for (let i = 0; i < items.length; i++) {
+            for (let key in items[i]) {
+                let value = items[i][key];
+                if (typeof value === "string" && !key.startsWith("_")
+                    && !(key === "date" || key === "lastAccess")) {
+                    value = decryptData(value);
+                }
+                decryptedData[i][key] = value;
+            }
+        }
+        return decryptedData;
+    };
+
     const viewItems = Object.keys(items).map(type => {
         return getDecryptedData(items[type]).map((item, itemIndex) => {
             const itemType = item.type || type;
@@ -157,21 +172,6 @@ const FullView = ({
                 reload={loadAllItems}/>;
         });
     });
-
-    const getDecryptedData = (items) => {
-        const decryptedData = structuredClone(items);
-        for (let i = 0; i < items.length; i++) {
-            for (let key in items[i]) {
-                let value = items[i][key];
-                if (typeof value === "string" && !key.startsWith("_")
-                    && !(key === "date" || key === "lastAccess")) {
-                    value = decryptData(value);
-                }
-                decryptedData[i][key] = value;
-            }
-        }
-        return decryptedData;
-    };
 
     const DefaultPageActions = () => {
         return (
