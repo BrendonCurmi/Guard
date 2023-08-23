@@ -42,16 +42,14 @@ const FullView = ({
     /**
      * Load all items in the view.
      */
-    const loadAllItems = async () => {
+    const loadAllItems = () => {
         const accountData = { [dataType]: getVault()[dataType]};
         console.log("API REQUEST SHOULD BE DONE ONCE")
         setItems(accountData);
     };
 
     // Load items after loading component
-    useEffect(() => {
-        loadAllItems();
-    }, [...loadDeps]);
+    useEffect(() => loadAllItems, [...loadDeps]);
 
     // Actions
     const onEditClickHandler = (key) => {
