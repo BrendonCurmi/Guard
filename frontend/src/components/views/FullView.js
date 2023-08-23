@@ -62,8 +62,8 @@ const FullView = ({
     const onCopyClick = async (key) => {
         const [type, index] = key.split("-");
         const dataType = getData(type);
-        const creds = await getCreds(dataType, items[type][index]._id);
-        copyToClipboard(dataType.copyField(creds));
+        const item = items[type][index];
+        copyToClipboard(decryptData(dataType.copyField(item)));
     };
 
     const getCreds = async (dataType, id) => {
