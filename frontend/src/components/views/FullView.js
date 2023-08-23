@@ -49,7 +49,7 @@ const FullView = ({
     };
 
     // Load items after loading component
-    useEffect(() => loadAllItems, [...loadDeps]);
+    useEffect(loadAllItems, [...loadDeps]);
 
     // Actions
     const onEditClickHandler = (key) => {
