@@ -11,6 +11,7 @@ import { getData } from "./Profile";
 import { safeFetch } from "../../utils/SafeFetch";
 import { copyToClipboard } from "../../utils/CopyUtils";
 import { decryptData } from "../../../security/SecurityUtils";
+import { getVault } from "../../utils/VaultCache";
 
 import classes from "./FullView.module.scss";
 
@@ -42,8 +43,7 @@ const FullView = ({
      * Load all items in the view.
      */
     const loadAllItems = async () => {
-        const res = await safeFetch(loadApi);
-        const accountData = await res.json();
+        const accountData = { [dataType]: getVault()[dataType]};
         console.log("API REQUEST SHOULD BE DONE ONCE")
         setItems(accountData);
     };
