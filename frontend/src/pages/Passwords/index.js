@@ -38,7 +38,7 @@ export const PasswordData = {
         credentialsApi: val => `${PasswordData.endpoints.createApi}/${val}/credentials`
     },
     copyField: creds => creds.pw,
-    icon: item => <SiteIcon domain={item.site} size="32"/>
+    icon: site => <SiteIcon domain={site} size="32"/>
 }
 
 const Passwords = () => {
