@@ -140,20 +140,8 @@ const FullView = ({
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
     const pageActionClick = call(switchFocusedViewHandler, action);
 
-    const viewItems = Object.keys(items).map((type) => {
-        // Decrypt data from server
-        const decryptedData = structuredClone(items[type]);
-        for (let i = 0; i < items[type].length; i++) {
-            for (let key in items[type][i]) {
-                let value = items[type][i][key];
-                if (typeof value === "string" && !key.startsWith("_")
-                    && !(key === "date" || key === "lastAccess")) {
-                    value = decryptData(value);
-                }
-                decryptedData[i][key] = value;
-            }
-        }
-        return decryptedData.map((item, itemIndex) => {
+    const viewItems = Object.keys(items).map(type => {
+        return getDecryptedData(items[type]).map((item, itemIndex) => {
             const itemType = item.type || type;
             const itemDataType = getData(itemType);
             const key = `${type}-${itemIndex}`;
@@ -169,6 +157,21 @@ const FullView = ({
                 reload={loadAllItems}/>;
         });
     });
+
+    const getDecryptedData = (items) => {
+        const decryptedData = structuredClone(items);
+        for (let i = 0; i < items.length; i++) {
+            for (let key in items[i]) {
+                let value = items[i][key];
+                if (typeof value === "string" && !key.startsWith("_")
+                    && !(key === "date" || key === "lastAccess")) {
+                    value = decryptData(value);
+                }
+                decryptedData[i][key] = value;
+            }
+        }
+        return decryptedData;
+    };
 
     const DefaultPageActions = () => {
         return (
