@@ -154,7 +154,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show
             key: id,
             id: id,
             label: label,
-            value: decryptData(userInput[value]),
+            value: userInput[value] && userInput[value] !== "" ? decryptData(userInput[value]) : "",
 
             // Defaults
             className: classes.textField,
@@ -200,7 +200,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show
         return <TextField {...fieldProps}/>;
     });
 
-    const icon = userInput ? dataType.icon(decryptData(userInput.site)) : "";
+    const icon = userInput && userInput.site ? dataType.icon(decryptData(userInput.site)) : "";
 
     return (
         <Modal className={classes.focusedViewWrapper} show={show} onClose={onClick}>
