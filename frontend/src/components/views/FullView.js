@@ -37,7 +37,7 @@ const FullView = ({
                       loadDeps = [],
                       listedViewProps
                   }) => {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState({});
 
     /**
      * Load all items in the view.
