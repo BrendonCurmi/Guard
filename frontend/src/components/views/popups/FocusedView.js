@@ -121,14 +121,14 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
         submitItemRequest(encryptedData);
     };
 
-    const secureUserInputValue = focus && userInput[secureField] === "" && !isEditing ? "............." : userInput[secureField];
+    const secureUserInputValue = userInput[secureField];
 
     /**
      * Load the secure value from getCreds or show secure user input value,
      * if value from getCreds has already been loaded.
      */
     const loadSecureUserInputValue = async () => {
-        let secureVal = focus && userInput[secureField] === "" ? (await getCreds(dataType, focus._id))[secureField] : userInput[secureField];
+        let secureVal = userInput[secureField];
         setUserInput(prevState => {
             return { ...prevState, [secureField]: secureVal };
         });
@@ -191,7 +191,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
             if (!showPw && fieldProps.multiline) fieldProps.multiline = false;
 
             fieldProps.type = showPw ? "text" : "password";
-            fieldProps.value = secureUserInputValue;
+            // fieldProps.value = secureUserInputValue;
             fieldProps.className = `${classes.textField} ${classes.pwTextField}`;
         }
 
@@ -202,7 +202,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
         return <TextField {...fieldProps}/>;
     });
 
-    const icon = userInput ? dataType.icon(userInput) : "";
+    const icon = userInput ? dataType.icon(decryptData(userInput.site)) : "";
 
     return (
         <Modal className={classes.focusedViewWrapper} show={show} onClose={onClick}>
