@@ -15,13 +15,12 @@ import classes from "./FocusedView.module.scss";
  * @param focus the item to focus the view on.
  * @param submitItemRequest the function to execute when submitting (creating & updating).
  * @param onClick the function to execute when clicking Cancel button to close the view.
- * @param getCreds the function to execute when retrieving credentials.
  * @param fields the array of form fields.
  * @param dataType the item type.
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, dataType, show }) => {
+const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show }) => {
     if (!show) return null;
 
     /**
@@ -124,8 +123,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, getCreds, fields, data
     const secureUserInputValue = userInput[secureField];
 
     /**
-     * Load the secure value from getCreds or show secure user input value,
-     * if value from getCreds has already been loaded.
+     * Load the secure value.
      */
     const loadSecureUserInputValue = async () => {
         let secureVal = userInput[secureField];

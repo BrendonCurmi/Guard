@@ -66,11 +66,6 @@ const FullView = ({
         copyToClipboard(decryptData(dataType.copyField(item)));
     };
 
-    const getCreds = async (dataType, id) => {
-        const res = await safeFetch(dataType.endpoints.credentialsApi(id));
-        return await res.json();
-    };
-
     const [isEditing, setIsEditing] = useState(false);
     const [focused, setFocused] = useState();
     const [confirming, setConfirming] = useState(null);
@@ -202,7 +197,6 @@ const FullView = ({
                 onClick={switchFocusedViewHandler}
                 focus={focused}
                 submitItemRequest={submitItemRequest}
-                getCreds={getCreds}
                 dataType={dataTypeData}
                 fields={dataTypeData.fields}/>
 
