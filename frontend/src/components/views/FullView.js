@@ -167,7 +167,7 @@ const FullView = ({
             return <ListedViewItem
                 key={key} dKey={key}
                 account={item}
-                icon={itemDataType.icon(item)}
+                icon={itemDataType.icon(item.site)}
                 onEditClickHandler={onEditClickHandler}
                 onCopyClick={onCopyClick}
                 setConfirming={setConfirming}
