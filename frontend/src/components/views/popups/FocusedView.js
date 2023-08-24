@@ -5,7 +5,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Modal from "../../modals/Modal";
 import NiceButton from "../../buttons/NiceButton";
 import FolderSelect from "./FolderSelect";
-import { decryptData, encryptData } from "../../../../security/SecurityUtils";
+import { encryptData } from "../../../../security/SecurityUtils";
 
 import { useFolders } from "../../../store/FolderProvider";
 
@@ -154,7 +154,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show
             key: id,
             id: id,
             label: label,
-            value: userInput[value] && userInput[value] !== "" ? decryptData(userInput[value]) : "",
+            value: userInput[value],
 
             // Defaults
             className: classes.textField,
@@ -200,7 +200,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show
         return <TextField {...fieldProps}/>;
     });
 
-    const icon = userInput && userInput.site ? dataType.icon(decryptData(userInput.site)) : "";
+    const icon = userInput && userInput.site ? dataType.icon(userInput.site) : "";
 
     return (
         <Modal className={classes.focusedViewWrapper} show={show} onClose={onClick}>

@@ -39,12 +39,28 @@ const FullView = ({
                   }) => {
     const [items, setItems] = useState({});
 
+    const getDecryptedData = (items) => {
+        const decryptedData = structuredClone(items);
+        for (let i = 0; i < items.length; i++) {
+            for (let key in items[i]) {
+                let value = items[i][key];
+                if (typeof value === "string" && !key.startsWith("_")
+                    && !(key === "date" || key === "lastAccess")) {
+                    value = decryptData(value);
+                }
+                decryptedData[i][key] = value;
+            }
+        }
+        return decryptedData;
+    };
+
     /**
      * Load all items in the view.
      */
     const loadAllItems = () => {
-        const accountData = { [dataType]: getVault()[dataType]};
-        console.log("API REQUEST SHOULD BE DONE ONCE")
+        const encryptedVaultData = getVault()[dataType];
+        const vaultItems = getDecryptedData(encryptedVaultData);
+        const accountData = { [dataType]: vaultItems};
         setItems(accountData);
     };
 
@@ -61,7 +77,7 @@ const FullView = ({
         const [type, index] = key.split("-");
         const dataType = getData(type);
         const item = items[type][index];
-        copyToClipboard(decryptData(dataType.copyField(item)));
+        copyToClipboard(dataType.copyField(item));
     };
 
     const [isEditing, setIsEditing] = useState(false);
@@ -140,23 +156,8 @@ const FullView = ({
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
     const pageActionClick = call(switchFocusedViewHandler, action);
 
-    const getDecryptedData = (items) => {
-        const decryptedData = structuredClone(items);
-        for (let i = 0; i < items.length; i++) {
-            for (let key in items[i]) {
-                let value = items[i][key];
-                if (typeof value === "string" && !key.startsWith("_")
-                    && !(key === "date" || key === "lastAccess")) {
-                    value = decryptData(value);
-                }
-                decryptedData[i][key] = value;
-            }
-        }
-        return decryptedData;
-    };
-
     const viewItems = Object.keys(items).map(type => {
-        return getDecryptedData(items[type]).map((item, itemIndex) => {
+        return items[type].map((item, itemIndex) => {
             const itemType = item.type || type;
             const itemDataType = getData(itemType);
             const key = `${type}-${itemIndex}`;
