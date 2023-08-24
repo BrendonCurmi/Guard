@@ -11,7 +11,7 @@ import { getData } from "./Profile";
 import { safeFetch } from "../../utils/SafeFetch";
 import { copyToClipboard } from "../../utils/CopyUtils";
 import { decryptData } from "../../../security/SecurityUtils";
-import { getVault } from "../../utils/VaultCache";
+import { getVault, loadVault } from "../../utils/VaultCache";
 
 import classes from "./FullView.module.scss";
 
@@ -122,7 +122,8 @@ const FullView = ({
         const rawResponse = await (focused ? callUpdateItem(focused._id, data) : callCreateItem(data));
         if (rawResponse.ok) {
             // const content = await rawResponse.json();
-            await loadAllItems();
+            await loadVault();
+            loadAllItems();
             switchFocusedViewHandler();
         }
     };
@@ -143,7 +144,8 @@ const FullView = ({
         if (rawResponse.status === 200) {
             const content = await rawResponse.json();
             // console.log(content);
-            await loadAllItems();
+            await loadVault();
+            loadAllItems();
             setConfirming(null);
         }
     };

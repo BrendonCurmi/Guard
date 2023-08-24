@@ -11,8 +11,8 @@ export const getVault = () => {
     return { ...vault }; // Clone to prevent direct modification
 };
 
-export const loadVault = () => {
-    safeFetch(VAULT_API)
+export const loadVault = async () => {
+    await safeFetch(VAULT_API)
         .then(res => res.json())
         .then(data => setVault(data))
         .catch(console.log);
