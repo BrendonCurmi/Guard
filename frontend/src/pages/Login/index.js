@@ -5,12 +5,12 @@ import FormInput from "./FormInput";
 import NiceButton from "../../components/buttons/NiceButton";
 import { useAuth } from "../../context/AuthProvider";
 import { safeFetch } from "../../utils/SafeFetch";
-import { setVault } from "../../utils/VaultCache";
+import { loadVault } from "../../utils/VaultCache";
 
 import { setEncryptionKey } from "../../../security/EncryptionKeyUtils";
 import { generateHashes } from "../../../security/SecurityUtils";
 
-import { CREATE_API, LOGIN_API, REFRESH_API, VAULT_API } from "../../utils/API";
+import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 
 import classes from "./index.module.scss";
 
@@ -95,13 +95,6 @@ const Login = () => {
                 setAuth({ username, accessToken });
                 // navigate(from, { replace: true });
             })
-            .catch(console.log);
-    };
-
-    const loadVault = () => {
-        safeFetch(VAULT_API)
-            .then(res => res.json())
-            .then(data => setVault(data))
             .catch(console.log);
     };
 
