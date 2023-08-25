@@ -13,6 +13,7 @@ import { generateHashes } from "../../../security/SecurityUtils";
 import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 
 import classes from "./index.module.scss";
+import { CircularProgress } from "@mui/material";
 
 const Login = () => {
     const { authenticated, setAuth, persist, setPersist } = useAuth();
@@ -41,6 +42,7 @@ const Login = () => {
     const [errorMsg, setErrorMsg] = useState("");
     const userErr = errorMsg ? { error: true, helperText: errorMsg } : "";
 
+    const [isSaving, setIsSaving] = useState(false);
     const [isLoggingIn, setIsLoggingIn] = useState(true);
     const isRegistering = !isLoggingIn;
 
@@ -56,6 +58,8 @@ const Login = () => {
 
     const formSubmissionHandler = event => {
         event.preventDefault();
+        setIsSaving(true);
+
         const username = userInput["username"];
         const pw = userInput["pw"];
 
@@ -85,10 +89,13 @@ const Login = () => {
             .then(async data => {
                 if (data.err) {
                     setErrorMsg(data.err);
+                    setIsSaving(false);
                     return;
                 }
 
                 await loadVault();
+
+                setIsSaving(false);
 
                 const accessToken = data.accessToken;
                 setEncryptionKey(encryptionHash);
@@ -182,7 +189,9 @@ const Login = () => {
                     <label htmlFor="persist">Stay logged in</label>
                 </div>
                 <NiceButton type="submit"
-                            color="primary">{buttonText}</NiceButton>
+                            color="primary">
+                    {isSaving ? <CircularProgress size={24} /> : buttonText}
+                </NiceButton>
                 <a className={classes.left}
                    onClick={() => setIsLoggingIn(prevState => !prevState)}>{switchButtonText}</a>
             </form>
