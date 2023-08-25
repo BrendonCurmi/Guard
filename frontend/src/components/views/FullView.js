@@ -116,11 +116,9 @@ const FullView = ({
     };
 
     /**
-     * Clear focused item and either open or close view.
+     * Clear focused item.
      */
-    const switchFocusedViewHandler = () => {
-        focusOn(null, dataType);
-    };
+    const clearFocused = () => focusOn(null);
 
     /**
      * Submit create/update requests, reload all items, and close FocusedView.
@@ -146,7 +144,7 @@ const FullView = ({
         if (rawResponse.ok) {
             // const content = await rawResponse.json();
             await freshReloadVault()
-            switchFocusedViewHandler();
+            clearFocused();
         }
     };
 
@@ -177,7 +175,7 @@ const FullView = ({
 
     const isShade = !!focused || !!confirming;
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
-    const pageActionClick = call(switchFocusedViewHandler, action);
+    const pageActionClick = call(clearFocused, action);
 
     const viewItems = Object.keys(items).map(type => {
         return items[type].map((item, itemIndex) => {
@@ -215,7 +213,7 @@ const FullView = ({
     // Modals
     ////////////////////////
     const focusedModal = (
-        <FocusedModal onClick={switchFocusedViewHandler}
+        <FocusedModal onClick={clearFocused}
                       focus={focused}
                       submitItemRequest={submitItemRequest}
                       dataType={dataTypeData}
