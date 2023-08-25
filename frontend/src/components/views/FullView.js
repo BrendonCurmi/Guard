@@ -104,15 +104,16 @@ const FullView = ({
         copyToClipboard(dataType.copyField(item));
     };
 
-    // Focused item
+    ////////////////////////
+    // Focused and confirming items
+    ////////////////////////
+    const [focusedData, setFocusedData] = useState(false);
     const [focused, setFocused] = useState();
     const [confirming, setConfirming] = useState();
 
-    const [dataTypeData, setData] = useState(false);
-
     const focusOn = (item, type) => {
         setFocused(item);
-        if (type) setData(getData(type));
+        if (type) setFocusedData(getData(type));
     };
 
     /**
@@ -127,12 +128,12 @@ const FullView = ({
     const submitItemRequest = async (data) => {
         const callCreateItem = (data) => {
             // return send(createApi, "POST", data);
-            return send(dataTypeData.endpoints.createApi, "POST", data);
+            return send(focusedData.endpoints.createApi, "POST", data);
         };
 
         const callUpdateItem = (id, data) => {
             // return send(updateApi(id), "PUT", data);
-            return send(dataTypeData.endpoints.updateApi(id), "PUT", data);
+            return send(focusedData.endpoints.updateApi(id), "PUT", data);
         };
 
         const send = (url, method, data) => {
@@ -216,8 +217,8 @@ const FullView = ({
         <FocusedModal onClick={clearFocused}
                       focus={focused}
                       submitItemRequest={submitItemRequest}
-                      dataType={dataTypeData}
-                      fields={dataTypeData.fields}/>
+                      dataType={focusedData}
+                      fields={focusedData.fields}/>
     );
 
     const confirmModal = (
