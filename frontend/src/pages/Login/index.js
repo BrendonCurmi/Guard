@@ -82,13 +82,13 @@ const Login = () => {
 
         safeFetch(url, "POST", data)
             .then(res => res.json())
-            .then(data => {
+            .then(async data => {
                 if (data.err) {
                     setErrorMsg(data.err);
                     return;
                 }
 
-                loadVault();
+                await loadVault();
 
                 const accessToken = data.accessToken;
                 setEncryptionKey(encryptionHash);
