@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import classes from "./Modal.module.scss";
 
 // Adapted from https://codesandbox.io/s/magical-christian-qxtdm?from-embed
-const Modal = ({ className, show, onClose, children }) => {
+const Modal = ({ className, show = true, onClose, children }) => {
     if (!show) return null;
     const modal = (
         <div className={classes.modal} onClick={onClose}>
