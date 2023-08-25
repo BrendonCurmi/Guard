@@ -35,7 +35,9 @@ const FullView = ({
                       loadDeps = [],
                       listedViewProps
                   }) => {
-    // Items in view
+    ////////////////////////
+    // View Items
+    ////////////////////////
     const [items, setItems] = useState({});
 
     /**
@@ -79,7 +81,9 @@ const FullView = ({
         loadAllItems();
     };
 
+    ////////////////////////
     // Actions
+    ////////////////////////
     /**
      * Handler for focusing on and editing specified item.
      * @param key item key.
@@ -102,7 +106,7 @@ const FullView = ({
 
     // Focused item
     const [focused, setFocused] = useState();
-    const [confirming, setConfirming] = useState(null);
+    const [confirming, setConfirming] = useState();
 
     const [dataTypeData, setData] = useState(false);
 
@@ -148,7 +152,7 @@ const FullView = ({
 
 
     const deleteItemOnConfirmationHandler = async () => {
-        if (confirming === null) return;
+        if (!confirming) return;
         const [type, index] = confirming.split("-");
         const deleteId = items[type][index]._id;
 
@@ -171,7 +175,7 @@ const FullView = ({
         return optionalFn ? optionalFn : defaultFn;
     };
 
-    const isShade = !!focused || confirming !== null;
+    const isShade = !!focused || !!confirming;
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
     const pageActionClick = call(switchFocusedViewHandler, action);
 
@@ -219,7 +223,7 @@ const FullView = ({
     );
 
     const confirmModal = (
-        <ConfirmModal show={confirming !== null}
+        <ConfirmModal show={!!confirming}
                       // onCancel={onCancelConfirm}
                       onCancel={() => setConfirming(null)}
                       // onConfirm={onConfirmConfirm}
