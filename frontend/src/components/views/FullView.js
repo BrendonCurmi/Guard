@@ -223,18 +223,17 @@ const FullView = ({
     );
 
     const confirmModal = (
-        <ConfirmModal show={!!confirming}
+        <ConfirmModal confirm={confirm}
                       // onCancel={onCancelConfirm}
                       onCancel={() => setConfirming(null)}
                       // onConfirm={onConfirmConfirm}
-                      onConfirm={call(deleteItemOnConfirmationHandler, deleteItemHandler)}
-                      confirm={confirm}/>
+                      onConfirm={call(deleteItemOnConfirmationHandler, deleteItemHandler)}/>
     );
 
     return (
         <div id="wrapper" className={classes.wrapper}>
             {!!focused && focusedModal}
-            {confirmModal}
+            {!!confirming && confirmModal}
             <div className={classes.contentWrapper}>
                 <div className={classes.header}>
                     <h1 className={classes.title}>{title}</h1>
