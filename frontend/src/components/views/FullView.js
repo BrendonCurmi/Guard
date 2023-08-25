@@ -45,7 +45,7 @@ const FullView = ({
             for (let key in items[i]) {
                 let value = items[i][key];
                 if (typeof value === "string" && !key.startsWith("_")
-                    && !(key === "date" || key === "lastAccess")) {
+                    && !(key === "date" || key === "lastAccess" || key === "deletedDate" || key === "type")) {
                     value = decryptData(value);
                 }
                 decryptedData[i][key] = value;
