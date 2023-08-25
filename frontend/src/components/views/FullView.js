@@ -219,7 +219,7 @@ const FullView = ({
     );
 
     const confirmModal = (
-        <ConfirmModal show={confirming !== null} 
+        <ConfirmModal show={confirming !== null}
                       // onCancel={onCancelConfirm}
                       onCancel={() => setConfirming(null)}
                       // onConfirm={onConfirmConfirm}
