@@ -212,7 +212,6 @@ const FullView = ({
     ////////////////////////
     const focusedModal = (
         <FocusedModal
-            show={!!focused}
             onClick={switchFocusedViewHandler}
             focus={focused}
             submitItemRequest={submitItemRequest}
@@ -232,7 +231,7 @@ const FullView = ({
 
     return (
         <div id="wrapper" className={classes.wrapper}>
-            {focusedModal}
+            {!!focused && focusedModal}
             {confirmModal}
             <div className={classes.contentWrapper}>
                 <div className={classes.header}>

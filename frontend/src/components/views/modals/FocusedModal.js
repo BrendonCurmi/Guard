@@ -21,9 +21,7 @@ import classes from "./FocusedModal.module.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType, show }) => {
-    if (!show) return null;
-
+const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) => {
     /**
      * Get the specified value from the focus item. If it doesn't exist,
      * return the specified default value. If it exists, fix it using
