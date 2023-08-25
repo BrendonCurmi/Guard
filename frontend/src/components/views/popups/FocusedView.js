@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 
 import Modal from "../../modals/Modal";
 import NiceButton from "../../buttons/NiceButton";
@@ -86,12 +87,15 @@ const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show
     //     return () => clearTimeout(delayDebounceFn)
     // }, [userInput.site])
 
+    const [isSaving, setIsSaving] = useState(false);
+
     /**
      * Organise input data and submit.
      * @param event the event.
      */
     const onSubmitHandler = (event) => {
         event.preventDefault();
+        setIsSaving(true);
 
         const data = userInput;
 
@@ -117,7 +121,7 @@ const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show
             encryptedData[key] = value;
         }
 
-        submitItemRequest(encryptedData);
+        submitItemRequest(encryptedData).then(() => setIsSaving(false));
     };
 
     const secureUserInputValue = userInput[secureField];
@@ -221,7 +225,10 @@ const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show
 
                 {isEditing ?
                     <NiceButton type="submit"
-                                color="primary">Save</NiceButton> :
+                                color="primary"
+                                disabled={isSaving}>
+                        {isSaving ? <CircularProgress size={24} /> : "Save"}
+                    </NiceButton> :
                     <NiceButton type="button"
                                 color="primary"
                                 onClick={onEditBtnClick}>Edit</NiceButton>}
