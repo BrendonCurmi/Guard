@@ -40,6 +40,7 @@ const Trash = () => {
             title: "Are you sure? This will be permanently deleted",
             msg: "This action cannot be reversed and item cannot be recovered"
         }}
+        dataType="trash"
         loadApi={loadApi}
         deleteApi={deleteApi}
         listedViewProps={{
