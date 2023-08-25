@@ -10,7 +10,7 @@ import { encryptData } from "../../../../security/SecurityUtils";
 
 import { useFolders } from "../../../store/FolderProvider";
 
-import classes from "./FocusedView.module.scss";
+import classes from "./FocusedModal.module.scss";
 
 /**
  * @param focus the item to focus the view on.
@@ -21,7 +21,7 @@ import classes from "./FocusedView.module.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show }) => {
+const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType, show }) => {
     if (!show) return null;
 
     /**
@@ -242,4 +242,4 @@ const FocusedView = ({ focus, submitItemRequest, onClick, fields, dataType, show
     );
 };
 
-export default FocusedView;
+export default FocusedModal;

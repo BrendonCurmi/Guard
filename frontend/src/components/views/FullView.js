@@ -4,8 +4,8 @@ import { faAdd } from "@fortawesome/free-solid-svg-icons";
 
 import ListedViewItem from "./ListedViewItem";
 import CircleButton from "../buttons/CircleButton";
-import FocusedView from "./popups/FocusedView";
-import ConfirmView from "./popups/ConfirmView";
+import FocusedModal from "./modals/FocusedModal";
+import ConfirmModal from "./modals/ConfirmModal";
 
 import { getData } from "./Profile";
 import { safeFetch } from "../../utils/SafeFetch";
@@ -193,7 +193,7 @@ const FullView = ({
 
     return (
         <div id="wrapper" className={classes.wrapper}>
-            <FocusedView
+            <FocusedModal
                 show={isEditing}
                 onClick={switchFocusedViewHandler}
                 focus={focused}
@@ -201,7 +201,7 @@ const FullView = ({
                 dataType={dataTypeData}
                 fields={dataTypeData.fields}/>
 
-            <ConfirmView
+            <ConfirmModal
                 show={confirming !== null}
                 // onCancel={onCancelConfirm}
                 onCancel={() => setConfirming(null)}

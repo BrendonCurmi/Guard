@@ -2,9 +2,9 @@ import React from "react";
 import Modal from "../../modals/Modal";
 import NiceButton from "../../buttons/NiceButton";
 
-import classes from "./ConfirmView.module.scss";
+import classes from "./ConfirmModal.module.scss";
 
-const ConfirmView = ({ onCancel, onConfirm, confirm, show }) => {
+const ConfirmModal = ({ onCancel, onConfirm, confirm, show }) => {
     if (!show) return null;
     const { title, msg } = confirm;
     return (
@@ -21,4 +21,4 @@ const ConfirmView = ({ onCancel, onConfirm, confirm, show }) => {
     );
 };
 
-export default ConfirmView;
+export default ConfirmModal;
