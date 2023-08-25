@@ -87,7 +87,7 @@ const FullView = ({
         copyToClipboard(dataType.copyField(item));
     };
 
-    const [isEditing, setIsEditing] = useState(false);
+    // Focused item
     const [focused, setFocused] = useState();
     const [confirming, setConfirming] = useState(null);
 
@@ -95,7 +95,6 @@ const FullView = ({
 
     const focusOn = (item, type) => {
         setFocused(item);
-        setIsEditing(prevState => !prevState);
         if (type) setData(getData(type));
     };
 
@@ -159,7 +158,7 @@ const FullView = ({
         return optionalFn ? optionalFn : defaultFn;
     };
 
-    const isShade = isEditing || confirming !== null;
+    const isShade = !!focused || confirming !== null;
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
     const pageActionClick = call(switchFocusedViewHandler, action);
 
@@ -198,7 +197,7 @@ const FullView = ({
     return (
         <div id="wrapper" className={classes.wrapper}>
             <FocusedModal
-                show={isEditing}
+                show={!!focused}
                 onClick={switchFocusedViewHandler}
                 focus={focused}
                 submitItemRequest={submitItemRequest}
