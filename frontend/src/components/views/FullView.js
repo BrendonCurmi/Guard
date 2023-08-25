@@ -211,22 +211,20 @@ const FullView = ({
     // Modals
     ////////////////////////
     const focusedModal = (
-        <FocusedModal
-            onClick={switchFocusedViewHandler}
-            focus={focused}
-            submitItemRequest={submitItemRequest}
-            dataType={dataTypeData}
-            fields={dataTypeData.fields}/>
+        <FocusedModal onClick={switchFocusedViewHandler}
+                      focus={focused}
+                      submitItemRequest={submitItemRequest}
+                      dataType={dataTypeData}
+                      fields={dataTypeData.fields}/>
     );
 
     const confirmModal = (
-        <ConfirmModal
-            show={confirming !== null}
-            // onCancel={onCancelConfirm}
-            onCancel={() => setConfirming(null)}
-            // onConfirm={onConfirmConfirm}
-            onConfirm={call(deleteItemOnConfirmationHandler, deleteItemHandler)}
-            confirm={confirm}/>
+        <ConfirmModal show={confirming !== null} 
+                      // onCancel={onCancelConfirm}
+                      onCancel={() => setConfirming(null)}
+                      // onConfirm={onConfirmConfirm}
+                      onConfirm={call(deleteItemOnConfirmationHandler, deleteItemHandler)}
+                      confirm={confirm}/>
     );
 
     return (
