@@ -5,9 +5,8 @@ import { faTrashRestore, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import FullView from "../../components/views/FullView";
 import CircleButton from "../../components/buttons/CircleButton";
 
-const loadApi= "http://localhost:4000/api/trash"
-const deleteApi = val => `${loadApi}/${val}`;
-const restoreApi = val => `${loadApi}/${val}/restore`;
+const deleteApi = val => `http://localhost:4000/api/trash/${val}`;
+const restoreApi = val => `http://localhost:4000/api/trash/${val}/restore`;
 
 const Trash = () => {
     const createActionBtns = (item, reload) => {
@@ -41,7 +40,6 @@ const Trash = () => {
             msg: "This action cannot be reversed and item cannot be recovered"
         }}
         dataType="trash"
-        loadApi={loadApi}
         deleteApi={deleteApi}
         listedViewProps={{
             cells: { time: "deletedDate" },

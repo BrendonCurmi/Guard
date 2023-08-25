@@ -19,7 +19,6 @@ import classes from "./FullView.module.scss";
  * ListedView that loads items into it.
  * @param page the page variables.
  * @param confirm the confirm variables.
- * @param loadApi the API to load items.
  * @param deleteApi the optional API function to delete items.
  * @param dataType the optional item type.
  * @param deleteItemHandler the optional delete handler.
@@ -30,7 +29,6 @@ import classes from "./FullView.module.scss";
 const FullView = ({
                       page = { title: "", actionTitle: "", timeName: "", action: "", actions: "" },
                       confirm = { title: "", msg: "" },
-                      loadApi,
                       deleteApi = "",
                       dataType,
                       deleteItemHandler,

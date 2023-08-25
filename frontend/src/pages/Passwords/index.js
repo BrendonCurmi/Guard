@@ -31,7 +31,6 @@ export const PasswordData = {
         }
     ],
     endpoints: {
-        loadApi: "http://localhost:4000/api/accounts",
         createApi: "http://localhost:4000/api/account",
         updateApi: val => `${PasswordData.endpoints.createApi}/${val}`,
         deleteApi: val => `${PasswordData.endpoints.createApi}/${val}`,
@@ -48,8 +47,7 @@ const Passwords = () => {
             title: "Are you sure?",
             msg: "Do you really want to delete this account? It will be moved to Trash"
         }}
-        dataType="accounts"
-        loadApi={PasswordData.endpoints.loadApi}/>;
+        dataType="accounts"/>;
 };
 
 export default Passwords;

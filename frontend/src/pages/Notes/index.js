@@ -22,7 +22,6 @@ export const NoteData = {
         }
     ],
     endpoints: {
-        loadApi: "http://localhost:4000/api/notes",
         createApi: "http://localhost:4000/api/note",
         updateApi: val => `${NoteData.endpoints.createApi}/${val}`,
         deleteApi: val => `${NoteData.endpoints.createApi}/${val}`,
@@ -40,7 +39,6 @@ const SecureNotes = () => {
             msg: "Do you really want to delete this note? It will be moved to Trash"
         }}
         dataType="notes"
-        loadApi={NoteData.endpoints.loadApi}
         listedViewProps={{
             canCopy: false,
         }}/>;

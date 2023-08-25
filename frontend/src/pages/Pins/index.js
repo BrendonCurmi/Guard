@@ -20,7 +20,6 @@ export const PinData = {
         }
     ],
     endpoints: {
-        loadApi: "http://localhost:4000/api/pins",
         createApi: "http://localhost:4000/api/pin",
         updateApi: val => `${PinData.endpoints.createApi}/${val}`,
         deleteApi: val => `${PinData.endpoints.createApi}/${val}`,
@@ -37,8 +36,7 @@ const Pins = () => {
             title: "Are you sure?",
             msg: "Do you really want to delete this pin? It will be moved to Trash"
         }}
-        dataType="pins"
-        loadApi={PinData.endpoints.loadApi}/>;
+        dataType="pins"/>;
 };
 
 export default Pins;

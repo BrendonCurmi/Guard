@@ -13,7 +13,6 @@ export const FolderData = {
         }
     ],
     endpoints: {
-        loadApi: "http://localhost:4000/api/notes",
         createApi: "http://localhost:4000/api/note",
         updateApi: val => `${FolderData.endpoints.createApi}/${val}`,
         deleteApi: val => `${FolderData.endpoints.createApi}/${val}`,
@@ -32,7 +31,6 @@ const Folders = () => {
             msg: "Do you really want to delete this folder? It cannot be recovered"
         }}
         dataType="folders"
-        loadApi={FolderData.endpoints.loadApi}
         listedViewProps={{
             canCopy: false
         }}/>;
