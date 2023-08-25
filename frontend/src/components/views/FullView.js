@@ -207,24 +207,33 @@ const FullView = ({
 
     const PageActions = actions || DefaultPageActions;
 
+    ////////////////////////
+    // Modals
+    ////////////////////////
+    const focusedModal = (
+        <FocusedModal
+            show={!!focused}
+            onClick={switchFocusedViewHandler}
+            focus={focused}
+            submitItemRequest={submitItemRequest}
+            dataType={dataTypeData}
+            fields={dataTypeData.fields}/>
+    );
+
+    const confirmModal = (
+        <ConfirmModal
+            show={confirming !== null}
+            // onCancel={onCancelConfirm}
+            onCancel={() => setConfirming(null)}
+            // onConfirm={onConfirmConfirm}
+            onConfirm={call(deleteItemOnConfirmationHandler, deleteItemHandler)}
+            confirm={confirm}/>
+    );
+
     return (
         <div id="wrapper" className={classes.wrapper}>
-            <FocusedModal
-                show={!!focused}
-                onClick={switchFocusedViewHandler}
-                focus={focused}
-                submitItemRequest={submitItemRequest}
-                dataType={dataTypeData}
-                fields={dataTypeData.fields}/>
-
-            <ConfirmModal
-                show={confirming !== null}
-                // onCancel={onCancelConfirm}
-                onCancel={() => setConfirming(null)}
-                // onConfirm={onConfirmConfirm}
-                onConfirm={call(deleteItemOnConfirmationHandler, deleteItemHandler)}
-                confirm={confirm}/>
-
+            {focusedModal}
+            {confirmModal}
             <div className={classes.contentWrapper}>
                 <div className={classes.header}>
                     <h1 className={classes.title}>{title}</h1>
