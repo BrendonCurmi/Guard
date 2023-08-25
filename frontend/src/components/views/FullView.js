@@ -35,8 +35,14 @@ const FullView = ({
                       loadDeps = [],
                       listedViewProps
                   }) => {
+    // Items in view
     const [items, setItems] = useState({});
 
+    /**
+     * Decrypts the specified Vault data.
+     * @param items
+     * @returns {any}
+     */
     const getDecryptedData = (items) => {
         const decryptedData = structuredClone(items);
         for (let i = 0; i < items.length; i++) {
@@ -53,7 +59,7 @@ const FullView = ({
     };
 
     /**
-     * Load all items in the view.
+     * Load all items from the local Vault.
      */
     const loadAllItems = () => {
         const encryptedVaultData = getVault()[dataType];
@@ -65,12 +71,19 @@ const FullView = ({
     // Load items after loading component
     useEffect(loadAllItems, [...loadDeps]);
 
+    /**
+     * Freshly syncs local Vault with server and reloads all view items.
+     */
     const freshReloadVault = async () => {
         await loadVault();
         loadAllItems();
     };
 
     // Actions
+    /**
+     * Handler for focusing on and editing specified item.
+     * @param key item key.
+     */
     const onEditClickHandler = (key) => {
         const [type, index] = key.split("-");
         focusOn(items[type][index], type);
