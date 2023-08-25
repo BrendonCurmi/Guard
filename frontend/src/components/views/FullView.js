@@ -122,29 +122,19 @@ const FullView = ({
     const clearFocused = () => focusOn(null);
 
     /**
-     * Submit create/update requests, reload all items, and close FocusedView.
+     * Submit create/update requests, reload all items, and close FocusedModal.
      * @param data the data to create/update.
      */
     const submitItemRequest = async (data) => {
-        const callCreateItem = (data) => {
-            // return send(createApi, "POST", data);
-            return send(focusedData.endpoints.createApi, "POST", data);
-        };
+        // Call create API from View data type
+        const callCreateItem = (data) => safeFetch(getData(dataType).endpoints.createApi, "POST", data);
 
-        const callUpdateItem = (id, data) => {
-            // return send(updateApi(id), "PUT", data);
-            return send(focusedData.endpoints.updateApi(id), "PUT", data);
-        };
+        // Call update API from focused data type
+        const callUpdateItem = (id, data) => safeFetch(focusedData.endpoints.updateApi(id), "PUT", data);
 
-        const send = (url, method, data) => {
-            return safeFetch(url, method, data);
-        };
-
-
-        const rawResponse = await (focused ? callUpdateItem(focused._id, data) : callCreateItem(data));
-        if (rawResponse.ok) {
-            // const content = await rawResponse.json();
-            await freshReloadVault()
+        const response = await (focused ? callUpdateItem(focused._id, data) : callCreateItem(data));
+        if (response.status === 201 || response.status === 204) {
+            await freshReloadVault();
             clearFocused();
         }
     };
