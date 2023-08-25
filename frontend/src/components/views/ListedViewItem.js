@@ -13,7 +13,7 @@ const ListedViewItem = ({
                             icon,
                             reload,
                             onEditClickHandler,
-                            onCopyClick,
+                            onCopyClickHandler,
                             setConfirming,
                             listedViewProps = {},
                             allowActions = true
@@ -31,7 +31,7 @@ const ListedViewItem = ({
 
     const DefaultActionBtns = () => {
         const copyBtn =
-            <CircleButton tooltip="Copy" onClick={() => onCopyClick(key)}>
+            <CircleButton tooltip="Copy" onClick={() => onCopyClickHandler(key)}>
                 <FontAwesomeIcon icon={faCopy}/>
             </CircleButton>;
 

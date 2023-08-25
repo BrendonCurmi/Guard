@@ -76,7 +76,11 @@ const FullView = ({
         focusOn(items[type][index], type);
     };
 
-    const onCopyClick = async (key) => {
+    /**
+     * Handler for copying item's field based on its data type.
+     * @param key item key.
+     */
+    const onCopyClickHandler = (key) => {
         const [type, index] = key.split("-");
         const dataType = getData(type);
         const item = items[type][index];
@@ -169,7 +173,7 @@ const FullView = ({
                 account={item}
                 icon={itemDataType.icon(item.site)}
                 onEditClickHandler={onEditClickHandler}
-                onCopyClick={onCopyClick}
+                onCopyClickHandler={onCopyClickHandler}
                 setConfirming={setConfirming}
                 listedViewProps={listedViewProps}
                 allowActions={!isShade}
