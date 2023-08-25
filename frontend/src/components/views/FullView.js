@@ -67,6 +67,11 @@ const FullView = ({
     // Load items after loading component
     useEffect(loadAllItems, [...loadDeps]);
 
+    const freshReloadVault = async () => {
+        await loadVault();
+        loadAllItems();
+    };
+
     // Actions
     const onEditClickHandler = (key) => {
         const [type, index] = key.split("-");
@@ -122,8 +127,7 @@ const FullView = ({
         const rawResponse = await (focused ? callUpdateItem(focused._id, data) : callCreateItem(data));
         if (rawResponse.ok) {
             // const content = await rawResponse.json();
-            await loadVault();
-            loadAllItems();
+            await freshReloadVault()
             switchFocusedViewHandler();
         }
     };
@@ -144,8 +148,7 @@ const FullView = ({
         if (rawResponse.status === 200) {
             const content = await rawResponse.json();
             // console.log(content);
-            await loadVault();
-            loadAllItems();
+            await freshReloadVault();
             setConfirming(null);
         }
     };
@@ -172,7 +175,7 @@ const FullView = ({
                 setConfirming={setConfirming}
                 listedViewProps={listedViewProps}
                 allowActions={!isShade}
-                reload={loadAllItems}/>;
+                reload={freshReloadVault}/>;
         });
     });
 
