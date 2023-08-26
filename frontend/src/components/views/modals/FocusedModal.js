@@ -64,7 +64,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
     const [userInput, setUserInput] = useState(initialUserInput);
 
     const [showPw, setShowPw] = useState(false);
-    const [isEditing, setIsEditing] = useState(focus === null);
+    const [isEditing, setIsEditing] = useState(JSON.stringify(focus) === "{}");
 
     /**
      * Update user input property when changing field input values.
