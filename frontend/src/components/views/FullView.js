@@ -186,14 +186,14 @@ const FullView = ({
     });
 
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
-    const pageActionClick = call(clearFocused, action);
+    const pageActionClickHandler = call(clearFocused, action);
 
     const DefaultPageActions = () => {
         return (
             <CircleButton type="button"
                           color="secondary"
                           tooltip={actionTitle}
-                          onClick={pageActionClick}>
+                          onClick={pageActionClickHandler}>
                 <FontAwesomeIcon icon={actionIcon}/>
             </CircleButton>
         );
