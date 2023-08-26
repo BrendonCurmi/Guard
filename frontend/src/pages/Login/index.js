@@ -19,6 +19,7 @@ const Login = () => {
     const { authenticated, setAuth, persist, setPersist } = useAuth();
 
     // If persist is enabled, try to auto sign in using refresh token
+    //todo decide on this
     useEffect(() => {
         if (persist) {
             safeFetch(REFRESH_API)
@@ -55,7 +56,6 @@ const Login = () => {
             return { ...prevState, [property]: event.target.value };
         });
     };
-    console.log(isSaving);
 
     const formSubmissionHandler = async event => {
         event.preventDefault();
