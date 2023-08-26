@@ -61,7 +61,7 @@ const FullView = ({
     };
 
     /**
-     * Load all items from the local Vault.
+     * Loads all items from the local Vault.
      */
     const loadAllItems = () => {
         const encryptedVaultData = getVault()[dataType];
@@ -127,12 +127,12 @@ const FullView = ({
     };
 
     /**
-     * Clear focused item.
+     * Clears the currently focused item.
      */
     const clearFocused = () => focusOn(null);
 
     /**
-     * Submit create/update requests, reload all items, and close FocusedModal.
+     * Submits create/update requests, reloads all items, and closes FocusedModal.
      * @param data the data to create/update.
      */
     const submitItemRequest = async (data) => {
@@ -149,22 +149,19 @@ const FullView = ({
         }
     };
 
-
+    /**
+     * Deletes the confirming item, reloads all items, and closes ConfirmModal.
+     */
     const deleteItemOnConfirmationHandler = async () => {
         if (!confirming) return;
         const [type, index] = confirming.split("-");
         const deleteId = items[type][index]._id;
 
-        const getEndpointDeleteApi = (deleteId) => {
-            const dataType = getData(type);
-            return dataType.endpoints.deleteApi(deleteId);
-        };
+        const getEndpointDeleteApi = (deleteId) => getData(type).endpoints.deleteApi(deleteId);
 
-        const deleteUrl = deleteApi ? deleteApi(deleteId) : getEndpointDeleteApi(deleteId);
-        const rawResponse = await safeFetch(deleteUrl, "DELETE");
-        if (rawResponse.status === 200) {
-            const content = await rawResponse.json();
-            // console.log(content);
+        const deleteUrl = deleteApi ? deleteApi(deleteId) : getEndpointDeleteApi(deleteId);//todo check this after folder page
+        const response = await safeFetch(deleteUrl, "DELETE");
+        if (response.status === 200) {
             await freshReloadVault();
             setConfirming(null);
         }
