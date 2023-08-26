@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 import FormInput from "./FormInput";
 import NiceButton from "../../components/buttons/NiceButton";
@@ -13,7 +14,6 @@ import { generateHashes } from "../../../security/SecurityUtils";
 import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 
 import classes from "./index.module.scss";
-import { CircularProgress } from "@mui/material";
 
 const Login = () => {
     const { authenticated, setAuth, persist, setPersist } = useAuth();
