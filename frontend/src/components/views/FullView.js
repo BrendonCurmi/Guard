@@ -111,7 +111,17 @@ const FullView = ({
     const [focused, setFocused] = useState();
     const [confirming, setConfirming] = useState();
 
-    const focusOn = (item, type) => {
+    /**
+     * Focuses on the specified item object, and sets the
+     * specified focused item data. If item is an empty
+     * object {}, the focus will be opened but empty.
+     * If the focus data is empty, it will default to the
+     * view data type. This is to allow for empty items
+     * to open the focus with appropriate data fields.
+     * @param item object to focus on.
+     * @param type data type of focused item.
+     */
+    const focusOn = (item, type = dataType) => {
         setFocused(item);
         if (type) setFocusedData(getData(type));
     };
@@ -186,7 +196,9 @@ const FullView = ({
     });
 
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
-    const pageActionClickHandler = call(clearFocused, action);
+
+    // Use optional action if page defined it, otherwise open empty focus modal
+    const pageActionClickHandler = call(() => focusOn({}), action);
 
     const DefaultPageActions = () => {
         return (
