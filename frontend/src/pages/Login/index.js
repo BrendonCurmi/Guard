@@ -66,6 +66,10 @@ const Login = () => {
 
         let valid = validateUsername(username) && validatePw(pw);
 
+        // Short delay to allow circle progress symbol to appear, otherwise
+        // hashing function will slow page and the symbol will barely appear
+        await new Promise(resolve => setTimeout(resolve, 100));
+
         let data = {};
         if (isRegistering) {
             const pwConfirm = userInput["pw-confirm"];
