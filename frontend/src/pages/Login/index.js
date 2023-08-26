@@ -55,8 +55,9 @@ const Login = () => {
             return { ...prevState, [property]: event.target.value };
         });
     };
+    console.log(isSaving);
 
-    const formSubmissionHandler = event => {
+    const formSubmissionHandler = async event => {
         event.preventDefault();
         setIsSaving(true);
 
@@ -65,18 +66,14 @@ const Login = () => {
 
         let valid = validateUsername(username) && validatePw(pw);
 
-        const { encryptionHash, authHash } = generateHashes(pw, username);
-
-        const url = isRegistering ? CREATE_API : LOGIN_API;
-        let data = { username, authHash };
-
+        let data = {};
         if (isRegistering) {
             const pwConfirm = userInput["pw-confirm"];
             const email = userInput["email"];
 
             valid = valid && validatePwConfirm(pwConfirm) && validateEmail(email) && pw === pwConfirm;
 
-            data = { email, ...data };
+            data = { email };
         }
 
         if (!valid) {
@@ -84,7 +81,10 @@ const Login = () => {
             return;
         }
 
-        safeFetch(url, "POST", data)
+        let { encryptionHash, authHash } = generateHashes(pw, username);
+
+        const url = isRegistering ? CREATE_API : LOGIN_API;
+        safeFetch(url, "POST", { username, authHash, ...data })
             .then(res => res.json())
             .then(async data => {
                 if (data.err) {
