@@ -164,9 +164,8 @@ const FullView = ({
         return optionalFn ? optionalFn : defaultFn;
     };
 
-    const isShade = !!focused || !!confirming;
-    const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
-    const pageActionClick = call(clearFocused, action);
+    // Disable actions if modals are open
+    const areModalsOpen = !!focused || !!confirming;
 
     const viewItems = Object.keys(items).map(type => {
         return items[type].map((item, itemIndex) => {
@@ -181,10 +180,13 @@ const FullView = ({
                 onCopyClickHandler={onCopyClickHandler}
                 setConfirming={setConfirming}
                 listedViewProps={listedViewProps}
-                allowActions={!isShade}
+                allowActions={!areModalsOpen}
                 reload={freshReloadVault}/>;
         });
     });
+
+    const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
+    const pageActionClick = call(clearFocused, action);
 
     const DefaultPageActions = () => {
         return (
@@ -195,7 +197,6 @@ const FullView = ({
                 <FontAwesomeIcon icon={actionIcon}/>
             </CircleButton>
         );
-        //return <a className={classes.button} onClick={pageActionClick}>{actionTitle}</a>;
     };
 
     const PageActions = actions || DefaultPageActions;
