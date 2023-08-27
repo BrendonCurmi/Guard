@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { CircularProgress, IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { CircularProgress } from "@mui/material";
 
 import Modal from "../../modals/Modal";
 import NiceButton from "../../buttons/NiceButton";
@@ -50,12 +49,12 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
 
     // Set up initial user input values
     let secureField = "";
-    const initialUserInput = {
-        folders: getOr("folders", [], foldersIdsToNames)
-    };
+    const initialUserInput = {};
     fields.map(field => {
         if (field instanceof Object && field.value) {
-            initialUserInput[field.value] = getOr(field.value);
+            initialUserInput[field.value] = field.value === "folders"
+                ? getOr("folders", [], foldersIdsToNames)
+                : getOr(field.value);
             if (field.secure) {
                 secureField = field.value;
             }
@@ -149,8 +148,20 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
         if (typeof field === "string" || field instanceof String) {
             return <label key={field}>{field}</label>;
         }
-
         const { id, label, value, required = false, secure = false, ...extraProps } = field;
+
+        if (value === "folders") {
+            return <FolderSelect key={id}
+                                 className={classes.folderSelect}
+                                 onChange={event => onChangeHandler(event, "folders")}
+                                 label="Folders"
+                                 readOnly={!isEditing}
+                                 // InputProps={{ readOnly: !isEditing }}
+                                 // InputLabelProps={!isEditing ? { shrink: false } : {}}
+                                 value={userInput.folders}
+                                 allFolders={allFolders}/>;
+        }
+
         const fieldProps = {
             // From field
             key: id,
@@ -211,15 +222,6 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
             </div>
             <form className={`${classes.inputForm} ${!isEditing ? classes.readOnly : ""}`} onSubmit={onSubmitHandler}>
                 {formFields}
-
-                <FolderSelect className={classes.folderSelect}
-                              onChange={event => onChangeHandler(event, "folders")}
-                              label="Folders"
-                              readOnly={!isEditing}
-                    // InputProps={{ readOnly: !isEditing }}
-                    // InputLabelProps={!isEditing ? { shrink: false } : {}}
-                              value={userInput.folders}
-                              allFolders={allFolders}/>
 
                 {isEditing ?
                     <NiceButton type="submit"
