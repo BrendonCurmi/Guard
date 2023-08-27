@@ -101,7 +101,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
         if (data[secureField] === "") delete data[secureField];
 
         // Update with folders if selected
-        if (userInput.folders !== []) {
+        if (userInput.folders && userInput.folders !== []) {
             // Convert selected folder ids to folder names
             data.folders = userInput.folders.map(name =>
                 Object.keys(allFolders).find(key => allFolders[key] === name)
