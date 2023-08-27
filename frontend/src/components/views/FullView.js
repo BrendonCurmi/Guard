@@ -142,7 +142,7 @@ const FullView = ({
         // Call update API from focused data type
         const callUpdateItem = (id, data) => safeFetch(focusedData.endpoints.updateApi(id), "PUT", data);
 
-        const response = await (focused ? callUpdateItem(focused._id, data) : callCreateItem(data));
+        const response = await (focused && JSON.stringify(focused) !== "{}" ? callUpdateItem(focused._id, data) : callCreateItem(data));
         if (response.status === 201 || response.status === 204) {
             await freshReloadVault();
             clearFocused();
