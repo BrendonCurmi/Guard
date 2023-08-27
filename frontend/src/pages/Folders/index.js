@@ -13,7 +13,7 @@ export const FolderData = {
         }
     ],
     endpoints: {
-        createApi: "http://localhost:4000/api/note",
+        createApi: "http://localhost:4000/api/folder",
         updateApi: val => `${FolderData.endpoints.createApi}/${val}`,
         deleteApi: val => `${FolderData.endpoints.createApi}/${val}`,
         credentialsApi: val => `${FolderData.endpoints.createApi}/${val}/credentials`
