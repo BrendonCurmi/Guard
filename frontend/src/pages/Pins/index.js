@@ -19,6 +19,10 @@ export const PinData = {
             value: "pin"
         }
     ],
+    listDisplay: {
+        title: item => item.title,
+        subtitle: item => item.identity ? item.identity : ""
+    },
     endpoints: {
         createApi: "http://localhost:4000/api/pin",
         updateApi: val => `${PinData.endpoints.createApi}/${val}`,
