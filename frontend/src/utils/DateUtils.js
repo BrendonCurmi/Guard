@@ -41,7 +41,7 @@ const describeDate = (date, curr = new Date(Date.now())) => {
         return isWithinSameMonth()
             ? config(weeks, "w")
             : config(monthsSince(date, curr), "month");
-    } else return `${curr.getDate()}-${curr.getMonth()}-${curr.getFullYear()}`;
+    } else return `${curr.getDate()}-${curr.getMonth() + 1}-${curr.getFullYear()}`;
 
 
     // if (isSameDayOfYear(date, curr)) {
