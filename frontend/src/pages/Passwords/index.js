@@ -28,6 +28,11 @@ export const PasswordData = {
             required: true,
             id: "input-pw",
             value: "pw"
+        },
+        {
+            label: "Folders",
+            id: "input-folders",
+            value: "folders"
         }
     ],
     endpoints: {
