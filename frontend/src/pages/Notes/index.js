@@ -21,6 +21,10 @@ export const NoteData = {
             maxRows: 7
         }
     ],
+    listDisplay: {
+        title: item => item.title,
+        subtitle: item => item.identity ? item.identity : ""
+    },
     endpoints: {
         createApi: "http://localhost:4000/api/note",
         updateApi: val => `${NoteData.endpoints.createApi}/${val}`,
