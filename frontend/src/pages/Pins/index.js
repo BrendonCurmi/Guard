@@ -17,6 +17,11 @@ export const PinData = {
             required: true,
             id: "input-pin",
             value: "pin"
+        },
+        {
+            label: "Folders",
+            id: "input-folders",
+            value: "folders"
         }
     ],
     listDisplay: {
