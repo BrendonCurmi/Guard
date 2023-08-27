@@ -21,7 +21,7 @@ const ListedViewItem = ({
     const [isHovered, setIsHovered] = useState(false);
 
     const { cells = {}, canCopy = true, canEdit = true, canDelete = true, customActionBtns = () => {} } = listedViewProps;
-    const { time = "lastAccess" } = cells;
+    const { timeField = "lastAccess" } = cells;
 
     const key = dKey;// "key" cannot be a prop
 
@@ -65,7 +65,7 @@ const ListedViewItem = ({
                 <p className={classes.accountTitle}>{account.title}</p>
                 <p className={classes.accountSubtitle}>{account.identity ? account.identity : ""}</p>
             </td>
-            <td onClick={onClick}>{describeDate(account[time])}</td>
+            <td onClick={onClick}>{describeDate(account[timeField])}</td>
             <td>{isHovered && allowActions && <DefaultActionBtns/>}</td>
         </tr>
     );

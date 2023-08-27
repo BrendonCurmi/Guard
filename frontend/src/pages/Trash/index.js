@@ -42,7 +42,7 @@ const Trash = () => {
         dataType="trash"
         deleteApi={deleteApi}
         listedViewProps={{
-            cells: { time: "deletedDate" },
+            cells: { timeField: "deletedDate" },
             canCopy: false,
             canEdit: false,
             canDelete: true,
