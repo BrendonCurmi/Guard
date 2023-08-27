@@ -35,6 +35,10 @@ export const PasswordData = {
             value: "folders"
         }
     ],
+    listDisplay: {
+        title: item => item.title,
+        subtitle: item => item.identity ? item.identity : ""
+    },
     endpoints: {
         createApi: "http://localhost:4000/api/account",
         updateApi: val => `${PasswordData.endpoints.createApi}/${val}`,
