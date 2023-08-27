@@ -12,6 +12,11 @@ export const FolderData = {
             value: "name"
         }
     ],
+    listDisplay: {
+        title: item=> item.name,
+        subtitle: () => "",
+        time: ""
+    },
     endpoints: {
         createApi: "http://localhost:4000/api/folder",
         updateApi: val => `${FolderData.endpoints.createApi}/${val}`,
