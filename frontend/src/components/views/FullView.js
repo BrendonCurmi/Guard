@@ -182,6 +182,7 @@ const FullView = ({
             return <ListedViewItem
                 key={key} dKey={key}
                 account={item}
+                display={itemDataType.listDisplay}
                 icon={itemDataType.icon(item.site)}
                 onEditClickHandler={onEditClickHandler}
                 onCopyClickHandler={onCopyClickHandler}

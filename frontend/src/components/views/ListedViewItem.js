@@ -16,7 +16,8 @@ const ListedViewItem = ({
                             onCopyClickHandler,
                             setConfirming,
                             listedViewProps = {},
-                            allowActions = true
+                            allowActions = true,
+                            display = { title: () => "", subtitle: () => "", time: "" }
                         }) => {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -54,18 +55,20 @@ const ListedViewItem = ({
         );
     };
 
+    const { title = () => "", subtitle = () => "", time = describeDate(account[timeField]) } = display;
+
     return (
-        <tr key={account.title}
+        <tr key={title(account)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
             <td onClick={onClick}>
                 {icon}
             </td>
             <td onClick={onClick}>
-                <p className={classes.accountTitle}>{account.title}</p>
-                <p className={classes.accountSubtitle}>{account.identity ? account.identity : ""}</p>
+                <p className={classes.accountTitle}>{title(account)}</p>
+                <p className={classes.accountSubtitle}>{subtitle(account)}</p>
             </td>
-            <td onClick={onClick}>{describeDate(account[timeField])}</td>
+            <td onClick={onClick}>{time}</td>
             <td>{isHovered && allowActions && <DefaultActionBtns/>}</td>
         </tr>
     );
