@@ -19,6 +19,11 @@ export const NoteData = {
             value: "note",
             multiline: true,
             maxRows: 7
+        },
+        {
+            label: "Folders",
+            id: "input-folders",
+            value: "folders"
         }
     ],
     listDisplay: {
