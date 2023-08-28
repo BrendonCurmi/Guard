@@ -97,12 +97,12 @@ const Login = () => {
                     return;
                 }
 
+                setEncryptionKey(encryptionHash);
                 await loadVault();
 
                 setIsSaving(false);
 
                 const accessToken = data.accessToken;
-                setEncryptionKey(encryptionHash);
                 setAuth({ username, accessToken });
                 // navigate(from, { replace: true });
             })
