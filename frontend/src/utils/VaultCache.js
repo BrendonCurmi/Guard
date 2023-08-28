@@ -1,5 +1,6 @@
 import { safeFetch } from "./SafeFetch";
 import { VAULT_API } from "./API";
+import { loadFoldersFromCache } from "./FolderCache";
 
 let vault = null;
 
@@ -15,5 +16,6 @@ export const loadVault = async () => {
     await safeFetch(VAULT_API)
         .then(res => res.json())
         .then(data => setVault(data))
+        .then(loadFoldersFromCache)
         .catch(console.log);
 };
