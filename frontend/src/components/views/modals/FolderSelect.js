@@ -19,8 +19,7 @@ const MenuProps = {
     transformOrigin: {
         vertical: "top",
         horizontal: "left"
-    },
-    getContentAnchorEl: null
+    }
 };
 
 // Adapted from and examples from: https://mui.com/material-ui/react-select/
