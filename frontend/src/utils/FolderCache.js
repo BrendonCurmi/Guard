@@ -1,4 +1,3 @@
-import React from "react";
 import { getVault } from "./VaultCache";
 import { decryptData } from "../../security/SecurityUtils";
 
