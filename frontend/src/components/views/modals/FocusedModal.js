@@ -5,9 +5,9 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Modal from "../../modals/Modal";
 import NiceButton from "../../buttons/NiceButton";
 import FolderSelect from "./FolderSelect";
-import { encryptData } from "../../../../security/SecurityUtils";
 
-import { useFolders } from "../../../store/FolderProvider";
+import { encryptData } from "../../../../security/SecurityUtils";
+import { getVault } from "../../../utils/VaultCache";
 
 import classes from "./FocusedModal.module.scss";
 
@@ -36,16 +36,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
             : defaultVal;
     };
 
-    const allFolders = useFolders().folders;
-
-    /**
-     * Convert an array of folder ids to an array of folder names.
-     * @param ids the array of folder ids.
-     * @returns {*} an array of folder names.
-     */
-    const foldersIdsToNames = (ids) => {
-        return ids.map(id => allFolders[id]);
-    };
+    const allFolders = getVault()["folders"];
 
     // Set up initial user input values
     let secureField = "";
@@ -53,7 +44,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
     fields.map(field => {
         if (field instanceof Object && field.value) {
             initialUserInput[field.value] = field.value === "folders"
-                ? getOr("folders", [], foldersIdsToNames)
+                ? getOr("folders", [])
                 : getOr(field.value);
             if (field.secure) {
                 secureField = field.value;
@@ -103,9 +94,10 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
         // Update with folders if selected
         if (userInput.folders && userInput.folders !== []) {
             // Convert selected folder ids to folder names
-            data.folders = userInput.folders.map(name =>
-                Object.keys(allFolders).find(key => allFolders[key] === name)
-            );
+            // data.folders = userInput.folders.map(name =>
+            //     Object.keys(allFolders).find(key => allFolders[key] === name)
+            // );
+            console.log(userInput.folders);
         }
 
         // Encrypt data before sending to server
