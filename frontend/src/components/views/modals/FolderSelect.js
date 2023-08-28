@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material";
-import { decryptData } from "../../../../security/SecurityUtils";
+import { getFoldersCache } from "../../../utils/FolderCache";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -23,14 +23,10 @@ const MenuProps = {
 };
 
 // Adapted from and examples from: https://mui.com/material-ui/react-select/
-const FolderSelect = ({ className, allFolders, label, readOnly, value, onChange }) => {
-    // Cache for the folder ids and names
-    const idNameMap = {};
-    const folderItems = Object.keys(allFolders).map(key => {
-        const { _id, name } = allFolders[key];
-        const decryptedName = decryptData(name);
-        idNameMap[_id] = decryptedName;
-        return <MenuItem key={_id} value={_id}>{decryptedName}</MenuItem>;
+const FolderSelect = ({ className, allFolders = getFoldersCache(), label, readOnly, value, onChange }) => {
+    const folderItems = Object.keys(allFolders).map(id => {
+        const name = allFolders[id];
+        return <MenuItem key={id} value={id}>{name}</MenuItem>;
     });
     return (
         <FormControl className={className} disabled={readOnly}>
@@ -45,7 +41,7 @@ const FolderSelect = ({ className, allFolders, label, readOnly, value, onChange 
                 renderValue={(selected) => (
                     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                         {selected.map((value) => (
-                            <Chip key={value} label={idNameMap[value]}/>
+                            <Chip key={value} label={allFolders[value]}/>
                         ))}
                     </Box>
                 )}
