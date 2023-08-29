@@ -5,9 +5,9 @@ import { decryptData } from "../../security/SecurityUtils";
 let folderCache = {};
 
 export const loadFoldersFromCache = () => {
-    const allFolders = getVault()["folders"];
-    Object.keys(allFolders).map(key => {
-        const { _id, name } = allFolders[key];
+    const folders = getVault()["folders"];
+    Object.keys(folders).map(key => {
+        const { _id, name } = folders[key];
         folderCache[_id] = decryptData(name);
     });
     console.log(folderCache);
