@@ -24,6 +24,7 @@ import classes from "./FullView.module.scss";
  * @param deleteItemHandler the optional delete handler.
  * @param loadDeps the dependencies for reloading items.
  * @param listedViewProps the props for ListedViewItems.
+ * @param loadItems the optional encrypted items data to load instead.
  * @returns {JSX.Element}
  */
 const FullView = ({
@@ -33,7 +34,8 @@ const FullView = ({
                       dataType,
                       deleteItemHandler,
                       loadDeps = [],
-                      listedViewProps
+                      listedViewProps,
+                      loadItems = {}
                   }) => {
     ////////////////////////
     // View Items
@@ -41,22 +43,25 @@ const FullView = ({
     const [items, setItems] = useState({});
 
     /**
-     * Decrypts the specified Vault data.
-     * @param items
-     * @returns {any}
+     * Decrypts the specified items data object, in
+     * the form: {accounts: [{...}], pins: [{...}]}
+     * @param data items data object with encrypted data.
+     * @returns {JSON} the decrypted items data object.
      */
-    const getDecryptedData = (items) => {
-        const decryptedData = structuredClone(items);
-        for (let i = 0; i < items.length; i++) {
-            for (let key in items[i]) {
-                let value = items[i][key];
-                if (typeof value === "string" && !key.startsWith("_")
-                    && !(key === "date" || key === "lastAccess" || key === "deletedDate" || key === "type")) {
-                    value = decryptData(value);
+    const decryptDataObject = (data) => {
+        const decryptedData = structuredClone(data);
+        Object.keys(data).map(type => {
+            return data[type].map((item, itemIndex) => {
+                for (let key in item) {
+                    let value = item[key];
+                    if (typeof value === "string" && !key.startsWith("_")
+                        && !(key === "date" || key === "lastAccess" || key === "deletedDate" || key === "type")) {
+                        value = decryptData(value);
+                    }
+                    decryptedData[type][itemIndex][key] = value;
                 }
-                decryptedData[i][key] = value;
-            }
-        }
+            });
+        });
         return decryptedData;
     };
 
@@ -64,10 +69,9 @@ const FullView = ({
      * Loads all items from the local Vault.
      */
     const loadAllItems = () => {
-        const encryptedVaultData = getVault()[dataType];
-        const vaultItems = getDecryptedData(encryptedVaultData);
-        const accountData = { [dataType]: vaultItems};
-        setItems(accountData);
+        const itemsData = JSON.stringify(loadItems) !== "{}" ? loadItems : { [dataType]: getVault()[dataType] };
+        const decryptedItemsData = decryptDataObject(itemsData);
+        setItems(decryptedItemsData);
     };
 
     // Load items after loading component
