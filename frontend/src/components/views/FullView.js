@@ -33,7 +33,7 @@ import classes from "./FullView.module.scss";
  */
 const FullView = ({
                       page = { title: "", actionTitle: "", timeName: "", action: "", actions: "" },
-                      confirm = { title: "", msg: "" },
+                      confirm = { title: "Are you sure?", msg: "Do you really want to delete this? It will be moved to Trash" },
                       deleteApi = "",
                       dataType,
                       deleteItemHandler,
