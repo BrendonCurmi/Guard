@@ -82,6 +82,7 @@ const Login = () => {
 
         if (!valid) {
             setIsFailed(true);
+            setIsSaving(false);
             return;
         }
 
