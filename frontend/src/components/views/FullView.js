@@ -215,6 +215,13 @@ const FullView = ({
 
     const PageActions = actions || DefaultPageActions;
 
+    const actionsSection = (
+        (actions !== undefined || actionTitle !== "") &&
+        <div className={classes.pageActionBtns}>
+            <PageActions/>
+        </div>
+    );
+
     ////////////////////////
     // Modals
     ////////////////////////
@@ -241,9 +248,7 @@ const FullView = ({
             <div className={classes.contentWrapper}>
                 <div className={classes.header}>
                     <h1 className={classes.title}>{title}</h1>
-                    <div className={classes.pageActionBtns}>
-                        <PageActions/>
-                    </div>
+                    {actionsSection}
                 </div>
                 <table>
                     <thead>
