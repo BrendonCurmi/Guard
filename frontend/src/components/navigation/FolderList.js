@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
-import NavigationFolderItem from "./NavigationFolderItem";
+import NavigationItemLink from "./NavigationItemLink";
 import { encode } from "../../utils/URLUtils";
 import { getFoldersCache } from "../../utils/FolderCache";
 
@@ -20,7 +20,7 @@ const FolderList = () => {
 
     const folderListItems = (name, i) => {
         const url = encode(name);
-        return <NavigationFolderItem to={`/folder/${url}`}
+        return <NavigationItemLink to={`/folder/${url}`}
                                      name={name}
                                      icon={faFolder}
                                      key={i}/>;
