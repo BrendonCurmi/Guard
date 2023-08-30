@@ -13,7 +13,7 @@ export const FolderData = {
         }
     ],
     listDisplay: {
-        title: item=> item.name,
+        title: item => item.name,
         subtitle: () => "",
         time: ""
     },
@@ -28,7 +28,6 @@ export const FolderData = {
 }
 
 const Folders = () => {
-    // todo remove folders section
     return <FullView
         page={{ title: "Folders", actionTitle: "Add Folder" }}
         confirm={{
