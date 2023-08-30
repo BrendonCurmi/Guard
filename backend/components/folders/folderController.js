@@ -72,7 +72,7 @@ exports.updateById = async (req, res) => {
     FolderTemplate.findByIdAndUpdate(req.params.id, req.body, (err, doc) => {
         if (!doc) res.sendStatus(404);
         else if (err) res.status(500).json({ message: err.message })
-        else res.sendStatus(200);
+        else res.sendStatus(204);
     });
     // requestCatch(data, res);
 };
