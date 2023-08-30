@@ -10,7 +10,9 @@ export const loadFoldersFromCache = () => {
         const { _id, name } = folders[key];
         folderCache[_id] = decryptData(name);
     });
-    console.log(folderCache);
+
+    // Dispatch custom event to notify listeners about the cache update
+    document.dispatchEvent(new CustomEvent("folderCacheUpdated", { detail: folderCache }));
 }
 
 export const getFoldersCache = () => {
