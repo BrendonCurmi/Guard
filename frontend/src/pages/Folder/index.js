@@ -35,6 +35,7 @@ const Folder = () => {
     function getItemsWithFolderId(vaultData, folderId) {
         const folderItems = [];
         for (const type in vaultData) {
+            if (type === "folders" || type === "trash") continue;
             const items = vaultData[type];
             for (const item of items) {
                 if (item.folders && item.folders.includes(folderId)) {
