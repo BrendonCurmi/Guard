@@ -31,7 +31,6 @@ const Folders = () => {
     return <FullView
         page={{ title: "Folders", actionTitle: "Add Folder" }}
         confirm={{
-            title: "Are you sure?",
             msg: "Do you really want to delete this folder? It cannot be recovered"
         }}
         dataType="folders"
