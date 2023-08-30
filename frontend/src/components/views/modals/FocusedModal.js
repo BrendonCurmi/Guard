@@ -150,8 +150,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                                  readOnly={!isEditing}
                                  // InputProps={{ readOnly: !isEditing }}
                                  // InputLabelProps={!isEditing ? { shrink: false } : {}}
-                                 value={userInput.folders}
-                                 allFolders={allFolders}/>;
+                                 value={userInput.folders}/>;
         }
 
         const fieldProps = {

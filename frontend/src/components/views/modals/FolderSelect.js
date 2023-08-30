@@ -23,9 +23,10 @@ const MenuProps = {
 };
 
 // Adapted from and examples from: https://mui.com/material-ui/react-select/
-const FolderSelect = ({ className, allFolders = getFoldersCache(), label, readOnly, value, onChange }) => {
-    const folderItems = Object.keys(allFolders).map(id => {
-        const name = allFolders[id];
+const FolderSelect = ({ className, label, readOnly, value, onChange }) => {
+    const foldersCache = getFoldersCache();
+    const folderItems = Object.keys(foldersCache).map(id => {
+        const name = foldersCache[id];
         return <MenuItem key={id} value={id}>{name}</MenuItem>;
     });
     return (
@@ -41,7 +42,7 @@ const FolderSelect = ({ className, allFolders = getFoldersCache(), label, readOn
                 renderValue={(selected) => (
                     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                         {selected.map((value) => (
-                            <Chip key={value} label={allFolders[value]}/>
+                            <Chip key={value} label={foldersCache[value]}/>
                         ))}
                     </Box>
                 )}
