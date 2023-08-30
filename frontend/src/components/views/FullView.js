@@ -17,8 +17,12 @@ import classes from "./FullView.module.scss";
 
 /**
  * ListedView that loads items into it.
- * @param page the page variables.
- * @param confirm the confirm variables.
+ * @param page the page properties, including title,
+ * title of the action button, name of the time section,
+ * action to perform when clicking button, and action
+ * buttons override.
+ * @param confirm the confirm modal properties, including
+ * modal title and message.
  * @param deleteApi the optional API function to delete items.
  * @param dataType the optional item type.
  * @param deleteItemHandler the optional delete handler.
