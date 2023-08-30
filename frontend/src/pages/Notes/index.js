@@ -43,10 +43,6 @@ export const NoteData = {
 const SecureNotes = () => {
     return <FullView
         page={{ title: "Secure Notes", actionTitle: "Add Secure Note", timeName: "Last Seen" }}
-        confirm={{
-            title: "Are you sure?",
-            msg: "Do you really want to delete this note? It will be moved to Trash"
-        }}
         dataType="notes"
         listedViewProps={{
             canCopy: false,

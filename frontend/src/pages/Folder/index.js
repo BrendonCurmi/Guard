@@ -87,10 +87,6 @@ const Folder = () => {
             actionTitle: "",
             timeName: "Last Used"
         }}
-        confirm={{
-            title: "Are you sure?",
-            msg: "Do you really want to delete this? It can't be recovered once it's deleted"
-        }}
         loadItems={getFolderData}
         loadApi={`${API}?f=${encode(folderName)}`}
         loadDeps={[name]}/>;

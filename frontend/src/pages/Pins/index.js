@@ -41,10 +41,6 @@ export const PinData = {
 const Pins = () => {
     return <FullView
         page={{ title: "Pins", actionTitle: "Add Pin", timeName: "Last Seen" }}
-        confirm={{
-            title: "Are you sure?",
-            msg: "Do you really want to delete this pin? It will be moved to Trash"
-        }}
         dataType="pins"/>;
 };
 
