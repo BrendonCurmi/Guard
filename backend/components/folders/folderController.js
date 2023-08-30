@@ -1,6 +1,9 @@
 const FolderTemplate = require("./folders.model");
-const AccountTemplate = require("../accounts/accounts.model");
 const TrashTemplate = require("../trash/trash.model");
+
+const AccountTemplate = require("../accounts/accounts.model");
+const PinTemplate = require("../pins/pins.model");
+const NoteTemplate = require("../notes/notes.model");
 
 /**
  * Retrieves all accounts, excluding pw field.
@@ -33,7 +36,14 @@ exports.createFolder = (req, res) => {
  */
 exports.deleteFolder = async (req, res) => {
     try {
-        await FolderTemplate.findByIdAndDelete(req.params.id);
+        const folderId = req.params.id;
+        await FolderTemplate.findByIdAndDelete(folderId);
+
+        // Remove the folder id from other templates
+        await AccountTemplate.updateMany({ folders: folderId }, { $pull: { folders: folderId } });
+        await PinTemplate.updateMany({ folders: folderId }, { $pull: { folders: folderId } });
+        await NoteTemplate.updateMany({ folders: folderId }, { $pull: { folders: folderId } });
+
         res.status(200).json({ });
     } catch (err) {
         res.status(500).json({ err: err.message });
