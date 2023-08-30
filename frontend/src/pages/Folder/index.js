@@ -1,10 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import FullView from "../../components/views/FullView";
-import CircleButton from "../../components/buttons/CircleButton";
 
 import { decode, encode } from "../../utils/URLUtils";
 import { getFoldersCache } from "../../utils/FolderCache";
@@ -75,29 +72,11 @@ const Folder = () => {
         }
     };
 
-    const ViewActionBtns = () => {
-        //todo
-        return <>
-            <CircleButton color="secondary"
-                          tooltip="Rename"
-                          onClick={() => console.log}>
-                <FontAwesomeIcon icon={faPencil}/>
-            </CircleButton>
-            <CircleButton color="secondary"
-                          tooltip="Delete"
-                          onClick={() => console.log}>
-                <FontAwesomeIcon icon={faTrash}/>
-            </CircleButton>
-        </>;
-    };
-
     //todo test what happens when deleting from folder
     return <FullView
         page={{
             title: folderName,
-            actionTitle: "Delete Folder",
-            action: deleteFolderHandler,
-            actions: ViewActionBtns,
+            actionTitle: "",
             timeName: "Last Used"
         }}
         confirm={{
