@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import CircleButton from "../buttons/CircleButton";
 import FolderList from "./FolderList";
 
-// import { useFolders } from "../../store/FolderProvider";
-import { getFoldersCache } from "../../utils/FolderCache";
-
 import classes from "./Navigation.module.scss";
 
 const NavigationFolderSection = () => {
     const [creatingFolder, setCreatingFolder] = useState(false);
     const [newFolderName, setNewFolderName] = useState("");
-    // const folders = useFolders();
-    const folders = getFoldersCache();
-
-    // useEffect(folders.loadFolders, []);
 
     const edit = () => {
         setCreatingFolder(!creatingFolder);
@@ -52,7 +45,7 @@ const NavigationFolderSection = () => {
                         <FontAwesomeIcon icon={faFolderPlus}/>
                     </CircleButton>
                 </span>
-            <FolderList allFolders={folders}/>
+            <FolderList/>
             {creatingFolder &&
                 <form onSubmit={createFolder}>
                     <input type="text"
