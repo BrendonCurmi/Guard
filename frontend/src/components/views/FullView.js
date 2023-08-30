@@ -28,7 +28,7 @@ import classes from "./FullView.module.scss";
  * @param deleteItemHandler the optional delete handler.
  * @param loadDeps the dependencies for reloading items.
  * @param listedViewProps the props for ListedViewItems.
- * @param loadItems the optional encrypted items data to load instead.
+ * @param loadItems optional function to load encrypted items data instead.
  * @returns {JSX.Element}
  */
 const FullView = ({
@@ -73,7 +73,7 @@ const FullView = ({
      * Loads all items from the local Vault.
      */
     const loadAllItems = () => {
-        const itemsData = loadItems !== null ? loadItems : { [dataType]: getVault()[dataType] };
+        const itemsData = loadItems !== null ? loadItems() : { [dataType]: getVault()[dataType] };
         const decryptedItemsData = decryptDataObject(itemsData);
         setItems(decryptedItemsData);
     };

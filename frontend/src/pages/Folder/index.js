@@ -47,16 +47,23 @@ const Folder = () => {
         return folderItems;
     }
 
-    // Get items belonging to the current folder and organise them into a data object
-    const folderData = {};
-    const folderId = getIdFromFolderName(folders, folderName);
-    const itemsInFolder = getItemsWithFolderId(getVault(), folderId);
-    Object.keys(itemsInFolder).map(key => {
-        const item = itemsInFolder[key];
-        const itemType = item.type;
-        if (folderData[itemType] === undefined) folderData[itemType] = [];
-        folderData[itemType].push(item);
-    });
+    /**
+     * Gets the items belonging to the current folder and
+     * organises them into a data object.
+     * @returns {JSON} data object of items in folder.
+     */
+    const getFolderData = () => {
+        const folderData = {};
+        const folderId = getIdFromFolderName(folders, folderName);
+        const itemsInFolder = getItemsWithFolderId(getVault(), folderId);
+        Object.keys(itemsInFolder).map(key => {
+            const item = itemsInFolder[key];
+            const itemType = item.type;
+            if (folderData[itemType] === undefined) folderData[itemType] = [];
+            folderData[itemType].push(item);
+        });
+        return folderData;
+    };
 
     const deleteFolderHandler = async () => {
         const rawResponse = await fetch(`http://localhost:4000/api/folder/`, {
@@ -84,7 +91,7 @@ const Folder = () => {
             title: "Are you sure?",
             msg: "Do you really want to delete this? It can't be recovered once it's deleted"
         }}
-        loadItems={folderData}
+        loadItems={getFolderData}
         loadApi={`${API}?f=${encode(folderName)}`}
         loadDeps={[name]}/>;
 };
