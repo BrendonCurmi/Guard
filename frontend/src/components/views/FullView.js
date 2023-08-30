@@ -35,7 +35,7 @@ const FullView = ({
                       deleteItemHandler,
                       loadDeps = [],
                       listedViewProps,
-                      loadItems = {}
+                      loadItems = null
                   }) => {
     ////////////////////////
     // View Items
@@ -69,7 +69,7 @@ const FullView = ({
      * Loads all items from the local Vault.
      */
     const loadAllItems = () => {
-        const itemsData = JSON.stringify(loadItems) !== "{}" ? loadItems : { [dataType]: getVault()[dataType] };
+        const itemsData = loadItems !== null ? loadItems : { [dataType]: getVault()[dataType] };
         const decryptedItemsData = decryptDataObject(itemsData);
         setItems(decryptedItemsData);
     };
