@@ -26,6 +26,10 @@ mongoose.connect(process.env.DATABASE_URI, () => console.log("Db"));
 const authRouter = require("./auth/userRoutes");
 app.use("/api/auth", authRouter);
 
+// Authenticate JSON Web Token for routes below
+const authenticateJwt = require("./middleware/authenticateJWT");
+app.use(authenticateJwt);
+
 const routeRouter = require("./components/accounts/accountRoutes");
 app.use("/api", routeRouter);
 
