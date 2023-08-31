@@ -6,15 +6,17 @@ const TrashTemplate = require("../trash/trash.model");
 
 exports.getVault = async (req, res) => {
     const id = req.params.id;
+    const userId = req.userId;
+
     const vaultData = {};
 
-    vaultData["accounts"] = await AccountTemplate.find();
-    vaultData["pins"] = await PinTemplate.find();
-    vaultData["notes"] = await NoteTemplate.find();
+    vaultData["accounts"] = await AccountTemplate.find({ user: userId });
+    vaultData["pins"] = await PinTemplate.find({ user: userId });
+    vaultData["notes"] = await NoteTemplate.find({ user: userId });
 
-    vaultData["folders"] = await FolderTemplate.find();
+    vaultData["folders"] = await FolderTemplate.find({ user: userId });
 
-    vaultData["trash"] = await TrashTemplate.find();
+    vaultData["trash"] = await TrashTemplate.find({ user: userId });
 
     res.status(200).json(vaultData);
 };
