@@ -89,7 +89,7 @@ class Profile {
     }
 
     async create(req, res) {
-        new this.model({ ...req.body })
+        new this.model({ ...req.body, user: req.userId })
             .save()
             .then(data => {
                 res.status(201).json(data);
