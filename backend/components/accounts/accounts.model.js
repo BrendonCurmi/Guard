@@ -22,6 +22,10 @@ const schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "folders"
     }],
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users"
+    },
 
     date: { type: Date, default: Date.now, required: true },
     lastAccess: { type: Date, default: Date.now, required: true }
