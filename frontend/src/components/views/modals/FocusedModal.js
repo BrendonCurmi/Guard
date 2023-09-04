@@ -5,6 +5,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Modal from "../../modals/Modal";
 import NiceButton from "../../buttons/NiceButton";
 import FolderSelect from "./FolderSelect";
+import PasswordEvaluation from "../../evaluator/PasswordEvaluation";
 
 import { encryptData } from "../../../../security/SecurityUtils";
 import { getVault } from "../../../utils/VaultCache";
@@ -55,6 +56,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
 
     const [showPw, setShowPw] = useState(false);
     const [isEditing, setIsEditing] = useState(JSON.stringify(focus) === "{}");
+    const [showEvaluator, setShowEvaluator] = useState(false);
 
     /**
      * Update user input property when changing field input values.
@@ -151,6 +153,8 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                                  // InputProps={{ readOnly: !isEditing }}
                                  // InputLabelProps={!isEditing ? { shrink: false } : {}}
                                  value={userInput.folders}/>;
+        } else if (value === "evaluator") {
+            return <PasswordEvaluation key="evaluator" pw={userInput[id]} detailed={showEvaluator}/>;
         }
 
         const fieldProps = {
@@ -175,6 +179,21 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
         }
 
         if (secure) {
+            // Show detailed evaluator on field focus if editing
+            fieldProps.onFocus = () => {
+                if (isEditing) {
+                    setShowEvaluator(true);
+                }
+            };
+
+            // Hide detailed evaluator on field blur
+            fieldProps.onBlur = () => {
+                if (isEditing) {
+                    setShowEvaluator(false);
+                }
+            };
+
+            // Add password visibility toggle
             fieldProps.InputProps = {
                 readOnly: !isEditing,
                 endAdornment: (
