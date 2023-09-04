@@ -15,5 +15,9 @@
     background-color: #484545;
     padding: 15px;
     border-radius: 10px;
+
+    // Show scrollbar when modal is too long
+    max-height: 98vh;
+    overflow-y: auto;
   }
 }
