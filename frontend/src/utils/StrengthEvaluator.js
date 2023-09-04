@@ -10,6 +10,15 @@ export const check = (pw) => {
 };
 
 /**
+ * Gets the score of the specified result.
+ * @param result password result.
+ * @returns {int} score from 0-4.
+ */
+export const getScore = (result) => {
+    return result.score;
+};
+
+/**
  * Enum for password strength.
  * @type {{WEAK: string, MODERATE: string, STRONG: string}}
  */
