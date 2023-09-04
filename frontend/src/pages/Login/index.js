@@ -4,6 +4,7 @@ import { CircularProgress } from "@mui/material";
 
 import FormInput from "./FormInput";
 import NiceButton from "../../components/buttons/NiceButton";
+import PasswordEvaluation from "../../components/evaluator/PasswordEvaluation";
 import { useAuth } from "../../context/AuthProvider";
 import { safeFetch } from "../../utils/SafeFetch";
 import { loadVault } from "../../utils/VaultCache";
@@ -175,6 +176,7 @@ const Login = () => {
                            showError={isFailed}
                            validation={validatePw}
                            errorMsg={"Enter a valid password longer than 8 characters"}/>
+                {isRegistering && <PasswordEvaluation pw={userInput["pw"]}/>}
                 {isRegistering &&
                     <FormInput id="pw-confirm"
                                name="pw-confirm"
