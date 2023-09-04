@@ -30,6 +30,10 @@ export const PasswordData = {
             value: "pw"
         },
         {
+            value: "evaluator",
+            id: "pw"
+        },
+        {
             label: "Folders",
             id: "input-folders",
             value: "folders"
