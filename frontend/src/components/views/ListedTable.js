@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import ListedViewItem from "./ListedViewItem";
-import FocusedModal from "./modals/FocusedModal";
-import ConfirmModal from "./modals/ConfirmModal";
+import FocusedModal from "../modals/FocusedModal";
+import ConfirmModal from "../modals/ConfirmModal";
 
 import { getData } from "./Profile";
 import { safeFetch } from "../../utils/SafeFetch";

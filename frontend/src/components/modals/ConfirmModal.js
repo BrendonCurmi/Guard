@@ -1,6 +1,6 @@
 import React from "react";
-import Modal from "../../modals/Modal";
-import NiceButton from "../../buttons/NiceButton";
+import Modal from "./Modal";
+import NiceButton from "../buttons/NiceButton";
 
 import classes from "./ConfirmModal.module.scss";
 

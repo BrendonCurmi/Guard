@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { CircularProgress, IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import Modal from "../../modals/Modal";
-import NiceButton from "../../buttons/NiceButton";
-import FolderSelect from "./FolderSelect";
-import PasswordEvaluation from "../../evaluator/PasswordEvaluation";
+import Modal from "./Modal";
+import NiceButton from "../buttons/NiceButton";
+import FolderSelect from "../views/modals/FolderSelect";
+import PasswordEvaluation from "../evaluator/PasswordEvaluation";
 
-import { encryptData } from "../../../../security/SecurityUtils";
+import { encryptData } from "../../../security/SecurityUtils";
 
 import classes from "./FocusedModal.module.scss";
 
