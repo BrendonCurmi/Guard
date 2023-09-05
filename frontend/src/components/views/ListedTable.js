@@ -13,11 +13,8 @@ import { getVault, loadVault } from "../../storage/VaultCache";
 import classes from "./ListedTable.module.scss";
 
 /**
- * ListedView that loads items into it.
- * @param page the page properties, including title,
- * title of the action button, name of the time section,
- * action to perform when clicking button, and action
- * buttons override.
+ * Displays a table that loads a list of items into it, and
+ * can display modals.
  * @param confirm the confirm modal properties, including
  * modal title and message.
  * @param deleteApi the optional API function to delete items.
@@ -31,7 +28,6 @@ import classes from "./ListedTable.module.scss";
  * @returns {JSX.Element}
  */
 const ListedTable = ({
-                      page = { title: "", actionTitle: "", timeName: "", action: "", actions: "" },
                       confirm = { title: "Are you sure?", msg: "Do you really want to delete this? It will be moved to Trash" },
                       deleteApi = "",
                       dataType,
