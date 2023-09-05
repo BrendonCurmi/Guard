@@ -14,7 +14,7 @@ export const getVault = () => {
 
 export const loadVault = async () => {
     await safeFetch(VAULT_API)
-        .then(res => res.json())
+        .then(res => res.data)
         .then(data => setVault(data))
         .then(loadFoldersFromCache)
         .catch(console.log);

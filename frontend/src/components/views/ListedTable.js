@@ -154,8 +154,8 @@ const ListedTable = ({
         // Call update API from focused data type
         const callUpdateItem = (id, data) => safeFetch(focusedData.endpoints.updateApi(id), "PUT", data);
 
-        const response = await (focused && JSON.stringify(focused) !== "{}" ? callUpdateItem(focused._id, data) : callCreateItem(data));
-        if (response.status === 201 || response.status === 204) {
+        const res = await (focused && JSON.stringify(focused) !== "{}" ? callUpdateItem(focused._id, data) : callCreateItem(data));
+        if (res.status === 201 || res.status === 204) {
             await freshReloadVault();
             clearFocused();
         }
@@ -172,8 +172,8 @@ const ListedTable = ({
         const getEndpointDeleteApi = (deleteId) => getData(type).endpoints.deleteApi(deleteId);
 
         const deleteUrl = deleteApi ? deleteApi(deleteId) : getEndpointDeleteApi(deleteId);//todo check this after folder page
-        const response = await safeFetch(deleteUrl, "DELETE");
-        if (response.status === 200) {
+        const res = await safeFetch(deleteUrl, "DELETE");
+        if (res.status === 200) {
             await freshReloadVault();
             setConfirming(null);
         }

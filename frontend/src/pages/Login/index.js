@@ -91,7 +91,7 @@ const Login = () => {
 
         const url = isRegistering ? CREATE_API : LOGIN_API;
         safeFetch(url, "POST", { username, authHash, ...data })
-            .then(res => res.json())
+            .then(res => res.data)
             .then(async data => {
                 if (data.err) {
                     setErrorMsg(data.err);
