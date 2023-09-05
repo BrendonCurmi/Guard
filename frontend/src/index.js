@@ -5,7 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
 import { AuthProvider } from "./context/AuthProvider";
-import FolderProvider from "./store/FolderProvider";
 
 import "./index.module.scss";
 
@@ -24,10 +23,8 @@ fetch("http://localhost:4000/csrf-token", {
 
 ReactDOM.render(
     <AuthProvider>
-        <FolderProvider>
-            <BrowserRouter>
-                <App/>
-            </BrowserRouter>
-        </FolderProvider>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
     </AuthProvider>,
     document.getElementById("app"));
