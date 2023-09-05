@@ -1,19 +1,21 @@
+const axios = require("axios");
+
 const safeFetch = (url, method = "GET", data = {}) => {
-    const init = {
+    const config = {
         method: method,
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
             "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").getAttribute("content")
         },
-        credentials: "include",
-        // mode: "cors"
+        withCredentials: true,// Include credentials (cookies) in the request
     };
+
     if (method !== "GET") {
-        init.body = JSON.stringify(data);
+        config.data = data;
     }
-    return fetch(url, init);
-    //.catch(console.log)
+
+    return axios(url, config);
 };
 
 module.exports = { safeFetch };
