@@ -7,7 +7,16 @@ import CircleButton from "../buttons/CircleButton";
 
 import classes from "./ListedTable.module.scss";
 
-const ListedPage = ({ page, ...props }) => {
+/**
+ * Displays a page with a list of items.
+ * @param page the page properties, including title,
+ * title of the action button, name of the time section,
+ * action to perform when clicking button, and action
+ * buttons override.
+ * @param props element props.
+ * @returns {JSX.Element}
+ */
+const ListedPage = ({ page = { title: "", actionTitle: "", timeName: "", action: "", actions: "" }, ...props }) => {
     const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
 
     // Use optional action if page defined it, otherwise open empty focus modal
