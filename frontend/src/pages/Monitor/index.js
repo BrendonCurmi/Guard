@@ -1,4 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Box, CircularProgress, Typography } from "@mui/material";
+
 import ListedTable from "../../components/views/ListedTable";
 import { getVault } from "../../utils/VaultCache";
 import { getData } from "../../components/views/Profile";
@@ -8,21 +11,9 @@ import { check, getPasswordStrength, getScore, PasswordStrength } from "../../ut
 import classes from "./index.module.scss";
 
 const Monitor = () => {
-    const accounts = getVault()["accounts"];
-    const itemDataType = getData("accounts");
-
-    const getReusedPasswords = () => {
-        let reused = 0;
-        const tmp = {};
-        accounts.map((item) => {
-            if (tmp[item]) {
-                reused++;
-            }
-
-            tmp[item] = 0;
-        });
-        return reused;
-    };
+    const dataTypeName = "accounts";
+    const accounts = getVault()[dataTypeName];
+    const itemDataType = getData(dataTypeName);
 
     const total = accounts.length;
     let sum = 0;
@@ -31,37 +22,107 @@ const Monitor = () => {
 
     const weakPasswords = [];
 
+    const reusedCache = {};
+    let reused = 0;
+
     accounts.map((item) => {
         const pw = itemDataType.copyField(item);
-        const decrypt = decryptData(pw);
-        const result = check(decrypt);
-        const score = getScore(result);
+        const decrypted = decryptData(pw);
+        const result = check(decrypted);
+        let addToWeak = false;
 
+        // Check if strong or weak password
         if (getPasswordStrength(result) === PasswordStrength.STRONG) {
             numStrongPasswords++;
         } else {
             numWeakPasswords++;
+            addToWeak = true;
+        }
+
+        // Check if has been reused
+        if (reusedCache[decrypted]) {
+            reused++;
+            addToWeak = true;
+        }
+
+        reusedCache[decrypted] = 1;
+
+        if (addToWeak) {
             weakPasswords.push(item);
         }
 
+        // Calculate percentage and sum
+        const score = getScore(result);
         const percentage = ((score + 1) / 5) * 100;
         sum += percentage;
     });
 
-    const dataType = "accounts";
-
     const getWeakPasswords = () => {
-        return { [dataType]: weakPasswords };
+        return { [dataTypeName]: weakPasswords };
+    };
+
+    const Progress = ({ value }) => {
+        return (
+            <Box className={classes.circle}>
+                <CircularProgress value={100}
+                                  className={classes.backgroundCircle}
+                                  variant="determinate"
+                                  size={150}
+                                  thickness={4}/>
+                <CircularProgress value={value}
+                                  className={classes.foregroundCircle}
+                                  variant="determinate"
+                                  size={150}
+                                  thickness={4}/>
+                <Box
+                    sx={{
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        position: 'absolute',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                    <Typography variant="caption" component="div" className={classes.circleValue}>
+                        {`${Math.round(value)}%`}
+                    </Typography>
+                </Box>
+            </Box>
+        );
     };
 
     return (
-        <ListedTable dataType={dataType} loadItems={getWeakPasswords}>
-            <div className={classes.monitorPage}>
-                <p>Score: {(sum / total) + "%"}</p>
-                <p>Total: {total}</p>
-                <p>Reused: {getReusedPasswords()}</p>
-                <p>Weak: {numWeakPasswords}</p>
-                <p>Strong: {numStrongPasswords}</p>
+        <ListedTable dataType={dataTypeName} loadItems={getWeakPasswords}>
+            <h1 className={classes.pageTitle}>Password Health</h1>
+            <div className={classes.monitor}>
+                <Progress value={sum / total}/>
+                <div className={classes.healthInfoGrid}>
+                    <div className={classes.healthInfoCard}>
+                        <p>Total</p>
+                        <p>{total}</p>
+                    </div>
+                    <div className={classes.healthInfoCard}>
+                        <p>Strong</p>
+                        <p>{numStrongPasswords}</p>
+                    </div>
+                    <div className={classes.healthInfoCard}>
+                        <p>Reused</p>
+                        <p>{reused}</p>
+                    </div>
+                    <div className={classes.healthInfoCard}>
+                        <p>Weak</p>
+                        <p>{numWeakPasswords}</p>
+                    </div>
+                </div>
+                <div className={classes.tipsSection}>
+                    <p className={classes.tipsTitle}>TIP: Change your weak or reused passwords</p>
+                    <p className={classes.tipsContent}>
+                        Long sentences and passphrases are better than passwords with special characters.
+                        You can use the <Link to="/gen">Password Generator</Link> to generate strong passwords.
+                    </p>
+                </div>
             </div>
         </ListedTable>
     );
