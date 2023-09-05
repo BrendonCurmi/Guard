@@ -5,7 +5,10 @@ import {
     faRightFromBracket,
     faKey,
     faLock,
-    faStickyNote, faTrash, faArrowRotateForward
+    faStickyNote,
+    faTrash,
+    faArrowRotateForward,
+    faHeartbeat
 } from "@fortawesome/free-solid-svg-icons";
 
 import NavigationItemLink from "./NavigationItemLink";
@@ -42,6 +45,7 @@ const Navigation = () => {
                     <NavigationItemLink to="/notes" name="Secure Notes" icon={faStickyNote} show/>
                     <NavigationItemLink to="/trash" name="Trash" icon={faTrash} show/>
                     <NavigationItemLink to="/gen" name="Password Generator" icon={faArrowRotateForward} show/>
+                    <NavigationItemLink to="/monitor" name="Health Monitor" icon={faHeartbeat} show/>
 
                     {show && <NavigationFolderSection/>}
                 </ul>
