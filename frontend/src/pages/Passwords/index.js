@@ -1,6 +1,6 @@
 import React from "react";
 import SiteIcon from "../../components/SiteIcon";
-import ListedPage from "../../components/views/ListedPage";
+import ListedPage from "../../components/listed/ListedPage";
 
 export const PasswordData = {
     fields: [

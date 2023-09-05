@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
-import ListedTable from "../../components/views/ListedTable";
+import ListedTable from "../../components/listed/ListedTable";
 import { getVault } from "../../storage/VaultCache";
 import { getData } from "../../components/Profile";
 import { decryptData } from "../../../security/SecurityUtils";

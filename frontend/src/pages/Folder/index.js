@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import ListedPage from "../../components/views/ListedPage";
+import ListedPage from "../../components/listed/ListedPage";
 
 import { decode, encode } from "../../utils/URLUtils";
 import { getFoldersCache } from "../../storage/FolderCache";

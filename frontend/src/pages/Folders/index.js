@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
-import ListedPage from "../../components/views/ListedPage";
+import ListedPage from "../../components/listed/ListedPage";
 
 export const FolderData = {
     fields: [
