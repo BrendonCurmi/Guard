@@ -115,26 +115,13 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
         submitItemRequest(encryptedData).then(() => setIsSaving(false));
     };
 
-    const secureUserInputValue = userInput[secureField];
-
-    /**
-     * Load the secure value.
-     */
-    const loadSecureUserInputValue = async () => {
-        let secureVal = userInput[secureField];
-        setUserInput(prevState => {
-            return { ...prevState, [secureField]: secureVal };
-        });
-    };
-
-    const showSecureHandler = async () => {
-        await loadSecureUserInputValue();// <- would cause issues because of secureUserInputValue defaulting when field is empty
+    const showSecureHandler = (event) => {
+        event.preventDefault();
         setShowPw(!showPw);
     };
 
-    const onEditBtnClick = async (event) => {
+    const onEditBtnClick = (event) => {
         event.preventDefault();
-        await loadSecureUserInputValue();// <- loading pw on edit instead fixes it
         setIsEditing(true);
     };
 
@@ -212,7 +199,6 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
             if (!showPw && fieldProps.multiline) fieldProps.multiline = false;
 
             fieldProps.type = showPw ? "text" : "password";
-            // fieldProps.value = secureUserInputValue;
             fieldProps.className = `${classes.textField} ${classes.pwTextField}`;
         }
 
