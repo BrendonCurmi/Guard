@@ -4,7 +4,7 @@ import ListedViewItem from "./ListedViewItem";
 import FocusedModal from "../modals/FocusedModal";
 import ConfirmModal from "../modals/ConfirmModal";
 
-import { getData } from "./Profile";
+import { getData } from "../Profile";
 import { safeFetch } from "../../utils/SafeFetch";
 import { copyToClipboard } from "../../utils/CopyUtils";
 import { decryptData } from "../../../security/SecurityUtils";
