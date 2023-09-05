@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
-import FullView from "../../components/views/FullView";
+import ListedPage from "../../components/views/ListedPage";
 
 export const PinData = {
     fields: [
@@ -39,7 +39,7 @@ export const PinData = {
 };
 
 const Pins = () => {
-    return <FullView
+    return <ListedPage
         page={{ title: "Pins", actionTitle: "Add Pin", timeName: "Last Seen" }}
         dataType="pins"/>;
 };

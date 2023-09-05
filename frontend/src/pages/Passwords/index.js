@@ -1,6 +1,6 @@
 import React from "react";
-import FullView from "../../components/views/FullView";
 import SiteIcon from "../../components/SiteIcon";
+import ListedPage from "../../components/views/ListedPage";
 
 export const PasswordData = {
     fields: [
@@ -54,7 +54,7 @@ export const PasswordData = {
 }
 
 const Passwords = () => {
-    return <FullView
+    return <ListedPage
         page={{ title: "Passwords", actionTitle: "Add Item", timeName: "Last Used" }}
         dataType="accounts"/>;
 };

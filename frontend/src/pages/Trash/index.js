@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashRestore, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
-import FullView from "../../components/views/FullView";
+import ListedPage from "../../components/views/ListedPage";
 import CircleButton from "../../components/buttons/CircleButton";
 
 const deleteApi = val => `http://localhost:4000/api/trash/${val}`;
@@ -27,7 +27,7 @@ const Trash = () => {
         console.log("trash clear");//todo trash clear
     };
 
-    return <FullView
+    return <ListedPage
         page={{
             title: "Trash",
             actionTitle: "Clear Trash",

@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
-import FullView from "../../components/views/FullView";
+import ListedPage from "../../components/views/ListedPage";
 
 export const FolderData = {
     fields: [
@@ -28,7 +28,7 @@ export const FolderData = {
 }
 
 const Folders = () => {
-    return <FullView
+    return <ListedPage
         page={{ title: "Folders", actionTitle: "Add Folder" }}
         confirm={{
             msg: "Do you really want to delete this folder? It cannot be recovered"

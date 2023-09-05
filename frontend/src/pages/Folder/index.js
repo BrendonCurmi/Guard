@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import FullView from "../../components/views/FullView";
+import ListedPage from "../../components/views/ListedPage";
 
 import { decode, encode } from "../../utils/URLUtils";
 import { getFoldersCache } from "../../utils/FolderCache";
@@ -81,7 +81,7 @@ const Folder = () => {
     };
 
     //todo test what happens when deleting from folder
-    return <FullView
+    return <ListedPage
         page={{
             title: folderName,
             actionTitle: "",

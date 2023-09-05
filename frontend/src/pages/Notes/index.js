@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStickyNote } from "@fortawesome/free-solid-svg-icons";
-import FullView from "../../components/views/FullView";
+import ListedPage from "../../components/views/ListedPage";
 
 export const NoteData = {
     fields: [
@@ -41,7 +41,7 @@ export const NoteData = {
 }
 
 const SecureNotes = () => {
-    return <FullView
+    return <ListedPage
         page={{ title: "Secure Notes", actionTitle: "Add Secure Note", timeName: "Last Seen" }}
         dataType="notes"
         listedViewProps={{
