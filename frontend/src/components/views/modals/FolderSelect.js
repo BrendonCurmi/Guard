@@ -29,8 +29,9 @@ const FolderSelect = ({ className, label, readOnly, value, onChange }) => {
         const name = foldersCache[id];
         return <MenuItem key={id} value={id}>{name}</MenuItem>;
     });
+    const disabled = readOnly || Object.keys(foldersCache).length === 0;
     return (
-        <FormControl className={className} disabled={readOnly}>
+        <FormControl className={className} disabled={disabled}>
             <InputLabel id="input-folder-label">{label}</InputLabel>
             <Select
                 labelId="input-folder-label"
