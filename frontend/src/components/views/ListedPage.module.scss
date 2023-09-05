@@ -1,0 +1,17 @@
+.header {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px;
+  grid-template-areas: "title button";
+  display: grid;
+  margin-left: 10px;
+}
+
+.title {
+  grid-area: title;
+  margin: 0;
+}
+
+.pageActionBtns {
+  grid-area: button;
+  text-align: right;
+}
