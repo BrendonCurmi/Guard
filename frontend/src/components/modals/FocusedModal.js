@@ -4,7 +4,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import Modal from "./Modal";
 import NiceButton from "../buttons/NiceButton";
-import FolderSelect from "../views/modals/FolderSelect";
+import FolderSelect from "./fields/FolderSelect";
 import PasswordEvaluation from "../evaluator/PasswordEvaluation";
 
 import { encryptData } from "../../../security/SecurityUtils";
