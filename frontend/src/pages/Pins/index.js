@@ -32,8 +32,7 @@ export const PinData = {
     endpoints: {
         createApi: API + "/pin",
         updateApi: val => `${PinData.endpoints.createApi}/${val}`,
-        deleteApi: val => `${PinData.endpoints.createApi}/${val}`,
-        credentialsApi: val => `${PinData.endpoints.createApi}/${val}/credentials`
+        deleteApi: val => `${PinData.endpoints.createApi}/${val}`
     },
     copyField: creds => creds.pin,
     icon: () => <FontAwesomeIcon icon={faFolder}/>

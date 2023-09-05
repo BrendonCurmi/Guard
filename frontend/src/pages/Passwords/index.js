@@ -47,8 +47,7 @@ export const PasswordData = {
     endpoints: {
         createApi: API + "/account",
         updateApi: val => `${PasswordData.endpoints.createApi}/${val}`,
-        deleteApi: val => `${PasswordData.endpoints.createApi}/${val}`,
-        credentialsApi: val => `${PasswordData.endpoints.createApi}/${val}/credentials`
+        deleteApi: val => `${PasswordData.endpoints.createApi}/${val}`
     },
     copyField: creds => creds.pw,
     icon: site => <SiteIcon domain={site} size="32"/>

@@ -21,8 +21,7 @@ export const FolderData = {
     endpoints: {
         createApi: API + "/folder",
         updateApi: val => `${FolderData.endpoints.createApi}/${val}`,
-        deleteApi: val => `${FolderData.endpoints.createApi}/${val}`,
-        credentialsApi: val => `${FolderData.endpoints.createApi}/${val}/credentials`
+        deleteApi: val => `${FolderData.endpoints.createApi}/${val}`
     },
     copyField: creds => creds.note,
     icon: () => <FontAwesomeIcon icon={faFolder}/>

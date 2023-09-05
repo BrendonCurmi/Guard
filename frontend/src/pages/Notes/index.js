@@ -34,8 +34,7 @@ export const NoteData = {
     endpoints: {
         createApi: API + "/note",
         updateApi: val => `${NoteData.endpoints.createApi}/${val}`,
-        deleteApi: val => `${NoteData.endpoints.createApi}/${val}`,
-        credentialsApi: val => `${NoteData.endpoints.createApi}/${val}/credentials`
+        deleteApi: val => `${NoteData.endpoints.createApi}/${val}`
     },
     copyField: creds => creds.note,
     icon: () => <FontAwesomeIcon icon={faStickyNote}/>
