@@ -8,7 +8,6 @@ import FolderSelect from "./FolderSelect";
 import PasswordEvaluation from "../../evaluator/PasswordEvaluation";
 
 import { encryptData } from "../../../../security/SecurityUtils";
-import { getVault } from "../../../storage/VaultCache";
 
 import classes from "./FocusedModal.module.scss";
 
@@ -36,8 +35,6 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
             fix ? fix(focus[property]) : focus[property]
             : defaultVal;
     };
-
-    const allFolders = getVault()["folders"];
 
     // Set up initial user input values
     let secureField = "";
@@ -92,15 +89,6 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
         // Remove secure property from data before sending
         // if it hasn't been set
         if (data[secureField] === "") delete data[secureField];
-
-        // Update with folders if selected
-        if (userInput.folders && userInput.folders !== []) {
-            // Convert selected folder ids to folder names
-            // data.folders = userInput.folders.map(name =>
-            //     Object.keys(allFolders).find(key => allFolders[key] === name)
-            // );
-            console.log(userInput.folders);
-        }
 
         // Encrypt data before sending to server
         const encryptedData = {};
