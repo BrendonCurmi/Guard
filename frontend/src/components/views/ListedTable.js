@@ -39,7 +39,7 @@ const ListedTable = ({
                       loadDeps = [],
                       listedViewProps,
                       loadItems = null,
-                      head=[""],
+                      head=["", "", "", ""],
                       children
                   }) => {
     ////////////////////////
