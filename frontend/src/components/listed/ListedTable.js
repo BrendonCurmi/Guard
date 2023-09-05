@@ -7,7 +7,7 @@ import ConfirmModal from "../modals/ConfirmModal";
 import { getData } from "../Profile";
 import { safeFetch } from "../../utils/SafeFetch";
 import { copyToClipboard } from "../../utils/CopyUtils";
-import { decryptData } from "../../../security/SecurityUtils";
+import { decryptData } from "../../security/SecurityUtils";
 import { getVault, loadVault } from "../../storage/VaultCache";
 
 import classes from "./ListedTable.module.scss";

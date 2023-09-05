@@ -9,8 +9,8 @@ import { useAuth } from "../../context/AuthProvider";
 import { safeFetch } from "../../utils/SafeFetch";
 import { loadVault } from "../../storage/VaultCache";
 
-import { setEncryptionKey } from "../../../security/EncryptionKeyUtils";
-import { generateHashes } from "../../../security/SecurityUtils";
+import { setEncryptionKey } from "../../security/EncryptionKeyUtils";
+import { generateHashes } from "../../security/SecurityUtils";
 
 import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 

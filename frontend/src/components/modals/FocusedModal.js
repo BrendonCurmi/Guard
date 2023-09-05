@@ -7,7 +7,7 @@ import NiceButton from "../buttons/NiceButton";
 import FolderSelect from "./fields/FolderSelect";
 import PasswordEvaluation from "../evaluator/PasswordEvaluation";
 
-import { encryptData } from "../../../security/SecurityUtils";
+import { encryptData } from "../../security/SecurityUtils";
 
 import classes from "./FocusedModal.module.scss";
 

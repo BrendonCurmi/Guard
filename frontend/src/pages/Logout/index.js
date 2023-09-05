@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { safeFetch } from "../../utils/SafeFetch";
-import { setEncryptionKey } from "../../../security/EncryptionKeyUtils";
+import { setEncryptionKey } from "../../security/EncryptionKeyUtils";
 import { useAuth } from "../../context/AuthProvider";
 
 import { LOGOUT_API } from "../../utils/API";

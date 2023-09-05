@@ -5,7 +5,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import ListedTable from "../../components/listed/ListedTable";
 import { getVault } from "../../storage/VaultCache";
 import { getData } from "../../components/Profile";
-import { decryptData } from "../../../security/SecurityUtils";
+import { decryptData } from "../../security/SecurityUtils";
 import { check, getPasswordStrength, getScore, PasswordStrength } from "../../utils/StrengthEvaluator";
 
 import classes from "./index.module.scss";

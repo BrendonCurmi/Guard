@@ -1,5 +1,5 @@
 import { getVault } from "./VaultCache";
-import { decryptData } from "../../security/SecurityUtils";
+import { decryptData } from "../security/SecurityUtils";
 
 // Cache for the folder ids and names
 let folderCache = {};
