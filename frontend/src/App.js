@@ -7,8 +7,6 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 
-import { useAuth } from "./context/AuthProvider";
-
 import classes from "./App.module.scss";
 import AuthRoute from "./components/AuthRoute";
 import Logout from "./pages/Logout";
@@ -19,6 +17,7 @@ import Trash from "./pages/Trash";
 import Generator from "./pages/Generator";
 import Folder from "./pages/Folder";
 import Folders from "./pages/Folders";
+import Monitor from "./pages/Monitor";
 
 //todo in focus view hide empty fields
 const App = () => {
@@ -47,6 +46,9 @@ const App = () => {
                     </Route>
                     <Route element={<AuthRoute/>}>
                         <Route path="/gen" element={<Generator/>}/>
+                    </Route>
+                    <Route element={<AuthRoute/>}>
+                        <Route path="/monitor" element={<Monitor/>}/>
                     </Route>
                     <Route element={<AuthRoute/>}>
                         <Route path="/folders" element={<Folders/>}/>
