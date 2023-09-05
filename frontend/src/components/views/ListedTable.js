@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
 
 import ListedViewItem from "./ListedViewItem";
-import CircleButton from "../buttons/CircleButton";
 import FocusedModal from "./modals/FocusedModal";
 import ConfirmModal from "./modals/ConfirmModal";
 
@@ -13,7 +10,7 @@ import { copyToClipboard } from "../../utils/CopyUtils";
 import { decryptData } from "../../../security/SecurityUtils";
 import { getVault, loadVault } from "../../utils/VaultCache";
 
-import classes from "./FullView.module.scss";
+import classes from "./ListedTable.module.scss";
 
 /**
  * ListedView that loads items into it.
@@ -29,9 +26,11 @@ import classes from "./FullView.module.scss";
  * @param loadDeps the dependencies for reloading items.
  * @param listedViewProps the props for ListedViewItems.
  * @param loadItems optional function to load encrypted items data instead.
+ * @param head array of table head column names.
+ * @param children element header children.
  * @returns {JSX.Element}
  */
-const FullView = ({
+const ListedTable = ({
                       page = { title: "", actionTitle: "", timeName: "", action: "", actions: "" },
                       confirm = { title: "Are you sure?", msg: "Do you really want to delete this? It will be moved to Trash" },
                       deleteApi = "",
@@ -39,7 +38,9 @@ const FullView = ({
                       deleteItemHandler,
                       loadDeps = [],
                       listedViewProps,
-                      loadItems = null
+                      loadItems = null,
+                      head=[""],
+                      children
                   }) => {
     ////////////////////////
     // View Items
@@ -134,6 +135,9 @@ const FullView = ({
         if (type) setFocusedData(getData(type));
     };
 
+    // Open empty focus modal, as an event to allow activating from children
+    document.addEventListener("openFocusModal", () => focusOn({}));
+
     /**
      * Clears the currently focused item.
      */
@@ -201,31 +205,6 @@ const FullView = ({
         });
     });
 
-    const { title, actionTitle, action, actions, timeName, actionIcon = faAdd } = page;
-
-    // Use optional action if page defined it, otherwise open empty focus modal
-    const pageActionClickHandler = call(() => focusOn({}), action);
-
-    const DefaultPageActions = () => {
-        return (
-            <CircleButton type="button"
-                          color="secondary"
-                          tooltip={actionTitle}
-                          onClick={pageActionClickHandler}>
-                <FontAwesomeIcon icon={actionIcon}/>
-            </CircleButton>
-        );
-    };
-
-    const PageActions = actions || DefaultPageActions;
-
-    const actionsSection = (
-        (actions !== undefined || actionTitle !== "") &&
-        <div className={classes.pageActionBtns}>
-            <PageActions/>
-        </div>
-    );
-
     ////////////////////////
     // Modals
     ////////////////////////
@@ -250,19 +229,14 @@ const FullView = ({
             {!!focused && focusedModal}
             {!!confirming && confirmModal}
             <div className={classes.contentWrapper}>
-                <div className={classes.header}>
-                    <h1 className={classes.title}>{title}</h1>
-                    {actionsSection}
-                </div>
+                {children}
                 <table>
                     <thead>
                     <tr>
-                        <th width="1%">Title</th>
-                        <th width="34%"></th>
-                        <th width="30%">
-                            <a>{timeName}</a>
-                        </th>
-                        <th width="35%">Actions</th>
+                        <th width="1%">{head[0]}</th>
+                        <th width="34%">{head[1]}</th>
+                        <th width="30%">{head[2]}</th>
+                        <th width="35%">{head[3]}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -274,4 +248,4 @@ const FullView = ({
     );
 };
 
-export default FullView;
+export default ListedTable;
