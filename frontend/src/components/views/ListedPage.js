@@ -5,7 +5,7 @@ import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import ListedTable from "./ListedTable";
 import CircleButton from "../buttons/CircleButton";
 
-import classes from "./ListedTable.module.scss";
+import classes from "./ListedPage.module.scss";
 
 /**
  * Displays a page with a list of items.
