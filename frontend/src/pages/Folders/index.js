@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import ListedPage from "../../components/listed/ListedPage";
+import { API } from "../../utils/API";
 
 export const FolderData = {
     fields: [
@@ -18,7 +19,7 @@ export const FolderData = {
         time: ""
     },
     endpoints: {
-        createApi: "http://localhost:4000/api/folder",
+        createApi: API + "/folder",
         updateApi: val => `${FolderData.endpoints.createApi}/${val}`,
         deleteApi: val => `${FolderData.endpoints.createApi}/${val}`,
         credentialsApi: val => `${FolderData.endpoints.createApi}/${val}/credentials`

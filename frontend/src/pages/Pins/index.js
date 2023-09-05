@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import ListedPage from "../../components/listed/ListedPage";
+import { API } from "../../utils/API";
 
 export const PinData = {
     fields: [
@@ -29,7 +30,7 @@ export const PinData = {
         subtitle: item => item.identity ? item.identity : ""
     },
     endpoints: {
-        createApi: "http://localhost:4000/api/pin",
+        createApi: API + "/pin",
         updateApi: val => `${PinData.endpoints.createApi}/${val}`,
         deleteApi: val => `${PinData.endpoints.createApi}/${val}`,
         credentialsApi: val => `${PinData.endpoints.createApi}/${val}/credentials`

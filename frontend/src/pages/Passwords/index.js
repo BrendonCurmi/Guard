@@ -1,6 +1,7 @@
 import React from "react";
 import SiteIcon from "../../components/SiteIcon";
 import ListedPage from "../../components/listed/ListedPage";
+import { API } from "../../utils/API";
 
 export const PasswordData = {
     fields: [
@@ -44,7 +45,7 @@ export const PasswordData = {
         subtitle: item => item.identity ? item.identity : ""
     },
     endpoints: {
-        createApi: "http://localhost:4000/api/account",
+        createApi: API + "/account",
         updateApi: val => `${PasswordData.endpoints.createApi}/${val}`,
         deleteApi: val => `${PasswordData.endpoints.createApi}/${val}`,
         credentialsApi: val => `${PasswordData.endpoints.createApi}/${val}/credentials`

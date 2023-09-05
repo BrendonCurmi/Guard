@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStickyNote } from "@fortawesome/free-solid-svg-icons";
 import ListedPage from "../../components/listed/ListedPage";
+import { API } from "../../utils/API";
 
 export const NoteData = {
     fields: [
@@ -31,7 +32,7 @@ export const NoteData = {
         subtitle: item => item.identity ? item.identity : ""
     },
     endpoints: {
-        createApi: "http://localhost:4000/api/note",
+        createApi: API + "/note",
         updateApi: val => `${NoteData.endpoints.createApi}/${val}`,
         deleteApi: val => `${NoteData.endpoints.createApi}/${val}`,
         credentialsApi: val => `${NoteData.endpoints.createApi}/${val}/credentials`
