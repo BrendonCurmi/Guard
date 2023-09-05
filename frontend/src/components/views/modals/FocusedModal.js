@@ -200,7 +200,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
     const icon = userInput && userInput.site ? dataType.icon(userInput.site) : "";
 
     return (
-        <Modal className={classes.focusedViewWrapper} onClose={onClick}>
+        <Modal className={classes.focusedModalWrapper} onClose={onClick}>
             <div className={classes.icon}>
                 {icon}
             </div>
