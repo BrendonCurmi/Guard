@@ -22,7 +22,7 @@ export const getScore = (result) => {
  * Enum for password strength.
  * @type {{WEAK: string, MODERATE: string, STRONG: string}}
  */
-const PasswordStrength = {
+export const PasswordStrength = {
     WEAK: "Weak",
     MODERATE: "Moderate",
     STRONG: "Strong"
