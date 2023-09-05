@@ -4,8 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ListedPage from "../../components/views/ListedPage";
 
 import { decode, encode } from "../../utils/URLUtils";
-import { getFoldersCache } from "../../utils/FolderCache";
-import { getVault } from "../../utils/VaultCache";
+import { getFoldersCache } from "../../storage/FolderCache";
+import { getVault } from "../../storage/VaultCache";
 
 const API = "http://localhost:4000/api/folderView";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material";
-import { getFoldersCache } from "../../../utils/FolderCache";
+import { getFoldersCache } from "../../../storage/FolderCache";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;

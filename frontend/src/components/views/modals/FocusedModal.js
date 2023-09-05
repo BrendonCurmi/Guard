@@ -8,7 +8,7 @@ import FolderSelect from "./FolderSelect";
 import PasswordEvaluation from "../../evaluator/PasswordEvaluation";
 
 import { encryptData } from "../../../../security/SecurityUtils";
-import { getVault } from "../../../utils/VaultCache";
+import { getVault } from "../../../storage/VaultCache";
 
 import classes from "./FocusedModal.module.scss";
 

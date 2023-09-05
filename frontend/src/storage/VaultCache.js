@@ -1,5 +1,5 @@
-import { safeFetch } from "./SafeFetch";
-import { VAULT_API } from "./API";
+import { safeFetch } from "../utils/SafeFetch";
+import { VAULT_API } from "../utils/API";
 import { loadFoldersFromCache } from "./FolderCache";
 
 let vault = null;

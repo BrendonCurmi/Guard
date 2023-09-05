@@ -7,7 +7,7 @@ import NiceButton from "../../components/buttons/NiceButton";
 import PasswordEvaluation from "../../components/evaluator/PasswordEvaluation";
 import { useAuth } from "../../context/AuthProvider";
 import { safeFetch } from "../../utils/SafeFetch";
-import { loadVault } from "../../utils/VaultCache";
+import { loadVault } from "../../storage/VaultCache";
 
 import { setEncryptionKey } from "../../../security/EncryptionKeyUtils";
 import { generateHashes } from "../../../security/SecurityUtils";

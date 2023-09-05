@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import NavigationItemLink from "./NavigationItemLink";
 import { encode } from "../../utils/URLUtils";
-import { getFoldersCache } from "../../utils/FolderCache";
+import { getFoldersCache } from "../../storage/FolderCache";
 
 import classes from "./FolderList.module.scss";
 
