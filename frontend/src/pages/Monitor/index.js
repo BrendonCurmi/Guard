@@ -62,6 +62,11 @@ const Monitor = () => {
     };
 
     const Progress = ({ value }) => {
+        const getColour = (strengthScore) => {
+            if (strengthScore <= 50) return "red";
+            else if (strengthScore > 50 && strengthScore < 90) return "yellow";
+            else if (strengthScore >= 90) return "green";
+        };
         return (
             <Box className={classes.circle}>
                 <CircularProgress value={100}
@@ -71,6 +76,7 @@ const Monitor = () => {
                                   thickness={4}/>
                 <CircularProgress value={value}
                                   className={classes.foregroundCircle}
+                                  sx={{ color: getColour(value) }}
                                   variant="determinate"
                                   size={150}
                                   thickness={4}/>
