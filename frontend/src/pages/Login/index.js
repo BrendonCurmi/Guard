@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import FormInput from "./FormInput";
 import NiceButton from "../../components/buttons/NiceButton";
@@ -143,6 +144,13 @@ const Login = () => {
         return (<Navigate to={to} replace/>);
     }
 
+    const [showPw, setShowPw] = useState(false);
+
+    const showPwHandler = (event) => {
+        event.preventDefault();
+        setShowPw(prevState => !prevState);
+    };
+
     return (
         <>
             <h2 className={classes.title}>{title}</h2>
@@ -175,6 +183,16 @@ const Login = () => {
                            className={classes.textField}
                            showError={isFailed}
                            validation={validatePw}
+                           type={showPw ? "text" : "password"}
+                           InputProps={{
+                               endAdornment: (
+                                   <InputAdornment position="end">
+                                       <IconButton onClick={showPwHandler}>
+                                           {showPw ? <Visibility/> : <VisibilityOff/>}
+                                       </IconButton>
+                                   </InputAdornment>
+                               )
+                           }}
                            errorMsg={"Enter a valid password longer than 8 characters"}/>
                 {isRegistering && <PasswordEvaluation pw={userInput["pw"]}/>}
                 {isRegistering &&
@@ -197,7 +215,7 @@ const Login = () => {
                 </div>
                 <NiceButton type="submit"
                             color="primary">
-                    {isSaving ? <CircularProgress size={24} /> : buttonText}
+                    {isSaving ? <CircularProgress size={24}/> : buttonText}
                 </NiceButton>
                 <a className={classes.left}
                    onClick={() => setIsLoggingIn(prevState => !prevState)}>{switchButtonText}</a>
