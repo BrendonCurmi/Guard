@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { CircularProgress, IconButton, InputAdornment } from "@mui/material";
+import { CircularProgress, IconButton, InputAdornment, Tooltip } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import FormInput from "./FormInput";
@@ -187,9 +187,11 @@ const Login = () => {
                            InputProps={{
                                endAdornment: (
                                    <InputAdornment position="end">
-                                       <IconButton onClick={showPwHandler}>
-                                           {showPw ? <Visibility/> : <VisibilityOff/>}
-                                       </IconButton>
+                                       <Tooltip title="Toggle Display Password" arrow placement="top" enterDelay={100} leaveDelay={200}>
+                                           <IconButton onClick={showPwHandler}>
+                                               {showPw ? <Visibility/> : <VisibilityOff/>}
+                                           </IconButton>
+                                       </Tooltip>
                                    </InputAdornment>
                                )
                            }}
