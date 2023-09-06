@@ -13,7 +13,4 @@ router.route("/account/:id")
     .put(accountController.updateById)
     .delete(accountController.delete);
 
-router.route("/search/:str")
-    .get(accountController.searchByString);
-
 module.exports = router;
