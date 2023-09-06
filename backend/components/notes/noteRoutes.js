@@ -13,7 +13,4 @@ router.route("/note/:id")
     .put(noteController.updateById)
     .delete(noteController.delete);
 
-router.route("/note/:id/credentials")
-    .get(noteController.getCredentialsById);
-
 module.exports = router;

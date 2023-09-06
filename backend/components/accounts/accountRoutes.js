@@ -13,9 +13,6 @@ router.route("/account/:id")
     .put(accountController.updateById)
     .delete(accountController.delete);
 
-router.route("/account/:id/credentials")
-    .get(accountController.getCredentialsById);
-
 router.route("/search/:str")
     .get(accountController.searchByString);
 

@@ -13,7 +13,4 @@ router.route("/pin/:id")
     .put(pinController.updateById)
     .delete(pinController.delete);
 
-router.route("/pin/:id/credentials")
-    .get(pinController.getCredentialsById);
-
 module.exports = router;
