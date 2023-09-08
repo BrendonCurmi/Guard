@@ -188,7 +188,7 @@ const Login = () => {
                                endAdornment: (
                                    <InputAdornment position="end">
                                        <Tooltip title="Generate Password" arrow placement="top" enterDelay={100} leaveDelay={200}>
-                                           <IconButton onClick={}>
+                                           <IconButton onClick={showPwHandler}>
                                                <Refresh/>
                                            </IconButton>
                                        </Tooltip>
