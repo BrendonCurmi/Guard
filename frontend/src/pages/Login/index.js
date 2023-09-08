@@ -138,18 +138,19 @@ const Login = () => {
         return str.match(/^[a-zA-Z0-9]+$/) !== null;
     };
 
-    // If already logged in, send away or to home page
-    if (authenticated) {
-        const to = from === "/login" ? "/" : from;
-        return (<Navigate to={to} replace/>);
-    }
-
     const [showPw, setShowPw] = useState(false);
 
     const showPwHandler = (event) => {
         event.preventDefault();
         setShowPw(prevState => !prevState);
     };
+
+    // If already logged in, send away or to home page
+    // Navigate after loading all hooks to prevent error
+    if (authenticated) {
+        const to = from === "/login" ? "/" : from;
+        return (<Navigate to={to} replace/>);
+    }
 
     return (
         <>
