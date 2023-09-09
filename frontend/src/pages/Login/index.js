@@ -195,6 +195,8 @@ const Login = () => {
                            validation={validateUsername}
                            errorMsg={"Enter a unique username of length 6-30 without special characters"}
                            {...userErr}/>
+                {isRegistering && <span className={classes.hint}>Make sure your master password is a long passphrase
+                    that you will remember. It cannot be recovered or changed.</span>}
                 <FormInput id="pw"
                            name="pw"
                            value={userInput.pw}
