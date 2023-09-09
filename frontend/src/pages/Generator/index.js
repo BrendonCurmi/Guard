@@ -9,8 +9,6 @@ import { copyToClipboard } from "../../utils/CopyUtils";
 
 import classes from "./index.module.scss";
 
-const label = { inputProps: { "aria-label": "Switch test" } };
-
 const minLength = 10;
 const maxLength = 60;
 const initialLength = 16;
@@ -80,14 +78,10 @@ const Generator = () => {
                     <td>Length</td>
                     <td className={classes.length}>
                         <Slider value={values.length}
-                                aria-label="custom label"
-                            // aria-label="Default"
                                 marks={marks}
-                            // step={10}
                                 min={minLength}
                                 max={maxLength}
                                 color="secondary"
-                            // valueLabelDisplay="on"
                                 onChange={(event, value) => set({ length: value })}
                                 slots={{
                                     valueLabel: ValueLabelComponent
@@ -98,20 +92,17 @@ const Generator = () => {
                 </tr>
                 <tr>
                     <td>Use capital letters (A-Z)</td>
-                    <td><Switch {...label}
-                                defaultChecked
+                    <td><Switch defaultChecked
                                 onChange={(event, value) => set({ useCapitals: value })}/></td>
                 </tr>
                 <tr>
                     <td>Use digits (0-9)</td>
-                    <td><Switch {...label}
-                                defaultChecked
+                    <td><Switch defaultChecked
                                 onChange={(event, value) => set({ useDigits: value })}/></td>
                 </tr>
                 <tr>
                     <td>Use symbols (@!$%&*)</td>
-                    <td><Switch {...label}
-                                defaultChecked
+                    <td><Switch defaultChecked
                                 onChange={(event, value) => set({ useSymbols: value })}/></td>
                 </tr>
                 </tbody>
