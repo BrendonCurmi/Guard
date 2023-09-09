@@ -5,7 +5,6 @@ const FolderTemplate = require("../folders/folders.model");
 const TrashTemplate = require("../trash/trash.model");
 
 exports.getVault = async (req, res) => {
-    const id = req.params.id;
     const userId = req.userId;
 
     const vaultData = {};
