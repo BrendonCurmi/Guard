@@ -19,23 +19,7 @@ import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 import classes from "./index.module.scss";
 
 const Login = () => {
-    const { authenticated, setAuth, persist, setPersist } = useAuth();
-
-    // If persist is enabled, try to auto sign in using refresh token
-    //todo decide on this
-    useEffect(() => {
-        if (persist) {
-            safeFetch(REFRESH_API)
-                .then(res => res.status === 200 ? res.json() : null)
-                .then(data => {
-                    if (data === null || !data.accessToken) return;
-                    const accessToken = data.accessToken;
-                    setAuth({ accessToken });
-                    navigate(from, { replace: true });
-                })
-                .catch(console.log);
-        }
-    }, []);
+    const { authenticated, setAuth } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -238,14 +222,6 @@ const Login = () => {
                                showError={isFailed}
                                validation={validatePwConfirm}
                                errorMsg={"Passwords do not match"}/>}
-                <div className={classes.left}>
-                    <input id="persist"
-                           checked={persist}
-                           onChange={() => setPersist(prev => !prev)}
-                           className={classes.checkbox}
-                           type="checkbox"/>
-                    <label htmlFor="persist">Stay logged in</label>
-                </div>
                 <NiceButton type="submit"
                             color="primary">
                     {isSaving ? <CircularProgress size={24}/> : buttonText}

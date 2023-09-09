@@ -16,11 +16,10 @@ const redirectionWait = 3000;
  */
 const Logout = () => {
     const navigate = useNavigate();
-    const { setAuth, setPersist } = useAuth();
+    const { setAuth } = useAuth();
 
     const clear = () => {
         setAuth({});
-        setPersist(false);
         setEncryptionKey(null);
         navigate("/login");
     };
