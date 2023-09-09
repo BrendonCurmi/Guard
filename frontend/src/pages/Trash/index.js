@@ -41,8 +41,7 @@ const Trash = () => {
             canEdit: false,
             canDelete: true,
             customActionBtns: createActionBtns
-        }}
-    />;
+        }}/>;
 };
 
 export default Trash;
