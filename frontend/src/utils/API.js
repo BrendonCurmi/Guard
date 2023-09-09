@@ -7,4 +7,4 @@ export const LOGOUT_API = API + "/auth/logout";
 export const REFRESH_API = API + "/auth/refreshToken";
 
 // Vault
-export const VAULT_API = API + "/vault/1";
+export const VAULT_API = API + "/vault";
