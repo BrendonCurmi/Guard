@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { CircularProgress, IconButton, InputAdornment, Tooltip } from "@mui/material";
 import { Visibility, VisibilityOff, Refresh } from "@mui/icons-material";
@@ -14,7 +14,7 @@ import { setEncryptionKey } from "../../security/EncryptionKeyUtils";
 import { generateHashes } from "../../security/SecurityUtils";
 import { generate } from "../../utils/GeneratorUtils";
 
-import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
+import { CREATE_API, LOGIN_API } from "../../utils/API";
 
 import classes from "./index.module.scss";
 
@@ -221,6 +221,7 @@ const Login = () => {
                                className={classes.textField}
                                showError={isFailed}
                                validation={validatePwConfirm}
+                               type="password"
                                errorMsg={"Passwords do not match"}/>}
                 <NiceButton type="submit"
                             color="primary">
