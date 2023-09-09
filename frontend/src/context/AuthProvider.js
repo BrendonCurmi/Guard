@@ -6,7 +6,7 @@ export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
     const authenticated = !!auth?.accessToken;
     return (
-        <AuthContext.Provider value={{ authenticated, auth, setAuth }}>
+        <AuthContext.Provider value={{ authenticated, setAuth }}>
             {children}
         </AuthContext.Provider>
     );
