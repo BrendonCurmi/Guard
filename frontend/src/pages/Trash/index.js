@@ -5,15 +5,15 @@ import { faTrashRestore, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import ListedPage from "../../components/listed/ListedPage";
 import CircleButton from "../../components/buttons/CircleButton";
 
-const deleteApi = val => `http://localhost:4000/api/trash/${val}`;
-const restoreApi = val => `http://localhost:4000/api/trash/${val}/restore`;
+import { API } from "../../utils/API";
+
+const deleteApi = val => `${API}/trash/${val}`;
+const restoreApi = val => `${API}/trash/${val}/restore`;
 
 const Trash = () => {
     const createActionBtns = (item, reload) => {
         const restoreItem = async () => {
-            const res = await fetch(restoreApi(item._id));
-            const data = await res.json();
-            const status = res.status;
+            await fetch(restoreApi(item._id));
             await reload();
         };
         return (
