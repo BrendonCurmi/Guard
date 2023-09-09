@@ -23,14 +23,13 @@ import classes from "./Navigation.module.scss";
  * @constructor
  */
 const Navigation = () => {
-    const { auth } = useAuth();
-    const isLoggedIn = auth?.accessToken;
-    const show = isLoggedIn;
+    const { authenticated } = useAuth();
+    const show = authenticated;
 
     const loginData = {
-        link: isLoggedIn ? "/logout" : "/login",
-        text: isLoggedIn ? "Logout" : "Login",
-        icon: isLoggedIn ? faRightFromBracket : faRightToBracket
+        link: authenticated ? "/logout" : "/login",
+        text: authenticated ? "Logout" : "Login",
+        icon: authenticated ? faRightFromBracket : faRightToBracket
     };
 
     return (
