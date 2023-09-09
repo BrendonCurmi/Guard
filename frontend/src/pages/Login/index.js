@@ -80,12 +80,6 @@ const Login = () => {
         safeFetch(url, "POST", { username, authHash, ...data })
             .then(res => res.data)
             .then(async data => {
-                if (data.err) {
-                    setErrorMsg(data.err);
-                    setIsSaving(false);
-                    return;
-                }
-
                 setEncryptionKey(encryptionHash);
                 await loadVault();
 
@@ -95,7 +89,12 @@ const Login = () => {
                 setAuth({ username, accessToken });
                 // navigate(from, { replace: true });
             })
-            .catch(console.log);
+            .catch(error => {
+                if (error.response.data.err) {
+                    setErrorMsg(error.response.data.err);
+                    setIsSaving(false);
+                }
+            });
     };
 
     // Adapted from https://stackoverflow.com/a/46181
