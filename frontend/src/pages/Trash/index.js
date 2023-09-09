@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashRestore, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 
 import ListedPage from "../../components/listed/ListedPage";
 import CircleButton from "../../components/buttons/CircleButton";
@@ -23,16 +23,10 @@ const Trash = () => {
         );
     };
 
-    const clearTrash = () => {
-        console.log("trash clear");//todo trash clear
-    };
-
     return <ListedPage
         page={{
             title: "Trash",
-            actionTitle: "Clear Trash",
-            actionIcon: faTrashAlt,
-            action: clearTrash,
+            actionTitle: "",
             timeName: "Date Deleted"
         }}
         confirm={{
