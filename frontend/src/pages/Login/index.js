@@ -12,7 +12,7 @@ import { loadVault } from "../../storage/VaultCache";
 
 import { setEncryptionKey } from "../../security/EncryptionKeyUtils";
 import { generateHashes } from "../../security/SecurityUtils";
-import { generates } from "../../utils/GeneratorUtils";
+import { generate } from "../../utils/GeneratorUtils";
 
 import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 
@@ -151,7 +151,7 @@ const Login = () => {
         event.preventDefault();
         const generatorParams = { length: 20, useCapitals: true, useDigits: true, useSymbols: true };
 
-        const generated = generates(generatorParams);
+        const generated = generate(generatorParams);
         setUserInput(prevState => {
             return { ...prevState, pw: generated };
         });
