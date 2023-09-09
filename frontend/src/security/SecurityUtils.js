@@ -13,7 +13,7 @@ const generateHashes = (password, salt) => {
     const keySize = 256;
 
     const encryptionKey = CryptoJS.PBKDF2(password, salt, {
-        iterations: 100000,
+        iterations: 1000,
         keySize: keySize / 32
     });
     const encryptionHash = CryptoJS.SHA256(encryptionKey).toString(CryptoJS.enc.Base64);
@@ -33,7 +33,7 @@ const generateHashes = (password, salt) => {
  * Number of PBKDF2 iterations in key generation for AES.
  * @type {number}
  */
-const iterations = 10000;
+const iterations = 1000;
 
 /**
  * AES-256 key size in bits.
