@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { CircularProgress, IconButton, InputAdornment, Tooltip } from "@mui/material";
 import { Visibility, VisibilityOff, Refresh } from "@mui/icons-material";
@@ -16,6 +16,7 @@ import { generateHashes } from "../../security/SecurityUtils";
 import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 
 import classes from "./index.module.scss";
+import { generates } from "../../utils/GeneratorUtils";
 
 const Login = () => {
     const { authenticated, setAuth, persist, setPersist } = useAuth();
@@ -44,6 +45,7 @@ const Login = () => {
     const [isFailed, setIsFailed] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const userErr = errorMsg ? { error: true, helperText: errorMsg } : "";
+    const pwInputRef = useRef(null);
 
     const [isSaving, setIsSaving] = useState(false);
     const [isLoggingIn, setIsLoggingIn] = useState(true);
@@ -145,6 +147,23 @@ const Login = () => {
         setShowPw(prevState => !prevState);
     };
 
+    const generatePassword = (event) => {
+        event.preventDefault();
+        const generatorParams = { length: 20, useCapitals: true, useDigits: true, useSymbols: true };
+
+        const generated = generates(generatorParams);
+        setUserInput(prevState => {
+            return { ...prevState, pw: generated };
+        });
+
+        setShowPw(true);
+
+        if (pwInputRef.current) {
+            pwInputRef.current.value = generated;
+            pwInputRef.current.focus();
+        }
+    };
+
     // If already logged in, send away or to home page
     // Navigate after loading all hooks to prevent error
     if (authenticated) {
@@ -178,7 +197,8 @@ const Login = () => {
                            {...userErr}/>
                 <FormInput id="pw"
                            name="pw"
-                           value={userInput["pw"]}
+                           value={userInput.pw}
+                           inputRef={pwInputRef}
                            onChange={onChangeHandler}
                            label="Password"
                            className={classes.textField}
