@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const { UserTemplate } = require("./users.model");
 
-const { saltAndHash } = require("../security/encrypt");
+const { saltAndHash, hash } = require("../security/hashing");
 
 const accessTokenCookieName = "x-auth-token";
 const refreshTokenCookieName = "x-refresh-token";
@@ -39,8 +39,7 @@ exports.createUser = async (req, res) => {
     await new UserTemplate({
         email: req.body.email,
         username: req.body.username,
-        // authHash: saltAndHash(req.body.pw),
-        authHash: req.body.authHash,
+        authHash: saltAndHash(req.body.authHash)
     })
         .save()
         .then(user => {
@@ -54,11 +53,10 @@ exports.loginUser = async (req, res) => {
     const { username, authHash } = req.body;
     UserTemplate.findOne({ username })
         .then((user) => {
-            //keep access tokens in memory, refresh tokens in httponly cookie
-            // const [salt, hash] = user.pw.split("$");
-            // const newHash = hashKey(req.body.login, Buffer.from(salt, "base64"));
+            const [userSalt, userHash] = atob(user.authHash).split("$");
+            const loginHash = hash(authHash, Buffer.from(userSalt, "base64"));
 
-            const compare = user.authHash === authHash;
+            const compare = userHash === loginHash;
             if (!compare) {
                 return res.status(401).json({ err: "Authentication failed" })
             }
