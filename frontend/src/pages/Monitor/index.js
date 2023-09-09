@@ -99,11 +99,13 @@ const Monitor = () => {
         );
     };
 
+    const healthValue = sum / total || 0;
+
     return (
         <ListedTable dataType={dataTypeName} loadItems={getWeakPasswords}>
             <h1 className={classes.pageTitle}>Password Health</h1>
             <div className={classes.monitor}>
-                <Progress value={sum / total}/>
+                <Progress value={healthValue}/>
                 <div className={classes.healthInfoGrid}>
                     <div className={classes.healthInfoCard}>
                         <p>Total</p>
