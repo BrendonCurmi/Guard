@@ -14,7 +14,14 @@ $input-background-colour: #2a2a2a;
   width: 70%;
 
   .textField {
-    color: $input-colour;
+    label {
+      color: $input-colour;
+    }
+
+    input {
+      color: $input-colour;
+    }
+
     background-color: $input-background-colour;
     border-radius: $input-border;
     margin-bottom: 10px;
