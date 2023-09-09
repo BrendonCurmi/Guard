@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import ListedPage from "../../components/listed/ListedPage";
 
@@ -13,7 +13,6 @@ const Folder = () => {
     const { name } = useParams();
     const folderName = decode(name);
 
-    const navigate = useNavigate();
     const folders = getFoldersCache();
 
     function getIdFromFolderName(folders, folderName) {
@@ -65,22 +64,6 @@ const Folder = () => {
         return folderData;
     };
 
-    const deleteFolderHandler = async () => {
-        const rawResponse = await fetch(`http://localhost:4000/api/folder/`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ search: folderName })
-        });
-
-        if (rawResponse.status === 200) {
-            const content = await rawResponse.json();
-            // console.log(content);
-            // folders.loadFolders();
-            navigate("/pass");
-        }
-    };
-
-    //todo test what happens when deleting from folder
     return <ListedPage
         page={{
             title: folderName,
