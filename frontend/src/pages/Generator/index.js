@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Slider, Switch, Tooltip } from "@mui/material";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faArrowRotateForward, faAdd } from "@fortawesome/free-solid-svg-icons";
 
 import NiceButton from "../../components/buttons/NiceButton";
-
+import { generate } from "../../utils/GeneratorUtils";
 import { copyToClipboard } from "../../utils/CopyUtils";
 
 import classes from "./index.module.scss";
@@ -30,33 +29,10 @@ const Generator = () => {
     });
     const [generated, setGenerated] = useState("");
 
-    const getStringChars = () => {
-        let chars = "abcdefghijklmnopqrstuvwxyz";
-        if (values.useCapitals) {
-            chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        }
-        if (values.useDigits) {
-            chars += "0123456789";
-        }
-        if (values.useSymbols) {
-            chars += "@!$%&*";
-        }
-        return chars;
-    };
-
-    const generate = () => {
-        let result = "";
-        const chars = getStringChars();
-        const charsLength = chars.length;
-        const length = values.length;
-        for (let i = 0; i < length; i++) {
-            result += chars.charAt(Math.floor(Math.random() * charsLength));
-        }
-        setGenerated(result);
-    };
+    const generateNew = () => setGenerated(generate(values));
 
     useEffect(() => {
-        generate();
+        generateNew();
     }, [values]);
 
     const set = (obj) => {
@@ -89,13 +65,13 @@ const Generator = () => {
                 <div className={classes.actions}>
                     <NiceButton type="button"
                                 color="primary"
-                                onClick={generate}><FontAwesomeIcon icon={faArrowRotateForward}/></NiceButton>
+                                onClick={generateNew}><FontAwesomeIcon icon={faArrowRotateForward}/></NiceButton>
                     <NiceButton type="button"
                                 color="primary"
                                 onClick={onCopyClick}><FontAwesomeIcon icon={faCopy}/></NiceButton>
                     <NiceButton type="button"
                                 color="primary"
-                                onClick={generate}><FontAwesomeIcon icon={faAdd}/></NiceButton>
+                                onClick={generateNew}><FontAwesomeIcon icon={faAdd}/></NiceButton>
                 </div>
             </div>
             <table>
