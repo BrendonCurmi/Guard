@@ -6,10 +6,8 @@ const { UserTemplate } = require("./users.model");
 const { saltAndHash, hash } = require("../security/hashing");
 
 const accessTokenCookieName = "x-auth-token";
-const refreshTokenCookieName = "x-refresh-token";
 
-const generateAccessToken = (payload) => jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });//15m
-const generateRefreshToken = (payload) => jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "20m" });//20m
+const generateAccessToken = (payload) => jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
 
 const sendCookies = (user, res) => {
     const payload = {
@@ -18,7 +16,6 @@ const sendCookies = (user, res) => {
     };
 
     const accessToken = generateAccessToken(payload);
-    const refreshToken = generateRefreshToken(payload);
 
     const options = {
         httpOnly: true,
@@ -31,7 +28,6 @@ const sendCookies = (user, res) => {
     //set maxAge to jwt age
 
     res.cookie(accessTokenCookieName, accessToken, options);
-    res.cookie(refreshTokenCookieName, refreshToken, options);
     return accessToken;
 };
 
@@ -68,10 +64,6 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.logoutUser = async (req, res) => {
-    res.clearCookie(refreshTokenCookieName, {
-        httpOnly: true,
-        secure: true
-    });
     res.clearCookie(accessTokenCookieName, {
         httpOnly: true,
         secure: true
