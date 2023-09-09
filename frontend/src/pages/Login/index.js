@@ -208,12 +208,15 @@ const Login = () => {
                            InputProps={{
                                endAdornment: (
                                    <InputAdornment position="end">
-                                       <Tooltip title="Generate Password" arrow placement="top" enterDelay={100} leaveDelay={200}>
-                                           <IconButton onClick={showPwHandler}>
-                                               <Refresh/>
-                                           </IconButton>
-                                       </Tooltip>
-                                       <Tooltip title="Toggle Display Password" arrow placement="top" enterDelay={100} leaveDelay={200}>
+                                       {isRegistering &&
+                                           <Tooltip title="Generate Password" arrow placement="top" enterDelay={100}
+                                                    leaveDelay={200}>
+                                               <IconButton onClick={generatePassword}>
+                                                   <Refresh/>
+                                               </IconButton>
+                                           </Tooltip>}
+                                       <Tooltip title="Toggle Display Password" arrow placement="top" enterDelay={100}
+                                                leaveDelay={200}>
                                            <IconButton onClick={showPwHandler}>
                                                {showPw ? <Visibility/> : <VisibilityOff/>}
                                            </IconButton>
