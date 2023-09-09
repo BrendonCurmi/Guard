@@ -37,7 +37,7 @@ class TrashController extends Profile {
                 swap.save();
                 result.remove();
             });
-            res.status(200).json({ message: "ok" });
+            res.sendStatus(200);
         } catch (err) {
             res.status(500).json({ err: err.message });
         }
