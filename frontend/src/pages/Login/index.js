@@ -12,11 +12,11 @@ import { loadVault } from "../../storage/VaultCache";
 
 import { setEncryptionKey } from "../../security/EncryptionKeyUtils";
 import { generateHashes } from "../../security/SecurityUtils";
+import { generates } from "../../utils/GeneratorUtils";
 
 import { CREATE_API, LOGIN_API, REFRESH_API } from "../../utils/API";
 
 import classes from "./index.module.scss";
-import { generates } from "../../utils/GeneratorUtils";
 
 const Login = () => {
     const { authenticated, setAuth, persist, setPersist } = useAuth();
