@@ -3,11 +3,9 @@ import { useParams } from "react-router-dom";
 
 import ListedPage from "../../components/listed/ListedPage";
 
-import { decode, encode } from "../../utils/URLUtils";
+import { decode } from "../../utils/URLUtils";
 import { getFoldersCache } from "../../storage/FolderCache";
 import { getVault } from "../../storage/VaultCache";
-
-const API = "http://localhost:4000/api/folderView";
 
 const Folder = () => {
     const { name } = useParams();
@@ -71,7 +69,6 @@ const Folder = () => {
             timeName: "Last Used"
         }}
         loadItems={getFolderData}
-        loadApi={`${API}?f=${encode(folderName)}`}
         loadDeps={[name]}/>;
 };
 
