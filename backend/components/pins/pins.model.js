@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Joi = require("joi");
 
 const schema = new mongoose.Schema({
     title: {
@@ -6,7 +7,10 @@ const schema = new mongoose.Schema({
         required: true,
         default: ""
     },
-    pin: String,
+    pin: {
+        type: String,
+        required: true
+    },
     folders: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "folders"
@@ -18,4 +22,14 @@ const schema = new mongoose.Schema({
     lastAccess: { type: Date, default: Date.now, required: true }
 });
 
-module.exports = mongoose.model("PinTemplate", schema, "pins");
+const PinTemplate = mongoose.model("PinTemplate", schema, "pins");
+
+const validatePin = (pin) => {
+    const schema = Joi.object({
+        title: Joi.string().required(),
+        pin: Joi.string().required()
+    });
+    return schema.validate(pin);
+};
+
+module.exports = { PinTemplate, validatePin };
