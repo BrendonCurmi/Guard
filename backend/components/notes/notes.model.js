@@ -27,7 +27,8 @@ const NoteTemplate = mongoose.model("NoteTemplate", schema, "notes");
 const validateNote = (note) => {
     const schema = Joi.object({
         title: Joi.string().required(),
-        note: Joi.string().required()
+        note: Joi.string().required(),
+        folders: Joi.array().items(Joi.string().allow(""))
     });
     return schema.validate(note);
 };
