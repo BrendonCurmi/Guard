@@ -34,7 +34,7 @@ const AccountTemplate = mongoose.model("AccountTemplate", schema, "accounts");
 
 const siteSchema = Joi.string();
 const titleSchema = Joi.string();
-const identitySchema = Joi.string();
+const identitySchema = Joi.string().allow("");
 const pwSchema = Joi.string();
 
 const validateAccount = (account) => {
