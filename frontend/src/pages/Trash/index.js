@@ -5,6 +5,7 @@ import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import ListedPage from "../../components/listed/ListedPage";
 import CircleButton from "../../components/buttons/CircleButton";
 
+import { safeFetch } from "../../utils/SafeFetch";
 import { API } from "../../utils/API";
 
 const deleteApi = val => `${API}/trash/${val}`;
@@ -13,7 +14,7 @@ const restoreApi = val => `${API}/trash/${val}/restore`;
 const Trash = () => {
     const createActionBtns = (item, reload) => {
         const restoreItem = async () => {
-            await fetch(restoreApi(item._id));
+            await safeFetch(restoreApi(item._id));
             await reload();
         };
         return (
