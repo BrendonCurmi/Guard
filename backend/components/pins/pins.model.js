@@ -27,7 +27,8 @@ const PinTemplate = mongoose.model("PinTemplate", schema, "pins");
 const validatePin = (pin) => {
     const schema = Joi.object({
         title: Joi.string().required(),
-        pin: Joi.string().required()
+        pin: Joi.string().required(),
+        folders: Joi.array().items(Joi.string().allow(""))
     });
     return schema.validate(pin);
 };
