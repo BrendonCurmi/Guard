@@ -42,4 +42,12 @@ const validateUser = (user) => {
     return schema.validate(user);
 };
 
-module.exports = { UserTemplate, validateUser };
+const validateLogin = (user) => {
+    const schema = Joi.object({
+        email: emailSchema.required(),
+        authHash: authHashSchema.required()
+    });
+    return schema.validate(user);
+};
+
+module.exports = { UserTemplate, validateUser, validateLogin };
