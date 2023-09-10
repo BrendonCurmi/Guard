@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const NoteController = require("./noteController");
-const noteController = new NoteController();
+const noteController = require("./noteController");
 
 const validateMiddleWare = require("../../middleware/validate");
 const { validateNote } = require("./notes.model");

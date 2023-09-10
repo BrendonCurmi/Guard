@@ -7,4 +7,4 @@ class NoteController extends Profile {
     }
 }
 
-module.exports = NoteController;
+module.exports = new NoteController();
