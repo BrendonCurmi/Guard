@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const whitelist = process.env.WHITELISTED_DOMAINS ? process.env.WHITELISTED_DOMAINS.split(",") : []
 
 // Adapted from https://stackoverflow.com/a/55195449
