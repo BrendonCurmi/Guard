@@ -7,4 +7,4 @@ class PinController extends Profile {
     }
 }
 
-module.exports = PinController;
+module.exports = new PinController();
