@@ -18,7 +18,7 @@ const FolderTemplate = mongoose.model("FolderTemplate", schema, "folders");
 
 const validateFolder = (folder) => {
     const schema = Joi.object({
-        email: Joi.string().required()
+        name: Joi.string().required()
     });
     return schema.validate(folder);
 };
