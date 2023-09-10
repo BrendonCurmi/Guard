@@ -1,8 +1,8 @@
-const FolderTemplate = require("./folders.model");
+const { FolderTemplate } = require("./folders.model");
 
-const AccountTemplate = require("../accounts/accounts.model");
-const PinTemplate = require("../pins/pins.model");
-const NoteTemplate = require("../notes/notes.model");
+const { AccountTemplate } = require("../accounts/accounts.model");
+const { PinTemplate } = require("../pins/pins.model");
+const { NoteTemplate } = require("../notes/notes.model");
 
 exports.createFolder = (req, res) => {
     new FolderTemplate({ name: req.body.name, user: req.userId })
