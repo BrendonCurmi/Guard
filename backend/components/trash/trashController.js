@@ -3,7 +3,7 @@ const Profile = require("../profile");
 
 class TrashController extends Profile {
     constructor() {
-        super(TrashTemplate, "trash", ["pw", "pin"]);
+        super(TrashTemplate, "trash");
     }
 
     /**
