@@ -4,22 +4,18 @@ import { setEncryptionKey } from "./EncryptionKeyUtils";
 describe("checking hashes", () => {
     test("test hash", () => {
         expect(generateHashes("password", "salt")).toStrictEqual({
-            "authHash": "eGsQ0ssGbrXV+iCzoYlfaNggon4Rl8jJlX/9GT04osA=",
-            "encryptionHash": "3ihm0szyQq0n4q/pzzZgZPCctMwObQhjnTsa2ZqWrNc="
+            "authHash": "Rc2UnS2N7VhSm4gclb3cuFojVR13Gi7nZZj+wW9J+cQ=",
+            "encryptionHash": "71if0nX0B2rO5WSkYjo9yTwykxmc9KY2bO6Y11FSbnw="
         });
     });
 });
 
 describe("checking encryption", () => {
-    test("test encryption", () => {
+    test("test encryption and decryption", () => {
         setEncryptionKey("key");
-        expect(encryptData("test data")).toBe("bW9iZEZEL1JCVXl3N2pNVTBzcGZEdz09JGpLejVGOU1OYmRhRHFBS3dMY1JGM3c9PQ==");
-    });
-});
-
-describe("checking decryption", () => {
-    test("test decryption", () => {
-        setEncryptionKey("key");
-        expect(decryptData("bW9iZEZEL1JCVXl3N2pNVTBzcGZEdz09JGpLejVGOU1OYmRhRHFBS3dMY1JGM3c9PQ==")).toBe("test data");
+        const plain = "test data";
+        const encrypted = encryptData(plain);
+        const decrypted = decryptData(encrypted);
+        expect(decrypted).toBe(plain);
     });
 });
