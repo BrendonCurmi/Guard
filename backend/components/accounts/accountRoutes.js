@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const AccountController = require("./accountController");
-const accountController = new AccountController();
+const accountController = require("./accountController");
 
 const validateMiddleWare = require("../../middleware/validate");
 const { validateAccount, validateUpdateAccount } = require("./accounts.model");

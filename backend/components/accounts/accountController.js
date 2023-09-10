@@ -7,4 +7,4 @@ class AccountController extends Profile {
     }
 }
 
-module.exports = AccountController;
+module.exports = new AccountController();
