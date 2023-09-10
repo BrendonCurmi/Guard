@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const TrashController = require("./trashController");
-const trashController = new TrashController();
+const trashController = require("./trashController");
 
 router.route("/trash").get(trashController.getAll);
 

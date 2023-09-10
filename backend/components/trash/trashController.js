@@ -44,4 +44,4 @@ class TrashController extends Profile {
     };
 }
 
-module.exports = TrashController;
+module.exports = new TrashController();
