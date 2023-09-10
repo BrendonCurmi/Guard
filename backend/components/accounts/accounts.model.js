@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Joi = require("joi");
 
 const schema = new mongoose.Schema({
     site: {
@@ -11,8 +12,6 @@ const schema = new mongoose.Schema({
         required: true,
         default: ""
     },
-    // email: String,
-    // username: String,
     identity: String,
     pw: {
         type: String,
@@ -31,4 +30,31 @@ const schema = new mongoose.Schema({
     lastAccess: { type: Date, default: Date.now, required: true }
 });
 
-module.exports = mongoose.model("AccountTemplate", schema, "accounts");
+const AccountTemplate = mongoose.model("AccountTemplate", schema, "accounts");
+
+const siteSchema = Joi.string();
+const titleSchema = Joi.string();
+const identitySchema = Joi.string();
+const pwSchema = Joi.string();
+
+const validateAccount = (account) => {
+    const schema = Joi.object({
+        site: siteSchema.required(),
+        title: titleSchema.required(),
+        identity: identitySchema,
+        pw: pwSchema.required()
+    });
+    return schema.validate(account);
+};
+
+const validateUpdateAccount = (account) => {
+    const schema = Joi.object({
+        site: siteSchema,
+        title: titleSchema,
+        identity: identitySchema,
+        pw: pwSchema
+    });
+    return schema.validate(account);
+};
+
+module.exports = { AccountTemplate, validateAccount, validateUpdateAccount };
