@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const noteController = require("./noteController");
-
 const validateMiddleware = require("../../middleware/validate");
 const { validateNote } = require("./notes.model");
 

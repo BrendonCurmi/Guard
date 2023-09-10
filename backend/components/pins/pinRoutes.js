@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const pinController = require("./pinController");
-
 const validateMiddleware = require("../../middleware/validate");
 const { validatePin } = require("./pins.model");
 
