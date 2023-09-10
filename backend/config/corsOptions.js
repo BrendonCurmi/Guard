@@ -7,7 +7,6 @@ const corsOptions = {
         const showError = process.env.SHOW_CORS_DOMAIN_ERROR.toLowerCase() === "true";
         callback(!isAllowed && showError ? new Error(`Domain ${origin} not allowed by CORS`) : null, isAllowed);
     },
-    // origin: "http://localhost:8080",
     credentials: true
 };
 
