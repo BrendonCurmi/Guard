@@ -36,13 +36,15 @@ const siteSchema = Joi.string();
 const titleSchema = Joi.string();
 const identitySchema = Joi.string().allow("");
 const pwSchema = Joi.string();
+const foldersSchema = Joi.array().items(Joi.string().allow(""));
 
 const validateAccount = (account) => {
     const schema = Joi.object({
         site: siteSchema.required(),
         title: titleSchema.required(),
         identity: identitySchema,
-        pw: pwSchema.required()
+        pw: pwSchema.required(),
+        folders: foldersSchema
     });
     return schema.validate(account);
 };
@@ -52,7 +54,8 @@ const validateUpdateAccount = (account) => {
         site: siteSchema,
         title: titleSchema,
         identity: identitySchema,
-        pw: pwSchema
+        pw: pwSchema,
+        folders: foldersSchema
     });
     return schema.validate(account);
 };
