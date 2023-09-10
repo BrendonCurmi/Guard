@@ -2,30 +2,23 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 const { UserTemplate } = require("./users.model");
-
 const { saltAndHash, hash } = require("../security/hashing");
 
 const accessTokenCookieName = "x-auth-token";
 
-const generateAccessToken = (payload) => jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
-
 const sendCookies = (user, res) => {
     const payload = {
-        userId: user._id,
-        userEmail: user.email
+        userId: user._id
     };
 
-    const accessToken = generateAccessToken(payload);
+    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "25m" });
 
     const options = {
         httpOnly: true,
-        // sameSite: "None",
         sameSite: true,
         secure: true,
-        maxAge: 24 * 60 * 60 * 1000 //1 day
-        // maxAge: 3 * 60 * 1000
+        maxAge: 25 * 60 * 1000 //20 mins
     };
-    //set maxAge to jwt age
 
     res.cookie(accessTokenCookieName, accessToken, options);
     return accessToken;
@@ -45,15 +38,14 @@ exports.createUser = async (req, res) => {
         .catch(err => res.status(400).json({ err: err.message }));
 };
 
-exports.loginUser = async (req, res) => {
+exports.loginUser = (req, res) => {
     const { username, authHash } = req.body;
     UserTemplate.findOne({ username })
         .then((user) => {
             const [userSalt, userHash] = atob(user.authHash).split("$");
             const loginHash = hash(authHash, Buffer.from(userSalt, "base64"));
 
-            const compare = userHash === loginHash;
-            if (!compare) {
+            if (userHash !== loginHash) {
                 return res.status(401).json({ err: "Authentication failed" })
             }
 
@@ -63,10 +55,10 @@ exports.loginUser = async (req, res) => {
         .catch(() => res.status(400).json({ err: "User does not exist" }));
 };
 
-exports.logoutUser = async (req, res) => {
+exports.logoutUser = (req, res) => {
     res.clearCookie(accessTokenCookieName, {
         httpOnly: true,
         secure: true
     });
-    res.status(204).json({ msg: "Logged out" });
+    res.sendStatus(200);
 };
