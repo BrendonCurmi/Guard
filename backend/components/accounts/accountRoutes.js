@@ -3,16 +3,16 @@ const router = express.Router();
 
 const accountController = require("./accountController");
 
-const validateMiddleWare = require("../../middleware/validate");
+const validateMiddleware = require("../../middleware/validate");
 const { validateAccount, validateUpdateAccount } = require("./accounts.model");
 
 router.route("/accounts").get(accountController.getAll);
 
-router.route("/account").post([validateMiddleWare(validateAccount)], accountController.create);
+router.route("/account").post([validateMiddleware(validateAccount)], accountController.create);
 
 router.route("/account/:id")
     .get(accountController.getById)
-    .put([validateMiddleWare(validateUpdateAccount)], accountController.updateById)
+    .put([validateMiddleware(validateUpdateAccount)], accountController.updateById)
     .delete(accountController.delete);
 
 module.exports = router;
