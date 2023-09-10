@@ -27,9 +27,9 @@ class TrashController extends Profile {
     /**
      * Restores item from trash.
      */
-    restoreFromTrash = async (req, res) => {
+    restoreFromTrash = (req, res) => {
         try {
-            await TrashTemplate.findOne({ _id: req.params.id }, (err, result) => {
+            TrashTemplate.findOne({ _id: req.params.id }, (err, result) => {
                 const data = result.toJSON();
                 const type = data.type;
                 const model = Profile.getTemplate(type);
