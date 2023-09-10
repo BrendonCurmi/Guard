@@ -1,4 +1,4 @@
-const TrashTemplate = require("./trash.model");
+const { TrashTemplate } = require("./trash.model");
 const Profile = require("../profile");
 
 class TrashController extends Profile {

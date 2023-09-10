@@ -2,7 +2,7 @@ const { AccountTemplate } = require("../accounts/accounts.model");
 const { PinTemplate } = require("../pins/pins.model");
 const { NoteTemplate } = require("../notes/notes.model");
 const { FolderTemplate } = require("../folders/folders.model");
-const TrashTemplate = require("../trash/trash.model");
+const { TrashTemplate } = require("../trash/trash.model");
 
 exports.getVault = async (req, res) => {
     const userId = req.userId;
