@@ -42,7 +42,4 @@ const validateUser = (user) => {
     return schema.validate(user);
 };
 
-module.exports = {
-    UserTemplate,
-    validateUser
-};
+module.exports = { UserTemplate, validateUser };
