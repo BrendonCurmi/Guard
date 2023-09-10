@@ -10,8 +10,4 @@ router.route("/folder/:id")
     .put(controller.updateById)
     .delete(controller.deleteFolder);
 
-const viewController = require("./folderViewController");
-
-router.route("/folderView").get(viewController.getFromFolder);
-
 module.exports = router;
