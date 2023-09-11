@@ -100,7 +100,9 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
             encryptedData[key] = value;
         }
 
-        submitItemRequest(encryptedData).then(() => setIsSaving(false));
+        submitItemRequest(encryptedData)
+            .then(() => setIsSaving(false))
+            .catch(() => setIsSaving(false));
     };
 
     const showSecureHandler = (event) => {
