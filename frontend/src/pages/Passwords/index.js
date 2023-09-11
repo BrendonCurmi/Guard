@@ -31,8 +31,8 @@ export const PasswordData = {
             value: "pw"
         },
         {
-            value: "evaluator",
-            id: "pw"
+            element: "evaluator",
+            value: "evaluator"
         },
         {
             label: "Folders",

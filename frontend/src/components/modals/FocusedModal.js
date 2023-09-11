@@ -40,7 +40,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
     let secureField = "";
     const initialUserInput = {};
     fields.map(field => {
-        if (field instanceof Object && field.value) {
+        if (field instanceof Object && field.value && !field.element) {
             initialUserInput[field.value] = field.value === "folders"
                 ? getOr("folders", [])
                 : getOr(field.value);
@@ -129,7 +129,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                                  // InputLabelProps={!isEditing ? { shrink: false } : {}}
                                  value={userInput.folders}/>;
         } else if (value === "evaluator") {
-            return <PasswordEvaluation key="evaluator" pw={userInput[id]} detailed={showEvaluator}/>;
+            return <PasswordEvaluation key="evaluator" pw={secureField} detailed={showEvaluator}/>;
         }
 
         const fieldProps = {
