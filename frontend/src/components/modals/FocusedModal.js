@@ -170,8 +170,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                     <InputAdornment position="end">
                         <IconButton
                             aria-label="toggle password visibility"
-                            onClick={showSecureHandler}
-                            onMouseDown={showSecureHandler}>
+                            onClick={showSecureHandler}>
                             {showPw ? <Visibility/> : <VisibilityOff/>}
                         </IconButton>
                     </InputAdornment>
