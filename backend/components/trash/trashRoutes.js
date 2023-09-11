@@ -8,7 +8,7 @@ router.route("/trash").get(trashController.getAll);
 router.route("/trash/:id/")
     .get(trashController.getById)
     .put(trashController.updateById)
-    .delete(trashController.deleteAccount);
+    .delete(trashController.deletePermanently);
 
 router.route("/trash/:id/restore").get(trashController.restoreFromTrash);
 
