@@ -5,6 +5,15 @@
     <title>Guard</title>
     <meta name="csrf-token" content=""/>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/css2;
+        img-src 'self' https://www.google.com/s2/favicons https://*.gstatic.com;
+        font-src 'self' https://fonts.googleapis.com/css2 https://fonts.gstatic.com;
+        connect-src 'self' http://localhost:4000;
+        frame-src 'self';
+    ">
     <base href="/"/>
 </head>
 <body>
