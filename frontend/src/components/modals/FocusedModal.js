@@ -168,9 +168,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                 readOnly: !isEditing,
                 endAdornment: (
                     <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={showSecureHandler}>
+                        <IconButton onClick={showSecureHandler}>
                             {showPw ? <Visibility/> : <VisibilityOff/>}
                         </IconButton>
                     </InputAdornment>
