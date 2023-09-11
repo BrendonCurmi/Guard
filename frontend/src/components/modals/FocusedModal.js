@@ -163,13 +163,6 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                 }
             };
 
-            // Hide detailed evaluator on field blur
-            fieldProps.onBlur = () => {
-                if (isEditing) {
-                    setShowEvaluator(false);
-                }
-            };
-
             // Add password visibility toggle
             fieldProps.InputProps = {
                 readOnly: !isEditing,
