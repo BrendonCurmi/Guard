@@ -27,6 +27,8 @@ module.exports = {
         ]
     },
     devServer: {
+        // Set up port
+        port: 8080,
         // Enabled to allow router to route urls
         historyApiFallback: true,
         // https: {
