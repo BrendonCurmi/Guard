@@ -16,7 +16,7 @@ const sendCookies = (user, res) => {
         httpOnly: true,
         sameSite: true,
         secure: true,
-        maxAge: 25 * 60 * 1000 //20 mins
+        maxAge: 25 * 60 * 1000 //25 mins
     };
 
     res.cookie(accessTokenCookieName, accessToken, options);
