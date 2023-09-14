@@ -1,6 +1,2 @@
 /.idea
 */node_modules
-
-# Excluded for security
-*/.env
-/security
