@@ -3,7 +3,6 @@ const htmlPlugin = new HtmlWebPackPlugin({
     template: "./public/index.html",
     filename: "./index.html"
 });
-const fs = require("fs");
 module.exports = {
     mode: "development",
     entry: "./src/index.js",
@@ -31,10 +30,6 @@ module.exports = {
         port: 8080,
         // Enabled to allow router to route urls
         historyApiFallback: true,
-        // https: {
-        //     key: fs.readFileSync("../security/key.pem"),
-        //     cert: fs.readFileSync("../security/cert.pem")
-        // },
     },
     plugins: [htmlPlugin]
 };
