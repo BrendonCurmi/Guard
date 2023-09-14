@@ -5,8 +5,6 @@ const accountController = require("./accountController");
 const validateMiddleware = require("../../middleware/validate");
 const { validateAccount, validateUpdateAccount } = require("./accounts.model");
 
-router.route("/accounts").get(accountController.getAll);
-
 router.route("/account").post([validateMiddleware(validateAccount)], accountController.create);
 
 router.route("/account/:id")

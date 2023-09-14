@@ -16,15 +16,6 @@ class Profile {
     };
 
     /**
-     * Retrieves all items of the model template.
-     */
-    getAll = (req, res) => {
-        this.model.find()
-            .then(data => res.json({ [this.name]: data }))
-            .catch(err => res.status(400).json({ err: err.message }));
-    };
-
-    /**
      * Creates an item of the model template.
      */
     create = (req, res) => {

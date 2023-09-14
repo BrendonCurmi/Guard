@@ -5,8 +5,6 @@ const noteController = require("./noteController");
 const validateMiddleware = require("../../middleware/validate");
 const { validateNote } = require("./notes.model");
 
-router.route("/notes").get(noteController.getAll);
-
 router.route("/note").post([validateMiddleware(validateNote)], noteController.create)
 
 router.route("/note/:id")
