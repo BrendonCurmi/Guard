@@ -15,8 +15,11 @@ const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 app.use(cors(corsOptions));
 
+// Only insert fields to db if they are specified in schema
+mongoose.set("strictQuery", true);
+
 // Connect to db
-mongoose.connect(process.env.DATABASE_URI, () => console.log("Db"));
+mongoose.connect(process.env.DATABASE_URI);
 
 const xss = require("xss-clean");
 app.use(xss());
