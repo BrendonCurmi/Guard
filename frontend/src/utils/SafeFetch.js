@@ -5,8 +5,7 @@ const safeFetch = (url, method = "GET", data = {}) => {
         method: method,
         headers: {
             "Accept": "application/json",
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+            "Content-Type": "application/json"
         },
         withCredentials: true,// Include credentials (cookies) in the request
     };

@@ -8,19 +8,6 @@ import { AuthProvider } from "./context/AuthProvider";
 
 import "./index.module.scss";
 
-fetch("http://localhost:4000/csrf-token", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    mode: "cors"
-}).then(res => res.json())
-    .then(res=> {
-        const data = res.csrfToken;
-        console.log(data);
-        document.querySelector("meta[name='csrf-token']").content = data;
-    })
-    .catch(console.log);
-
 ReactDOM.render(
     <AuthProvider>
         <BrowserRouter>
