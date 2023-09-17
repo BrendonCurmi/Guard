@@ -19,7 +19,8 @@
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.10.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "jest": "^29.5.0"
