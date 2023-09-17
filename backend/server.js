@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 mongoose.set("strictQuery", true);
 
 // Connect to db
-mongoose.connect(process.env.DATABASE_URI);
+mongoose.connect(process.env.DATABASE_URI, () => console.log("Connected to database"));
 
 const xss = require("xss-clean");
 app.use(xss());
