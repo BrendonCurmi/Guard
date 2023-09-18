@@ -19,7 +19,6 @@ import Folder from "./pages/Folder";
 import Folders from "./pages/Folders";
 import Monitor from "./pages/Monitor";
 
-//todo in focus view hide empty fields
 const App = () => {
     return (
         <div className={classes.wrapper}>

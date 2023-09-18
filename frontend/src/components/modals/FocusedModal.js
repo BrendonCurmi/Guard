@@ -65,14 +65,6 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
             return { ...prevState, [property]: event.target.value };
         });
     };
-    //todo check the target id property stuff
-
-    // useEffect(() => {
-    //     const delayDebounceFn = setTimeout(() => {
-    //     }, 3000)
-    //
-    //     return () => clearTimeout(delayDebounceFn)
-    // }, [userInput.site])
 
     const [isSaving, setIsSaving] = useState(false);
 
