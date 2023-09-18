@@ -167,7 +167,7 @@ const ListedTable = ({
 
         const getEndpointDeleteApi = (deleteId) => getData(type).endpoints.deleteApi(deleteId);
 
-        const deleteUrl = deleteApi ? deleteApi(deleteId) : getEndpointDeleteApi(deleteId);//todo check this after folder page
+        const deleteUrl = deleteApi ? deleteApi(deleteId) : getEndpointDeleteApi(deleteId);
         const res = await safeFetch(deleteUrl, "DELETE");
         if (res.status === 200) {
             await freshReloadVault();
