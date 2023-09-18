@@ -128,7 +128,7 @@ const Monitor = () => {
                     <p className={classes.tipsTitle}>TIP: Change your weak or reused passwords</p>
                     <p className={classes.tipsContent}>
                         Long sentences and passphrases are better than passwords with special characters.
-                        You can use the <Link to="/gen">Password Generator</Link> to generate strong passwords.
+                        You can use the <Link to="/generator">Password Generator</Link> to generate strong passwords.
                     </p>
                 </div>
             </div>

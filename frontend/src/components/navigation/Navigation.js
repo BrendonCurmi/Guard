@@ -39,11 +39,11 @@ const Navigation = () => {
                     <NavigationItemLink to="/" name="Home" icon={faHouse}/>
                     <NavigationItemLink to={loginData.link} name={loginData.text} icon={loginData.icon}/>
 
-                    <NavigationItemLink to="/pass" name="Passwords" icon={faKey} show/>
+                    <NavigationItemLink to="/passwords" name="Passwords" icon={faKey} show/>
                     <NavigationItemLink to="/pins" name="Pins" icon={faLock} show/>
                     <NavigationItemLink to="/notes" name="Secure Notes" icon={faStickyNote} show/>
                     <NavigationItemLink to="/trash" name="Trash" icon={faTrash} show/>
-                    <NavigationItemLink to="/gen" name="Password Generator" icon={faArrowRotateForward} show/>
+                    <NavigationItemLink to="/generator" name="Password Generator" icon={faArrowRotateForward} show/>
                     <NavigationItemLink to="/monitor" name="Health Monitor" icon={faHeartbeat} show/>
 
                     {show && <NavigationFolderSection/>}
