@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Slider, Switch, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy, faArrowRotateForward, faAdd } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faArrowRotateForward } from "@fortawesome/free-solid-svg-icons";
 
 import NiceButton from "../../components/buttons/NiceButton";
 import { generate } from "../../utils/GeneratorUtils";
@@ -67,9 +67,6 @@ const Generator = () => {
                     <NiceButton type="button"
                                 color="primary"
                                 onClick={onCopyClick}><FontAwesomeIcon icon={faCopy}/></NiceButton>
-                    <NiceButton type="button"
-                                color="primary"
-                                onClick={generateNew}><FontAwesomeIcon icon={faAdd}/></NiceButton>
                 </div>
             </div>
             <table>
