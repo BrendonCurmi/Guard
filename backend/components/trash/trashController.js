@@ -30,7 +30,7 @@ class TrashController extends Profile {
             });
             res.sendStatus(200);
         } catch (err) {
-            res.status(500).json({ err: err.message });
+            res.status(400).json({ err: err.message });
         }
     };
 }
