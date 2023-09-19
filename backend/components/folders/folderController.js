@@ -34,7 +34,7 @@ exports.getFolderById = async (req, res) => {
 
 exports.updateById = async (req, res) => {
     FolderTemplate.findByIdAndUpdate(req.params.id, req.body, (err, doc) => {
-        if (!doc) res.sendStatus(404);
+        if (!doc) res.sendStatus(400);
         else if (err) res.status(400).json({ err: err.message })
         else res.sendStatus(204);
     });
