@@ -12,7 +12,7 @@ class TrashController extends Profile {
     deletePermanently = (req, res) => {
         TrashTemplate.findByIdAndDelete(req.params.id)
             .then(() => res.sendStatus(200))
-            .catch(err => res.status(500).json({ err: err.message }));
+            .catch(err => res.status(400).json({ err: err.message }));
     };
 
     /**
