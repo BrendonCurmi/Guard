@@ -8,7 +8,7 @@ const authenticateJWT = (req, res, next) => {
             req.userId = decoded.userId;
             next();
         } catch (ex) {
-            res.sendStatus(403);
+            res.sendStatus(401);
         }
     } else {
         res.sendStatus(401);
