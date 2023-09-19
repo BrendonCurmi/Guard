@@ -1,7 +1,7 @@
 {
   "name": "guard-frontend",
   "version": "1.0.0",
-  "description": "",
+  "description": "React frontend service for Guard",
   "main": "index.js",
   "scripts": {
     "test": "jest",
