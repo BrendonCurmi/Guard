@@ -1,7 +1,7 @@
 {
   "name": "guard-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend REST API service for Guard",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -13,7 +13,6 @@
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "csurf": "^1.11.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.9.2",
