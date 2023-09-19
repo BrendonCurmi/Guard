@@ -34,22 +34,20 @@ app.use(authenticateJwt);
 const routeRouter = require("./components/accounts/accountRoutes");
 app.use("/api", routeRouter);
 
-const trashRouter = require("./components/trash/trashRoutes");
-app.use("/api", trashRouter);
-
 const pinRouter = require("./components/pins/pinRoutes");
 app.use("/api", pinRouter);
-
-const folderRoutes = require("./components/folders/folderRoutes");
-app.use("/api", folderRoutes);
 
 const noteRoutes = require("./components/notes/noteRoutes");
 app.use("/api", noteRoutes);
 
+const folderRoutes = require("./components/folders/folderRoutes");
+app.use("/api", folderRoutes);
+
+const trashRouter = require("./components/trash/trashRoutes");
+app.use("/api", trashRouter);
+
 const vaultRoutes = require("./components/vault/vaultRoutes");
 app.use("/api", vaultRoutes);
-
-// const server = https.createServer({key: key, cert: cert }, app);
 
 const port = process.env.SERVER_PORT
 app.listen(port, () => console.log("Server is up"));
