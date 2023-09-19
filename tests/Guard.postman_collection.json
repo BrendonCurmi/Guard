@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "a3dc09c0-0521-4bfd-9de6-8259d5c676e9",
-		"name": "Guard - Password Manager",
+		"name": "Guard",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -48,6 +48,46 @@
 								"user"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log in user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var accessToken = pm.response.json().accessToken;\r",
+									"pm.collectionVariables.set(\"token\", accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"johnsmith\",\r\n  \"authHash\": \"IZZNp/+cnxywrhRd/6zTvRcr0rIMlMndS3MpHOlBi6Q=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/auth/login",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "# To be used in case the access token expires, to log back into the user account to perform tests"
 					},
 					"response": []
 				},
@@ -812,6 +852,137 @@
 		{
 			"name": "Test endpoints",
 			"item": [
+				{
+					"name": "Auth Endpoints",
+					"item": [
+						{
+							"name": "Test create user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", () => pm.response.to.have.status(201));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "x-auth-token={{token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"testusername\",\r\n  \"authHash\": \"test auth hash\",\r\n  \"email\": \"test@email.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API}}/auth/user",
+									"host": [
+										"{{API}}"
+									],
+									"path": [
+										"auth",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test logout user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "x-auth-token={{token}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{API}}/auth/logout",
+									"host": [
+										"{{API}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test login user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var accessToken = pm.response.json().accessToken;\r",
+											"pm.collectionVariables.set(\"token\", accessToken);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "x-auth-token={{token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"testusername\",\r\n  \"authHash\": \"test auth hash\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API}}/auth/login",
+									"host": [
+										"{{API}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "Account Endpoints",
 					"item": [
@@ -1665,176 +1836,9 @@
 							"response": []
 						}
 					]
-				},
-				{
-					"name": "Auth Endpoints",
-					"item": [
-						{
-							"name": "Test create user",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 201\", () => pm.response.to.have.status(201));"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Cookie",
-										"value": "x-auth-token={{token}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"username\": \"testusername\",\r\n  \"authHash\": \"test auth hash\",\r\n  \"email\": \"test@email.com\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{API}}/auth/user",
-									"host": [
-										"{{API}}"
-									],
-									"path": [
-										"auth",
-										"user"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Test login user",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Cookie",
-										"value": "x-auth-token={{token}}",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"username\": \"testusername\",\r\n  \"authHash\": \"test auth hash\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{API}}/auth/login",
-									"host": [
-										"{{API}}"
-									],
-									"path": [
-										"auth",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Test logout user",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Cookie",
-										"value": "x-auth-token={{token}}",
-										"type": "default"
-									}
-								],
-								"url": {
-									"raw": "{{API}}/auth/logout",
-									"host": [
-										"{{API}}"
-									],
-									"path": [
-										"auth",
-										"logout"
-									]
-								}
-							},
-							"response": []
-						}
-					]
 				}
 			],
 			"description": "# This folder tests all backend REST API endpoints\n\nAfter testing, it is best to delete the database and recreate the test data using the \"Create test data\" folder for a hard reset of the database."
-		},
-		{
-			"name": "TMP: login",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"var accessToken = pm.response.json().accessToken;\r",
-							"pm.collectionVariables.set(\"token\", accessToken);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"johnsmith\",\r\n  \"authHash\": \"IZZNp/+cnxywrhRd/6zTvRcr0rIMlMndS3MpHOlBi6Q=\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{API}}/auth/login",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"auth",
-						"login"
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"event": [
@@ -1862,30 +1866,6 @@
 			"key": "API",
 			"value": "http://localhost:4000/api",
 			"type": "default"
-		},
-		{
-			"key": "token",
-			"value": ""
-		},
-		{
-			"key": "folders",
-			"value": ""
-		},
-		{
-			"key": "accountId",
-			"value": ""
-		},
-		{
-			"key": "noteId",
-			"value": ""
-		},
-		{
-			"key": "pinId",
-			"value": ""
-		},
-		{
-			"key": "folderId",
-			"value": ""
 		}
 	]
 }
