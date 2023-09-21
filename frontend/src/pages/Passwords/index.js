@@ -55,7 +55,7 @@ export const PasswordData = {
 
 const Passwords = () => {
     return <ListedPage
-        page={{ title: "Passwords", actionTitle: "Add Item", timeName: "Last Used" }}
+        page={{ title: "Passwords", actionTitle: "Add Item", timeName: "Last Updated" }}
         dataType="accounts"/>;
 };
 

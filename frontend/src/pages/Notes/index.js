@@ -42,7 +42,7 @@ export const NoteData = {
 
 const SecureNotes = () => {
     return <ListedPage
-        page={{ title: "Secure Notes", actionTitle: "Add Secure Note", timeName: "Last Seen" }}
+        page={{ title: "Secure Notes", actionTitle: "Add Secure Note", timeName: "Last Updated" }}
         dataType="notes"
         listedViewProps={{
             canCopy: false,

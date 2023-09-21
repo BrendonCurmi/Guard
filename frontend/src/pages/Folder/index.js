@@ -66,7 +66,7 @@ const Folder = () => {
         page={{
             title: folderName,
             actionTitle: "",
-            timeName: "Last Used"
+            timeName: "Last Updated"
         }}
         loadItems={getFolderData}
         loadDeps={[name]}/>;

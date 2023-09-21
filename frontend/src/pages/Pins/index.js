@@ -40,7 +40,7 @@ export const PinData = {
 
 const Pins = () => {
     return <ListedPage
-        page={{ title: "Pins", actionTitle: "Add Pin", timeName: "Last Seen" }}
+        page={{ title: "Pins", actionTitle: "Add Pin", timeName: "Last Updated" }}
         dataType="pins"/>;
 };
 
