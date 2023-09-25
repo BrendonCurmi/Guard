@@ -27,7 +27,10 @@ const Logout = () => {
     useEffect(() => {
         safeFetch(LOGOUT_API, "POST")
             .then(() => setTimeout(clear, redirectionWait))
-            .catch(console.log);
+            .catch(err => {
+                clear();
+                console.log(err);
+            });
     }, []);
     return <p>Logging out...</p>;
 };
