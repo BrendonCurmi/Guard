@@ -12,13 +12,13 @@ import { encryptData } from "../../security/SecurityUtils";
 import classes from "./FocusedModal.module.scss";
 
 /**
+ * Modal for focusing on item.
  * @param focus the item to focus the view on.
  * @param submitItemRequest the function to execute when submitting (creating & updating).
  * @param onClick the function to execute when clicking Cancel button to close the view.
  * @param fields the array of form fields.
  * @param dataType the item type.
  * @returns {JSX.Element}
- * @constructor
  */
 const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) => {
     /**

@@ -12,7 +12,6 @@ const redirectionWait = 3000;
 
 /**
  * Logout page that logs out user and redirects them to /login page.
- * @constructor
  */
 const Logout = () => {
     const navigate = useNavigate();

@@ -19,7 +19,6 @@ import classes from "./Navigation.module.scss";
 
 /**
  * Creates the Navigation of the app.
- * @constructor
  */
 const Navigation = () => {
     const { authenticated } = useAuth();
