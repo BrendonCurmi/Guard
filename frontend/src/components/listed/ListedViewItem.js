@@ -7,6 +7,20 @@ import { describeDate } from "../../utils/DateUtils";
 
 import classes from "./ListedViewItem.module.scss";
 
+/**
+ * An item in the ListedTable.
+ * @param dKey the key.
+ * @param account the item in the list.
+ * @param icon the icon.
+ * @param reload the reload function.
+ * @param onEditClickHandler handler for editing item.
+ * @param onCopyClickHandler handler for copying item.
+ * @param setConfirming set confirming function.
+ * @param listedViewProps the props for ListedViewItems.
+ * @param allowActions if actions are enabled.
+ * @param display the data type display.
+ * @returns {JSX.Element}
+ */
 const ListedViewItem = ({
                             dKey,
                             account,

@@ -38,9 +38,7 @@ const ListedTable = ({
                       head=["", "", "", ""],
                       children
                   }) => {
-    ////////////////////////
     // View Items
-    ////////////////////////
     const [items, setItems] = useState({});
 
     /**
@@ -86,9 +84,7 @@ const ListedTable = ({
         loadAllItems();
     };
 
-    ////////////////////////
     // Actions
-    ////////////////////////
     /**
      * Handler for focusing on and editing specified item.
      * @param key item key.
@@ -109,9 +105,7 @@ const ListedTable = ({
         copyToClipboard(dataType.copyField(item));
     };
 
-    ////////////////////////
     // Focused and confirming items
-    ////////////////////////
     const [focusedData, setFocusedData] = useState(false);
     const [focused, setFocused] = useState();
     const [confirming, setConfirming] = useState();
@@ -201,9 +195,7 @@ const ListedTable = ({
         });
     });
 
-    ////////////////////////
     // Modals
-    ////////////////////////
     const focusedModal = (
         <FocusedModal onClick={clearFocused}
                       focus={focused}
