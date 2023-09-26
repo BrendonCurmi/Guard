@@ -4,7 +4,7 @@ Guard is an application developed to help users create strong customisable and o
 to securely store and retrieve passwords and other sensitive user information, and to aid users in managing
 their password security through health overviews and password strength evaluations.
 
-Final Report: [Report.pdf](report/Final Report.pdf)
+Final Report: [Report.pdf](report/Final-Report.pdf)
 
 Kanban Board: https://trello.com/b/oMeNIkgJ/guard-project-kanban-board
 
