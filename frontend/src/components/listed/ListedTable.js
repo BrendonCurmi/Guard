@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import ListedViewItem from "./ListedViewItem";
+import ListedTableItem from "./ListedTableItem";
 import FocusedModal from "../modals/FocusedModal";
 import ConfirmModal from "../modals/ConfirmModal";
 
@@ -21,7 +21,7 @@ import classes from "./ListedTable.module.scss";
  * @param dataType the optional item type.
  * @param deleteItemHandler the optional delete handler.
  * @param loadDeps the dependencies for reloading items.
- * @param listedViewProps the props for ListedViewItems.
+ * @param listedViewProps the props for ListedTableItems.
  * @param loadItems optional function to load encrypted items data instead.
  * @param head array of table head column names.
  * @param children element header children.
@@ -181,7 +181,7 @@ const ListedTable = ({
             const itemType = item.type || type;
             const itemDataType = getData(itemType);
             const key = `${type}-${itemIndex}`;
-            return <ListedViewItem
+            return <ListedTableItem
                 key={key} dKey={key}
                 account={item}
                 display={itemDataType.listDisplay}

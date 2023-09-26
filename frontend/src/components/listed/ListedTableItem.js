@@ -5,7 +5,7 @@ import { faCopy, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import CircleButton from "../buttons/CircleButton";
 import { describeDate } from "../../utils/DateUtils";
 
-import classes from "./ListedViewItem.module.scss";
+import classes from "./ListedTableItem.module.scss";
 
 /**
  * An item in the ListedTable.
@@ -16,12 +16,12 @@ import classes from "./ListedViewItem.module.scss";
  * @param onEditClickHandler handler for editing item.
  * @param onCopyClickHandler handler for copying item.
  * @param setConfirming set confirming function.
- * @param listedViewProps the props for ListedViewItems.
+ * @param listedViewProps the props for ListedTableItems.
  * @param allowActions if actions are enabled.
  * @param display the data type display.
  * @returns {JSX.Element}
  */
-const ListedViewItem = ({
+const ListedTableItem = ({
                             dKey,
                             account,
                             icon,
@@ -88,4 +88,4 @@ const ListedViewItem = ({
     );
 };
 
-export default ListedViewItem;
+export default ListedTableItem;
