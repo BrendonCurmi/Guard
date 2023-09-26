@@ -44,18 +44,18 @@ To set up the application and populate the database with example data:
     Figure 2: Successful start of frontend service.
 
 3. Import test data into MongoDB:
-   1. In the /tests folder, there is a file called Guard - Password Manager.postman_collection.json which is an export of a Postman collection.
+   1. In the /tests folder, there is a file called `Guard - Password Manager.postman_collection.json` which is an export of a Postman collection.
    2. Import the collection file into Postman:
       ![figure3.png](report/imgs/figure3.png)
 
       Figure 3: Project collection imported into Postman.
-   3. Run the Create test data folder:
+   3. Run the `Create mock data` folder:
       ![figure4.png](report/imgs/figure4.png)
 
-      Figure 4: Run folder to create test data.
+      Figure 4: Run folder to create mock data.
       ![figure5.png](report/imgs/figure5.png)
 
-      Figure 5: Run folder to create test data.
+      Figure 5: Run folder to create mock data.
       
       This should successfully execute all requests, with all tests passing:
       ![figure6.png](report/imgs/figure6.png)
