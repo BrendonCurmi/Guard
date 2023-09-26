@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { CircularProgress, IconButton, InputAdornment, Tooltip } from "@mui/material";
 import { Visibility, VisibilityOff, Refresh } from "@mui/icons-material";
 
@@ -21,7 +21,6 @@ import classes from "./index.module.scss";
 const Login = () => {
     const { authenticated, setAuth } = useAuth();
 
-    const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
@@ -87,7 +86,6 @@ const Login = () => {
 
                 const accessToken = data.accessToken;
                 setAuth({ username, accessToken });
-                // navigate(from, { replace: true });
             })
             .catch(error => {
                 if (error.response.data.err) {
