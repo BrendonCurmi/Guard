@@ -44,7 +44,7 @@ To set up the application and populate the database with example data:
     Figure 2: Successful start of frontend service.
 
 3. Import test data into MongoDB:
-   1. In the /tests folder, there is a file called `Guard - Password Manager.postman_collection.json` which is an export of a Postman collection.
+   1. In the `/tests` folder, there is a file called `Guard - Password Manager.postman_collection.json` which is an export of a Postman collection.
    2. Import the collection file into Postman:
       ![figure3.png](report/imgs/figure3.png)
 
@@ -67,6 +67,6 @@ To set up the application and populate the database with example data:
 
       Figure 7: Successful creation of database in MongoDB.
 
-4. Visit the frontend on http://localhost:8080/login and log in using the test credentials:
-    - Username: johnsmith
-    - Password: this is a test password
+4. Visit the frontend on `http://localhost:8080/login` and log in using the test credentials:
+    - Username: `johnsmith`
+    - Password: `this is a test password`
