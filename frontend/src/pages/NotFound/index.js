@@ -7,7 +7,7 @@ const NotFound = () => {
     return (
         <div className={classes.notFound}>
             <h1>404 Page Not Found</h1>
-            <Link to="/">Homepage</Link>
+            <Link to="/passwords">Go to Passwords</Link>
         </div>
     );
 };

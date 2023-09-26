@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    faHouse,
     faRightToBracket,
     faRightFromBracket,
     faKey,
@@ -36,7 +35,6 @@ const Navigation = () => {
         <header className={classes.wrapper}>
             <div className={classes.sidebar}>
                 <ul>
-                    <NavigationItemLink to="/" name="Home" icon={faHouse}/>
                     <NavigationItemLink to={loginData.link} name={loginData.text} icon={loginData.icon}/>
 
                     <NavigationItemLink to="/passwords" name="Passwords" icon={faKey} show/>
