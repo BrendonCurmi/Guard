@@ -1839,7 +1839,7 @@
 					]
 				}
 			],
-			"description": "# This folder tests all backend REST API endpoints\n\nAfter testing, it is best to delete the database and recreate the test data using the \"Create test data\" folder for a hard reset of the database."
+			"description": "# This folder tests all backend REST API endpoints\n\nAfter testing, it is best to delete the database and recreate the test data using the \"Create mock data\" folder for a hard reset of the database."
 		}
 	],
 	"event": [
