@@ -121,7 +121,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                                  readOnly={!isEditing}
                                  value={userInput.folders}/>;
         } else if (value === "evaluator") {
-            return <PasswordEvaluation key="evaluator" pw={secureField} detailed={showEvaluator}/>;
+            return <PasswordEvaluation key="evaluator" pw={userInput[secureField]} detailed={showEvaluator}/>;
         }
 
         const fieldProps = {
