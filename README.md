@@ -1,4 +1,21 @@
-# Guard
+# Guard: A User-Centric, Security-Focused Modern Password Management Application
+
+Guard is an application developed to help users create strong customisable and optionally memorable passwords,
+to securely store and retrieve passwords and other sensitive user information, and to aid users in managing
+their password security through health overviews and password strength evaluations.
+
+Final Report: [Report.pdf](report/Final Report.pdf)
+
+Kanban Board: https://trello.com/b/oMeNIkgJ/guard-project-kanban-board
+
+Project on Personal GitHub: https://github.com/BrendonCurmi/Guard
+
+Project on University GitHub: https://github.com/University-of-London/project-module-BrendonCurmi
+
+### Required Software
+- Node.js (https://nodejs.org/) – dependency manager and application launcher
+- MongoDB (https://www.mongodb.com/) – database software
+- Postman (https://www.postman.com/) – REST API testing and mock data creation
 
 ### Setup
 To set up the application and populate the database with example data:
