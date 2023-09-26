@@ -119,8 +119,6 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                                  onChange={event => onChangeHandler(event, "folders")}
                                  label="Folders"
                                  readOnly={!isEditing}
-                                 // InputProps={{ readOnly: !isEditing }}
-                                 // InputLabelProps={!isEditing ? { shrink: false } : {}}
                                  value={userInput.folders}/>;
         } else if (value === "evaluator") {
             return <PasswordEvaluation key="evaluator" pw={secureField} detailed={showEvaluator}/>;
@@ -202,9 +200,7 @@ const FocusedModal = ({ focus, submitItemRequest, onClick, fields, dataType }) =
                                 onClick={onEditBtnClick}>Edit</NiceButton>}
                 <NiceButton type="button"
                             onClick={onClick}
-                            color="secondary"
-                    // disabled
-                >Cancel</NiceButton>
+                            color="secondary">Cancel</NiceButton>
             </form>
         </Modal>
     );
