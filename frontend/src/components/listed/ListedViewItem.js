@@ -79,8 +79,8 @@ const ListedViewItem = ({
                 {icon}
             </td>
             <td onClick={onClick}>
-                <p className={classes.accountTitle}>{title(account)}</p>
-                <p className={classes.accountSubtitle}>{subtitle(account)}</p>
+                <p className={classes.itemTitle}>{title(account)}</p>
+                <p className={classes.itemSubtitle}>{subtitle(account)}</p>
             </td>
             <td onClick={onClick}>{time}</td>
             <td>{isHovered && allowActions && <DefaultActionBtns/>}</td>
