@@ -22,7 +22,8 @@ const Login = () => {
     const { authenticated, setAuth } = useAuth();
 
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    let from = location.state?.from?.pathname || "/";
+    if (from === "/logout") from = "/";
 
     const [userInput, setUserInput] = useState({ username: "", pw: "" });
     const [isFailed, setIsFailed] = useState(false);
