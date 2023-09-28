@@ -24,9 +24,18 @@ const sendCookies = (user, res) => {
 };
 
 exports.createUser = async (req, res) => {
+    const email = req.body.email;
+    const username = req.body.username;
+    if (await UserTemplate.exists({ email })) {
+        return res.status(400).json({ err: "Email '" + email + "' already exists" });
+    }
+    if (await UserTemplate.exists({ username })) {
+        return res.status(400).json({ err: "Username '" + username + "' already exists" });
+    }
+
     await new UserTemplate({
-        email: req.body.email,
-        username: req.body.username,
+        email,
+        username,
         authHash: saltAndHash(req.body.authHash)
     })
         .save()
